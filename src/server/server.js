@@ -25,3 +25,27 @@ app.get("/", function (req, res) {
 const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
+
+let projectData = {};
+
+// Post Route
+app.post("/addWeather", addWeather);
+
+function addWeather(req, res){
+    newEntry = {
+        city: req.body.city,
+        weather: req.body.weather,
+        temperature: req.body.temperature,
+        feelsLike: req.body.feelsLike,
+        wind: req.body.wind
+    }
+    projectData = newEntry;
+}
+
+
+app.get("/all", getData);
+
+// Callback function to complete GET '/all'
+function getData (req, res) {
+    res.send(projectData);
+}
