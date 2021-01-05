@@ -4,6 +4,8 @@ let latitude = "";
 let longitude ="";
 let country = "";
 
+var d = new Date();
+
 // Event listener to add function to existing HTML DOM element
 document.getElementById("new-save").addEventListener("click", generate);
 
@@ -11,9 +13,12 @@ document.getElementById("new-save").addEventListener("click", generate);
 export async function generate() {
     let location = document.getElementById("location").value;
     location = location.trim();
-    location = encodeURI(location);
+    location = encodeURIComponent(location);
 
     getWeather(`${endpoint}${location}${userName}`)
+    .then(()=>{
+        getDates();
+    })
       /*.then ( (data) => {
         postData("/addWeather", {city: data.name, weather:
                 data.weather[0].description, temperature: data.main.temp,
@@ -33,7 +38,6 @@ export async function getWeather(url) {
     }
     try {
         const weather = await response.json();
-        //console.log(weather.geonames[0])
         latitude = weather.geonames[0].lat;
         longitude = weather.geonames[0].lng;
         country = weather.geonames[0].countryName;
@@ -42,4 +46,11 @@ export async function getWeather(url) {
     } catch (error) {
         console.log("error", error);
     }
+}
+
+export async function getDates() {
+    let departureDate = document.getElementById("departure").value;
+    console.log(data)
+    let currentDate = d.toISOString().slice(0, 10);
+    console.log(d);
 }

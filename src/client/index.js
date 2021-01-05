@@ -5,8 +5,10 @@ import "./styles/trip.scss"
 
 import { generate } from "./js/weather.js"
 import { getWeather } from "./js/weather.js"
+import { getDates } from "./js/weather.js"
 
 export {
     generate,
-    getWeather
+    getWeather,
+    getDates
 }
