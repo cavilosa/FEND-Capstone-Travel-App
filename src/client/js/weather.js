@@ -1,6 +1,8 @@
 const endpoint = "http://api.geonames.org/searchJSON?q=";
 const userName = "&maxRows=10&username=cavilosa";
-//http://api.geonames.org/searchJSON?q=london&maxRows=10&username=demo
+let latitude = "";
+let longitude ="";
+let country = "";
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById("new-save").addEventListener("click", generate);
@@ -9,6 +11,7 @@ document.getElementById("new-save").addEventListener("click", generate);
 export async function generate() {
     let location = document.getElementById("location").value;
     location = location.trim();
+    location = encodeURI(location);
 
     getWeather(`${endpoint}${location}${userName}`)
       /*.then ( (data) => {
@@ -30,8 +33,12 @@ export async function getWeather(url) {
     }
     try {
         const weather = await response.json();
-        console.log(weather)
-        return weather;
+        //console.log(weather.geonames[0])
+        latitude = weather.geonames[0].lat;
+        longitude = weather.geonames[0].lng;
+        country = weather.geonames[0].countryName;
+        console.log(latitude, longitude, country)
+        return latitude, longitude, country;
     } catch (error) {
         console.log("error", error);
     }
