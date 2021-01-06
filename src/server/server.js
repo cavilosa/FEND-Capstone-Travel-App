@@ -28,6 +28,15 @@ const server = app.listen(port, () => {
 
 let projectData = {};
 
+app.post("/departure", departureDate);
+
+function departureDate(req, res) {
+    departureDate = {
+        departureDate: req.body.departureDate;
+    }
+    projectData = departureDate;
+}
+
 // Post Route
 app.post("/addWeather", addWeather);
 
