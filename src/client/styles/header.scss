@@ -1,3 +1,20 @@
 header {
-    background-color: #ffe6ea;
+    //background-color: #e6e6e6;
+    grid-area: hd;
+}
+
+.header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+body{
+    display: grid;
+    grid-template-columns: repeat(2 1fr);
+    grid-template-rows: 3 auto;
+    grid-template-areas:
+    "hd hd"
+    "tr tr"
+    "nt nt";
 }

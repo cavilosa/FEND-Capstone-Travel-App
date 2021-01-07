@@ -5,6 +5,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
 
+const fetch = require('node-fetch');
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -14,6 +19,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({extended: false}));
 //app.use(bodyParser.text());
 app.use(bodyParser.json());
+
 
 app.use(express.static("dist"));
 const port = 8000;

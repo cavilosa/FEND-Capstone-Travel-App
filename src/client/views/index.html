@@ -2,79 +2,99 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FEND Capstone - Travel APP</title>
     </head>
     <body>
 
         <header>
             <h1>Travel Planner</h1>
-            <h3>My trips</h3>
-            <h3>+add trip</h3>
+            <div class="header">
+                <h3>My trips</h3>
+                <h3>+add trip</h3>
+            </div>
+
         </header>
 
-        <main>
-            <section class="trip">
 
-                <article class="add-info">
+    <section class="trip">
+        <article class="add-info">
 
-                    <div class="picture">
+            <div class="picture">
 
-                    </div>
+            </div>
 
-                    <div class="add-more-info">
-                        <button type="button" name="lodging">
-                            +add lodging info</button>
-                        <button type="button" name="list">
-                            +add packing list</button>
-                        <button type="button" name="notes">
-                            +add notes</button>
+            <div class="add-more-info">
+                <button id="add" name="lodging">
+                    +add lodging info</button>
+                <button id="add" name="list">
+                    +add packing list</button>
+                <button id="add"s name="notes">
+                    +add notes</button>
 
-                    </div>
+            </div>
 
-                </article>
+        </article>
 
-                <article class="current-trip">
-                    <div class="destination">
+        <article class="current-trip">
+            <h2>My trip to: </h2>
+            <div class="destination">
+            </div>
+            <h2>Departing: </h2>
+            <div class="departure">
+            </div>
+            <h4>flight info: </h4>
+            <div class="flight-info">
+            </div>
 
+            <div class="save-remove-trip">
+                <button type="button" name="save" id="save">save trip
+                </button>
+                <button type="button" name="remove" id="remove">remove trip
+                </button>
+            </div>
+            <div class="time-away">
+                <div class="destination">
 
-                    </div>
-                    <div class="departure">
+                </div>
+                <div class="days-away">
 
-                    </div>
-                    <div class="flight-info">
+                </div>
+            </div>
+            <div class="weather">
+                <h4>Typical weather for then is: </h4>
+                <h5>High - </h5>
+                <div class="max-temp">
 
-                    </div>
-                    <div class="save-remove-trip">
-                        <button type="button" name="save" id="save">save trip</button>
-                        <button type="button" name="remove" id="remove">remove trip</button>
+                </div>
+                <h5>Low - </h5>
+                <div class="min-temp">
 
-                    </div>
-                    <div class="days-away">
+                </div>
+                <div class="clouds">
 
-                    </div>
-                    <div class="weather">
+                </div>
+            </div>
 
-                    </div>
+        </article>
 
-                </article>
-            </section>
+    </section>
 
-            <section class="new-trip">
+    <section class="new-trip">
+            <article id="new-trip">
                 <div class="new-trip-info">
                     <h3>My trip to:</h3>
-                    <input type="text" id="location" name="trip" placeholder="Enter Location">
+                    <input type="text" id="location" name="location" placeholder="Enter Location">
                     <h3>Departing:</h3>
-                    <input type="date" id="departure" name="data">
+                    <input type="date" id="departure" name="departure">
+                    <h3>Returning:</h3>
+                    <input type="date" id="return" name="return" value="">
                 </div>
                 <div class="save-remove-trip">
                     <button type="button" name="save" id="new-save">save trip</button>
                     <button type="button" name="remove" id="new-remove">remove trip</button>
-
                 </div>
-            </section>
-        </main>
-
-
-
+            </article>
+    </section>
     </body>
 </html>

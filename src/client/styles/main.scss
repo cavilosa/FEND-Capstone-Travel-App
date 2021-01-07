@@ -1,3 +1,21 @@
-main {
-    background-color: pink;
+.trip {
+    background-color: #ffe6ea;
+    grid-area: tr;
+    display: flex;
+    flex-flow: row;
+}
+.add-more-info {
+    display: flex;
+    flex-flow: column;
+    padding:20px;
+    //grid-area: add;
+}
+
+#add {
+    border-radius: 5px;
+    margin: 6px;
+}
+
+.current-trip {
+    grid-area: tr;
 }

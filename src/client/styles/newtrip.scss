@@ -1,3 +1,11 @@
-.new-trip {
+section.new-trip {
     background-color: #e6e6e6;
+    grid-area: nt;
+    display: grid;
+    grid-template-columns: repeat(2 1fr);
+    grid-template-rows: 3 auto;
+    grid-template-areas:
+    "tr lc"
+    "dp dt"
+    "sv rm";
 }
