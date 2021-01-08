@@ -40,33 +40,39 @@ let geoData = {}; // lat, lng, city, country and countryCode
 
 let geoInfo = {};
 
-app.post("/data", getGeoInfo);
 
-async function getGeoInfo (req, res) {
-    inputData = req.body.data // destination, departure, comeback
+app.post("/data", retreiveInfo);
 
-    weather(inputData)
-    .then()
+async function retreiveInfo(req, res) {
+    getInput(req, res)
+    .then ((inputData)=>{ getGeoInfo(inputData)})
 }
 
-async function weather(inputData) {
+async function getInput (req, res) {
+    inputData = req.body.data // destination, departure, comeback
+    console.log("inputData", inputData)
+    return inputData
+}
+
+
+async function getGeoInfo(inputData) {
     const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`
     const response = await fetch(url);
         if (response.status != 200) {
             console.log("response status is", response.status)
         }
     geoInfo = await response.json()
-    return geoData = {
+    geoData = {
         latitude: geoInfo.geonames[0].lat,
         longitude: geoInfo.geonames[0].lng,
         country: geoInfo.geonames[0].countryName,
         city: geoInfo.geonames[0].toponymName,
         countryCode: geoInfo.geonames[0].countryCode
     }
-    //geoData = newEntry// latitude. longitude, country,
     console.log("geodata", geoData)
     console.log("inputData", inputData)
 }
+
 
 
 app.get("/all", getData);
