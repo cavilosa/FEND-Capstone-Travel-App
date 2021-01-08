@@ -33,13 +33,13 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
-let inputData = {};
+let inputData = {}; // input info: city destination, departure and return dates
 
-let geoData = {};
+let geoData = {}; // lat, lng, city, country and countryCode
 
-app.post("/data", getWeather);
+app.post("/data", geoInfo);
 
-async function getWeather (req, res) {
+async function geoInfo (req, res) {
     inputData = req.body.data // destination, departure, comback
     const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`;
     const response = await fetch(url);
@@ -62,20 +62,6 @@ async function getWeather (req, res) {
     console.log("inputData", inputData)
 }
 
-
-// Post Route
-app.post("/addWeather", addWeather);
-
-function addWeather(req, res){
-    newEntry = {
-        city: req.body.city,
-        weather: req.body.weather,
-        temperature: req.body.temperature,
-        feelsLike: req.body.feelsLike,
-        wind: req.body.wind
-    }
-    projectData = newEntry;
-}
 
 
 app.get("/all", getData);
