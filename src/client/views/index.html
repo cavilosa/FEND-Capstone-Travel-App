@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="#">
         <title>FEND Capstone - Travel APP</title>
     </head>
     <body>
@@ -81,20 +82,27 @@
     </section>
 
     <section class="new-trip">
-            <article id="new-trip">
+            <form id="new-trip" onsubmit="return Client.generate(event)">
                 <div class="new-trip-info">
                     <h3>My trip to:</h3>
-                    <input type="text" id="location" name="location" placeholder="Enter Location">
+                    <input type="text" id="location" name="location"
+                        placeholder="Enter Location">
                     <h3>Departing:</h3>
                     <input type="date" id="departure" name="departure">
                     <h3>Returning:</h3>
                     <input type="date" id="return" name="return" value="">
                 </div>
                 <div class="save-remove-trip">
-                    <button type="button" name="save" id="new-save">save trip</button>
-                    <button type="button" name="remove" id="new-remove">remove trip</button>
+                    <button type="submit" name="save" id="new-save"
+                        onsubmit="Client.generate(event)">
+                        save trip</button>
+                    <button type="submit" name="remove" id="new-remove">
+                        remove trip</button>
                 </div>
-            </article>
+            </form>
     </section>
+    <script>
+
+    </script>
     </body>
 </html>
