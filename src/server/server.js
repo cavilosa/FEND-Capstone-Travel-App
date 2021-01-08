@@ -10,6 +10,7 @@ const fetch = require('node-fetch');
 const dotenv = require('dotenv');
 dotenv.config();
 let api_key = process.env.api_key;
+let weather_key = process.env.weather_key;
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,27 +38,32 @@ let inputData = {}; // input info: city destination, departure and return dates
 
 let geoData = {}; // lat, lng, city, country and countryCode
 
-app.post("/data", geoInfo);
+let geoInfo = {};
 
-async function geoInfo (req, res) {
-    inputData = req.body.data // destination, departure, comback
-    const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`;
+app.post("/data", getGeoInfo);
+
+async function getGeoInfo (req, res) {
+    inputData = req.body.data // destination, departure, comeback
+
+    weather(inputData)
+    .then()
+}
+
+async function weather(inputData) {
+    const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`
     const response = await fetch(url);
         if (response.status != 200) {
-            window.alert("Weatherbit response failed");
             console.log("response status is", response.status)
         }
-
-    const geoInfo = await response.json();
-    console.log(geoInfo.geonames[0].toponymName)
-    newEntry = {
+    geoInfo = await response.json()
+    return geoData = {
         latitude: geoInfo.geonames[0].lat,
         longitude: geoInfo.geonames[0].lng,
         country: geoInfo.geonames[0].countryName,
         city: geoInfo.geonames[0].toponymName,
         countryCode: geoInfo.geonames[0].countryCode
     }
-    geoData = newEntry; // latitude. longitude, country,
+    //geoData = newEntry// latitude. longitude, country,
     console.log("geodata", geoData)
     console.log("inputData", inputData)
 }
