@@ -32,14 +32,33 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
-let projectData = {};
+let inputData = {};
 
-app.post("/data", data);
+app.post("/data", getWeather);
 
-function data (req, res) {
-    projectData = req.body.data
-    console.log("projectData is", projectData)
+async function getWeather (req, res) {
+    inputData = req.body.data // destination, departure, comback
+    const url = ""
 }
+/*
+async function getWeather(url) {
+    console.log(url)
+    const response = await fetch(url);
+    if (response.status != 200) {
+        window.alert("Try a valid city name, please!");
+        document.getElementById("location").value = "";
+    }
+    try {
+        const weather = await response.json();
+        latitude = weather.geonames[0].lat;
+        longitude = weather.geonames[0].lng;
+        country = weather.geonames[0].countryName;
+        console.log(latitude, longitude, country)
+        return latitude, longitude, country;
+    } catch (error) {
+        console.log("error", error);
+    }
+}*/
 
 
 // Post Route
