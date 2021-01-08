@@ -22,15 +22,13 @@ export async function generate() {
 
 export async function getData() {
     console.log("getdata is on")
-    let location = document.getElementById("location").value;
-
-
+    let destination = document.getElementById("destination").value;
 
     let regex = new RegExp(/\S/);
 
-    if (regex.test(location)) {
-        location = location.trim();
-        location = encodeURIComponent(location);
+    if (regex.test(destination)) {
+        destination = destination.trim();
+        destination = encodeURIComponent(destination);
     } else {
         alert("Destination is not provided")
     }
@@ -38,10 +36,21 @@ export async function getData() {
     let departure = document.getElementById("departure").value;
     departure = encodeURIComponent(departure);
 
-    let comeback = document.querySelector("#return").value;
+    let comeback = document.querySelector("#comeback").value;
     comeback = encodeURIComponent(comeback);
 
-    return {location: location, departure: departure, comeback: comeback}
+    let d = new Date();
+
+    if(Date.parse(departure) <= Date.parse(comeback)){
+        if (Date.parse(d.toISOString().slice(0, 10)) <= Date.parse(departure) ) {
+            return {destination: destination, departure: departure,
+                    comeback: comeback}
+        }else{
+            alert("The departure date can't be in past.")
+        }
+    }else{
+        alert("The return date can't be before the end date");
+    }
 }
 
 
