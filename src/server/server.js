@@ -36,17 +36,18 @@ const server = app.listen(port, () => {
 
 let inputData = {}; // input info: city destination, departure and return dates
 
-//let geoData = {}; // lat, lng, city, country and countryCode
+let geoData = {}; // lat, lng, city, country and countryCode
 
 app.post("/data", retreiveInfo);
 
 async function retreiveInfo(req, res) {
     getInput(req, res)
-    .then ( (inputData) => { getGeoInfo(inputData) } )
-    //.then( (geoData) => { weatherbit(geoData) } )
-        .then( async (result) => {
-            console.log(result)
+    .then ( (inputData) => {
+        getGeoInfo(inputData)
+        .then( () => {
+            weatherbit(geoData, inputData)
         } )
+    } )
 }
 
 
@@ -67,22 +68,18 @@ async function getGeoInfo(inputData) {
     try {
         const geoInfo = await response.json();
 
-        newEntry= {
+        geoData = {
             latitude: geoInfo.geonames[0].lat,
             longitude: geoInfo.geonames[0].lng,
             country: geoInfo.geonames[0].countryName,
             city: geoInfo.geonames[0].toponymName,
             countryCode: geoInfo.geonames[0].countryCode
         }
-        //console.log("newentry", newEntry, "geodata", geoData)
-        const geoData = newEntry;
         console.log( "geodata", geoData)
         return geoData
     } catch (error) {
         console.log("error", error)
     }
-    //return geoData
-    //.then( (geoData) => { console.log("then geodata", geoData, "then inputData", inputData)})
 }
 
 async function weatherbit(geoData, inputData) {
