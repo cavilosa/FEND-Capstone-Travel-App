@@ -36,41 +36,60 @@ const server = app.listen(port, () => {
 
 let inputData = {}; // input info: city destination, departure and return dates
 
-let geoData = {}; // lat, lng, city, country and countryCode
-
-let geoInfo = {};
-
+//let geoData = {}; // lat, lng, city, country and countryCode
 
 app.post("/data", retreiveInfo);
 
 async function retreiveInfo(req, res) {
     getInput(req, res)
-    .then ((inputData)=>{ getGeoInfo(inputData)})
+    .then ( (inputData) => { getGeoInfo(inputData) } )
+    //.then( (geoData) => { weatherbit(geoData) } )
+        .then( async (result) => {
+            console.log(result)
+        } )
 }
+
 
 async function getInput (req, res) {
     inputData = req.body.data // destination, departure, comeback
-    console.log("inputData", inputData)
+    console.log("getinput", inputData)
     return inputData
 }
 
-
 async function getGeoInfo(inputData) {
+
     const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`
+
     const response = await fetch(url);
         if (response.status != 200) {
             console.log("response status is", response.status)
         }
-    geoInfo = await response.json()
-    geoData = {
-        latitude: geoInfo.geonames[0].lat,
-        longitude: geoInfo.geonames[0].lng,
-        country: geoInfo.geonames[0].countryName,
-        city: geoInfo.geonames[0].toponymName,
-        countryCode: geoInfo.geonames[0].countryCode
+    try {
+        const geoInfo = await response.json();
+
+        newEntry= {
+            latitude: geoInfo.geonames[0].lat,
+            longitude: geoInfo.geonames[0].lng,
+            country: geoInfo.geonames[0].countryName,
+            city: geoInfo.geonames[0].toponymName,
+            countryCode: geoInfo.geonames[0].countryCode
+        }
+        //console.log("newentry", newEntry, "geodata", geoData)
+        const geoData = newEntry;
+        console.log( "geodata", geoData)
+        return geoData
+    } catch (error) {
+        console.log("error", error)
     }
-    console.log("geodata", geoData)
-    console.log("inputData", inputData)
+    //return geoData
+    //.then( (geoData) => { console.log("then geodata", geoData, "then inputData", inputData)})
+}
+
+async function weatherbit(geoData, inputData) {
+    console.log(geoData, inputData)
+    const url = `https://api.weatherbit.io/v2.0/history/daily&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${inputData.comeback}&key=${weather_key}`
+    console.log(url)
+
 }
 
 
