@@ -34,18 +34,18 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
-let inputData = {}; // input info: city destination, departure and return dates
+//let inputData = {}; // input info: city destination, departure and return dates
 
-let geoData = {}; // lat, lng, city, country and countryCode
+//let geoData = {}; // lat, lng, city, country and countryCode
 
 app.post("/data", retreiveInfo);
 
 async function retreiveInfo(req, res) {
     getInput(req, res)
-    .then ( (inputData) => {
-        getGeoInfo(inputData)
+    .then ( () => {
+        getGeoInfo()
         .then( () => {
-            weatherbit(geoData, inputData)
+            weatherbit()
         } )
     } )
 }
@@ -57,7 +57,7 @@ async function getInput (req, res) {
     return inputData
 }
 
-async function getGeoInfo(inputData) {
+async function getGeoInfo() {
 
     const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`
 
@@ -82,7 +82,7 @@ async function getGeoInfo(inputData) {
     }
 }
 
-async function weatherbit(geoData, inputData) {
+async function weatherbit() {
     console.log(geoData, inputData)
     const url = `https://api.weatherbit.io/v2.0/history/daily&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${inputData.comeback}&key=${weather_key}`
     console.log(url)
