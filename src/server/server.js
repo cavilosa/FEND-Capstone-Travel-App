@@ -83,15 +83,17 @@ async function getGeoInfo() {
 }
 
 async function weatherbit(req, res) {
-    console.log(weather_key)
-    const url = `https://api.weatherbit.io/v2.0/history/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${inputData.comeback}&key=${weather_key}`
+    const url = `https://api.weatherbit.io/v2.0/history/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${inputData.comeback}&units=M&key=${weather_key}`
     const response = await fetch(url)
         if (response.status !=200) {
             console.log(response.status)
         }
-    const data = await response.json();
-    console.log("data", data)
-    return data;
+    try {
+        const data = await response.json();
+        console.log("data", data)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
