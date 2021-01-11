@@ -45,7 +45,7 @@ async function retreiveInfo(req, res) {
     .then ( () => {
         getGeoInfo()
         .then( () => {
-            weatherbit()
+            weatherForecast()
         } )
     } )
 }
@@ -82,24 +82,17 @@ async function getGeoInfo() {
     }
 }
 
-async function weatherbit(req, res) {
-    // creating var for weather forecast - next day after arrival
-    let end_date = new Date(inputData.departure);  // new date as of departure
-    end_date.setDate(end_date.getDate() + 1) // nex day in calendar calculated
+async function weatherForecast(req, res) {
 
-    // extracting only neaded info from the date - year-month-day
-    end_date = end_date.toISOString().slice(0, 10)
-    end_date = encodeURIComponent(end_date);  // representing the provided string encoded as a URI component
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&units=M&key=${weather_key}`
 
-    const url = `https://api.weatherbit.io/v2.0/history/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${end_date}&units=M&key=${weather_key}`
-    console.log("url", url)
     const response = await fetch(url)
         if (response.status !=200) {
             console.log(response.status)
         }
     try {
         const data = await response.json();
-        console.log("data", data.data)
+        console.log("data", data.data[0])
     } catch (error) {
         console.log(error)
     }
