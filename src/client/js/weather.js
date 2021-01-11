@@ -66,10 +66,16 @@ export async function postData (data) {
     })
     try {
         const data = await request.json();
-        return data
+        const response = await fetch("http://localhost:8000/data");
+        const message = response.json();
+        alert(message)
+        return data, response
     }catch(error){
         console.log(error)
     }
+
+
+
 }
 
 //export { getData, postData, generate}

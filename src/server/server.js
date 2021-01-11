@@ -63,8 +63,12 @@ async function getGeoInfo() {
     const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`
 
     const response = await fetch(url);
-        if (response.status != 200) {
+        if (response.status !== 200) {
             console.log("response status is", response.status)
+            req.send("wrong")
+            function showDisplay(){
+                alert('WARNING: Price must equal Contract Price.');
+            }
         }
     try {
         const geoInfo = await response.json();
