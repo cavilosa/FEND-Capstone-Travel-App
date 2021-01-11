@@ -34,9 +34,9 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
-//let inputData = {}; // input info: city destination, departure and return dates
+let inputData = {}; // input info: city destination, departure and return dates
 
-//let geoData = {}; // lat, lng, city, country and countryCode
+let geoData = {}; // lat, lng, city, country and countryCode
 
 app.post("/data", retreiveInfo);
 
@@ -83,14 +83,23 @@ async function getGeoInfo() {
 }
 
 async function weatherbit(req, res) {
-    const url = `https://api.weatherbit.io/v2.0/history/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${inputData.comeback}&units=M&key=${weather_key}`
+    // creating var for weather forecast - next day after arrival
+    let end_date = new Date(inputData.departure);  // new date as of departure
+    end_date.setDate(end_date.getDate() + 1) // nex day in calendar calculated
+
+    // extracting only neaded info from the date - year-month-day
+    end_date = end_date.toISOString().slice(0, 10)
+    end_date = encodeURIComponent(end_date);  // representing the provided string encoded as a URI component
+
+    const url = `https://api.weatherbit.io/v2.0/history/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&start_date=${inputData.departure}&end_date=${end_date}&units=M&key=${weather_key}`
+    console.log("url", url)
     const response = await fetch(url)
         if (response.status !=200) {
             console.log(response.status)
         }
     try {
         const data = await response.json();
-        console.log("data", data)
+        console.log("data", data.data)
     } catch (error) {
         console.log(error)
     }
