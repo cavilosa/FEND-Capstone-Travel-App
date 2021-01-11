@@ -36,13 +36,10 @@ const server = app.listen(port, () => {
 
 let projectData = {inputData: {}, geoData: {}, weatherForecast: {}}
 
-//let inputData = {}; // input info: city destination, departure and return dates
 
-//let geoData = {}; // lat, lng, city, country and countryCode
+app.post("/data", retrieveInput);
 
-app.post("/data", retreiveInfo);
-
-async function retreiveInfo(req, res) {
+async function retrieveInput(req, res) {
     getInput(req, res)
     .then ( () => {
         getGeoInfo()
@@ -54,12 +51,15 @@ async function retreiveInfo(req, res) {
 
 
 async function getInput (req, res) {
-    projectData.inputData = req.body.data // destination, departure, comeback
-    return projectData.inputData
+    if (req) {
+        projectData.inputData = req.body.data // destination, departure, comeback
+        return projectData.inputData
+    }else{
+        console.log("the input is empty")
+    }
 }
 
 async function getGeoInfo() {
-
     const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
     const response = await fetch(url);
@@ -102,12 +102,11 @@ async function weatherbitForecast(req, res) {
                icon: each.weather.icon,
                code: each.weather.code
             }
-        } );
-
-        console.log(projectData)
+        });
     } catch (error) {
         console.log(error)
     }
+    console.log(projectData)
 }
 
 
