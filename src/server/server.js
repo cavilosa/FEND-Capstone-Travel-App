@@ -34,6 +34,7 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
+
 let inputData = {}; // input info: city destination, departure and return dates
 
 let geoData = {}; // lat, lng, city, country and countryCode
