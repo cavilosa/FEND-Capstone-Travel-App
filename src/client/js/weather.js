@@ -52,9 +52,9 @@ export async function getData() {
 
 async function getGeoInfo(data) {
     console.log(data);
-    let api_key = `${process.env.api_key}`;
+    // api_key = process.env.api_key;
     console.log(api_key)
-    const url = `http://api.geonames.org/searchJSON?q=${data.destination}${api_key}`
+    const url = `http://api.geonames.org/searchJSON?q=${data.destination}${process.env.api_key}`
 
     const response = await fetch(url);
     console.log(response)
@@ -64,14 +64,14 @@ async function getGeoInfo(data) {
     try {
         const geoInfo = await response.json();
 
-        projectData.geoData = {
+        geoData = {
             latitude: geoInfo.geonames[0].lat,
             longitude: geoInfo.geonames[0].lng,
             country: geoInfo.geonames[0].countryName,
             city: geoInfo.geonames[0].toponymName,
             countryCode: geoInfo.geonames[0].countryCode
         }
-        return projectData.geoData
+        return geoData
     } catch (error) {
         console.log("error", error)
     }
