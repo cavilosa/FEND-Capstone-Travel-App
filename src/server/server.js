@@ -34,10 +34,11 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
+let projectData = {inputData: {}, geoData: {}, weatherForecast: {}}
 
-let inputData = {}; // input info: city destination, departure and return dates
+//let inputData = {}; // input info: city destination, departure and return dates
 
-let geoData = {}; // lat, lng, city, country and countryCode
+//let geoData = {}; // lat, lng, city, country and countryCode
 
 app.post("/data", retreiveInfo);
 
@@ -46,21 +47,20 @@ async function retreiveInfo(req, res) {
     .then ( () => {
         getGeoInfo()
         .then( () => {
-            weatherForecast()
+            weatherbitForecast()
         } )
     } )
 }
 
 
 async function getInput (req, res) {
-    inputData = req.body.data // destination, departure, comeback
-    console.log("getinput", inputData)
-    return inputData
+    projectData.inputData = req.body.data // destination, departure, comeback
+    return projectData.inputData
 }
 
 async function getGeoInfo() {
 
-    const url = `http://api.geonames.org/searchJSON?q=${inputData.destination}${api_key}`
+    const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
     const response = await fetch(url);
         if (response.status != 200) {
@@ -69,23 +69,22 @@ async function getGeoInfo() {
     try {
         const geoInfo = await response.json();
 
-        geoData = {
+        projectData.geoData = {
             latitude: geoInfo.geonames[0].lat,
             longitude: geoInfo.geonames[0].lng,
             country: geoInfo.geonames[0].countryName,
             city: geoInfo.geonames[0].toponymName,
             countryCode: geoInfo.geonames[0].countryCode
         }
-        console.log( "geodata", geoData)
-        return geoData
+        return projectData.geoData
     } catch (error) {
         console.log("error", error)
     }
 }
 
-async function weatherForecast(req, res) {
+async function weatherbitForecast(req, res) {
 
-    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&units=M&key=${weather_key}`
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
 
     const response = await fetch(url)
         if (response.status !=200) {
@@ -93,7 +92,19 @@ async function weatherForecast(req, res) {
         }
     try {
         const data = await response.json();
-        console.log("data", data.data[0])
+
+        data.data.forEach( function(each) {
+            return projectData.weatherForecast[each.valid_date] = {
+               date: each.valid_date,
+               max_temp: each.max_temp,
+               min_temp: each.min_temp,
+               description: each.weather.description,
+               icon: each.weather.icon,
+               code: each.weather.code
+            }
+        } );
+
+        console.log(projectData)
     } catch (error) {
         console.log(error)
     }
