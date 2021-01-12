@@ -52,7 +52,7 @@ export async function getData() {
 
 
 export async function postData (data) {
-    console.log("post data", JSON.stringify({data}));
+
     const request = await fetch("http://localhost:8000/data", {
         method: "POST",
         mode: "cors",
@@ -63,18 +63,8 @@ export async function postData (data) {
     })
     try {
         const data = await request.json();
-        const response = await fetch("http://localhost:8000/data");
-        const message = response.json();
-        alert(message)
-        return data, response
+        return data
     }catch(error){
         console.log(error)
     }
-
-
-
-}
-
-//export { getData, postData, generate}
-
 }
