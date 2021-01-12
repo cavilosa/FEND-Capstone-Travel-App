@@ -63,7 +63,6 @@ async function getGeoInfo() {
     const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
     const response = await fetch(url);
-    console.log(response)
         if (response.status != 200) {
             console.log("response status is", response.status)
         }

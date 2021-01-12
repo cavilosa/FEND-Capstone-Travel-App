@@ -4,7 +4,7 @@ export async function generate() {
     console.log("generate is on");
 
     getData()
-    .then((data)=> {getGeoInfo(data)});
+    .then((data)=> {postData(data)});
 }
 
 
@@ -48,33 +48,6 @@ export async function getData() {
             alert("Please, fill in the departure date")
         }
     }else{alert("Please,fill in the destination")}
-}
-
-async function getGeoInfo(data) {
-    console.log(data);
-    // api_key = process.env.api_key;
-    console.log(api_key)
-    const url = `http://api.geonames.org/searchJSON?q=${data.destination}${process.env.api_key}`
-
-    const response = await fetch(url);
-    console.log(response)
-        if (response.status != 200) {
-            console.log("response status is", response.status)
-        }
-    try {
-        const geoInfo = await response.json();
-
-        geoData = {
-            latitude: geoInfo.geonames[0].lat,
-            longitude: geoInfo.geonames[0].lng,
-            country: geoInfo.geonames[0].countryName,
-            city: geoInfo.geonames[0].toponymName,
-            countryCode: geoInfo.geonames[0].countryCode
-        }
-        return geoData
-    } catch (error) {
-        console.log("error", error)
-    }
 }
 
 
