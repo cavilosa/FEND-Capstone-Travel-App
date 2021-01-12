@@ -36,6 +36,7 @@ const server = app.listen(port, () => {
 
 let projectData = {inputData: {}, geoData: {}, weatherForecast: {}}
 
+let message = ""; // error message from geo api when the city is incorrect
 
 app.post("/data", retrieveInput);
 
@@ -59,69 +60,61 @@ async function getInput (req, res) {
     }
 }
 
+
 async function getGeoInfo() {
+
     const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
     const response = await fetch(url);
-    console.log(response)
-        if (response.size === 0) {
-            console.log("response size is", response.size)
-            
-            app.get("/error", errorRes);
 
-            async function errorRes (response) {
-                console.log("errorRes")
-                res.send(response.size);
-            }
-        }
+    const geoInfo = await response.json();
+
     try {
-        const geoInfo = await response.json();
-
-        projectData.geoData = {
-            latitude: geoInfo.geonames[0].lat,
-            longitude: geoInfo.geonames[0].lng,
-            country: geoInfo.geonames[0].countryName,
-            city: geoInfo.geonames[0].toponymName,
-            countryCode: geoInfo.geonames[0].countryCode
+            if (Object.keys(geoInfo.geonames).length > 0) {
+                projectData.geoData = {
+                    latitude: geoInfo.geonames[0].lat,
+                    longitude: geoInfo.geonames[0].lng,
+                    country: geoInfo.geonames[0].countryName,
+                    city: geoInfo.geonames[0].toponymName,
+                    countryCode: geoInfo.geonames[0].countryCode
+                }
+                return projectData.geoData
+            } else {
+                message = "The city name is incorrect";
+                console.log(message)
+                return message
+            }
+        } catch(error) {
+            console.log(error)
         }
-        return projectData.geoData
-    } catch (error) {
-        console.log("error", error)
-    }
 }
-
-
-
 
 
 async function weatherbitForecast(req, res) {
+    if (projectData.geoData) {
+        const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
 
-    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
+        const response = await fetch(url);
+        try {
+            const data = await response.json();
 
-    const response = await fetch(url)
-        if (response.status !=200) {
-            console.log(response.status)
+            data.data.forEach( function(each) {
+                return projectData.weatherForecast[each.valid_date] = {
+                   date: each.valid_date,
+                   max_temp: each.max_temp,
+                   min_temp: each.min_temp,
+                   description: each.weather.description,
+                   icon: each.weather.icon,
+                   code: each.weather.code
+                }
+            });
+        } catch (error) {
+            console.log("no geoData")
         }
-    try {
-        const data = await response.json();
-
-        data.data.forEach( function(each) {
-            return projectData.weatherForecast[each.valid_date] = {
-               date: each.valid_date,
-               max_temp: each.max_temp,
-               min_temp: each.min_temp,
-               description: each.weather.description,
-               icon: each.weather.icon,
-               code: each.weather.code
-            }
-        });
-    } catch (error) {
-        console.log(error)
+        console.log(projectData)
     }
-    console.log(projectData)
+
 }
-
-
 
 
 app.get("/all", getData);
@@ -129,4 +122,11 @@ app.get("/all", getData);
 // Callback function to complete GET '/all'
 function getData (req, res) {
     res.send(projectData);
+}
+
+app.get("/error", errorMessage);
+
+async function errorMessage(req, res) {
+    res.send(JSON.stringify(message));
+    console.log("the message is sent", message)
 }

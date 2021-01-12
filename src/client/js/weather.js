@@ -82,7 +82,13 @@ export async function postData (data) {
 
 export async function getRes() {
     console.log("getRes is on")
-    const res = await fetch("/error");
-    const message = res.json();
-    console.log(message)
+    const req = await fetch("http://localhost:8000/error");
+    console.log(req)
+    try {
+        const message = req.json();
+        console.log(message.body)
+    }catch(error){
+        console.log(error)
+    }
+
 }
