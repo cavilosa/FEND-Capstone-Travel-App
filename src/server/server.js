@@ -36,7 +36,7 @@ const server = app.listen(port, () => {
 
 let projectData = {inputData: {}, geoData: {}, weatherForecast: {}}
 
-let message = ""; // error message from geo api when the city is incorrect
+let message = []; // error message from geo api when the city is incorrect
 
 app.post("/data", retrieveInput);
 
@@ -80,9 +80,9 @@ async function getGeoInfo() {
                 }
                 return projectData.geoData
             } else {
-                message = "The city name is incorrect";
+                message.message = "The city name is incorrect";
                 console.log(message)
-                return message
+                return errorMessage
             }
         } catch(error) {
             console.log(error)
@@ -127,6 +127,11 @@ function getData (req, res) {
 app.get("/error", errorMessage);
 
 async function errorMessage(req, res) {
-    res.send(JSON.stringify(message));
+    if (message === []) {
+        message.message = "no errors"
+        res.send(message);
+        console.log("the message is sent", message)
+    }
+    res.send(message);
     console.log("the message is sent", message)
 }

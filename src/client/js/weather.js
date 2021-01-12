@@ -8,7 +8,6 @@ export async function generate() {
         postData(data)
     })
     .then ( () => {
-        console.log("then")
         getRes();
     })
 }
@@ -86,7 +85,7 @@ export async function getRes() {
     console.log(req)
     try {
         const message = req.json();
-        console.log(message.body)
+        console.log(message)
     }catch(error){
         console.log(error)
     }
