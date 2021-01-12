@@ -64,8 +64,15 @@ async function getGeoInfo() {
 
     const response = await fetch(url);
     console.log(response)
-        if (response.status != 200) {
-            console.log("response status is", response.status)
+        if (response.size === 0) {
+            console.log("response size is", response.size)
+            
+            app.get("/error", errorRes);
+
+            async function errorRes (response) {
+                console.log("errorRes")
+                res.send(response.size);
+            }
         }
     try {
         const geoInfo = await response.json();
@@ -82,6 +89,10 @@ async function getGeoInfo() {
         console.log("error", error)
     }
 }
+
+
+
+
 
 async function weatherbitForecast(req, res) {
 

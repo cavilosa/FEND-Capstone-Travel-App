@@ -1,4 +1,4 @@
-import { generate, getData, postData } from "./js/weather.js";
+import { generate, getData, postData, getRes } from "./js/weather.js";
 
 import "./styles/main.scss";
 import "./styles/header.scss";
@@ -11,5 +11,6 @@ console.log("hello");
 export {
     generate,
     getData,
-    postData
+    postData,
+    getRes
 }
