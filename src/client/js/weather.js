@@ -52,19 +52,24 @@ export async function getData() {
 
 
 export async function postData (data) {
-
-    const request = await fetch("http://localhost:8000/data", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8"
-        },
-        body: JSON.stringify({data:data})
-    })
-    try {
-        const data = await request.json();
-        return data
-    }catch(error){
-        console.log(error)
+    console.log("data is on", data)
+    if (data !== undefined) {
+        const request = await fetch("http://localhost:8000/data", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify({data:data})
+        })
+        try {
+            const data = await request.json();
+            return data
+        }catch(error){
+            console.log(error)
+        }
+    }else{
+        console.log("The input information is undefined")
     }
+
 }

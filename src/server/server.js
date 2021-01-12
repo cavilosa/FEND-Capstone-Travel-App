@@ -125,22 +125,24 @@ async function pixabay () {
         try {
             const data = await response.json();
             if (data.totalHits > 0) {
-                return projectData.picture = data.hits[0]
-            } else {
+                projectData.picture = data.hits[0].largeImageURL
+                console.log(projectData.picture)
+                return projectData.picture
+            } else if (data.totalHits === 0)  {
                 const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
                 const response = await fetch(url)
                 try{
                     const data = await response.json();
-                    return projectData.picture = data.hits[0]
+                    projectData.picture = data.hits[0].largeImageURL
+                    console.log(projectData.picture)
+                    return projectData.picture
                 }catch(error) {
                     console.log(error)
                 }
             }
-            console.log(projectData)
         }catch(error) {
             console.log(error)
         }
-
     }
-    console.log(projectData)
+
 }
