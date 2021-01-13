@@ -1,5 +1,4 @@
 export async function generate() {
-
     event.preventDefault();
     console.log("generate is on");
 
@@ -96,14 +95,21 @@ export async function getProjectData(){
         })
         .then((projectData)=>{
 
+            let trip = document.querySelector(".current-trip");
+            let placeholder = document.querySelector(".trip-placeholder");
+            trip.removeChild(placeholder);
+
+
+            const pictureDiv = document.querySelector(".picture")
+            const url = projectData.picture
+            document.querySelector("img").src = url;
+
+
             let destination = projectData.inputData.destination;
             destination = destination.charAt(0).toUpperCase() + destination.slice(1);
             document.querySelector(".destination").innerText = destination;
 
-            const pictureDiv = document.querySelector(".picture")
 
-            const url = projectData.picture
-            document.querySelector("img").src = url;
 
         })
     }catch(error){
