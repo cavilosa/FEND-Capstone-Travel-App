@@ -3,19 +3,36 @@
     grid-area: tr;
     display: flex;
     flex-flow: row;
-}
-.add-more-info {
-    display: flex;
-    flex-flow: column;
-    padding:20px;
-    //grid-area: add;
-}
 
-#add {
-    border-radius: 5px;
-    margin: 6px;
+    .add-info {
+        display: flex;
+        flex-flow: column;
+        //stify-content: center;
+        align-items: center;
+        max-width: 30 vw;
+
+        .picture {
+            max-width: 30vw;
+        }
+
+        #img {
+            padding: 10px;
+            max-width: 90%;
+        }
+        .add-more-info {
+            display: flex;
+            flex-flow: column;
+            padding:20px;
+
+            #add {
+                border-radius: 5px;
+                margin: 6px;
+            }
+        }
+    }
 }
 
 .current-trip {
     grid-area: tr;
+    max-width: 70vw;
 }

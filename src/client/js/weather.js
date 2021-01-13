@@ -4,7 +4,15 @@ export async function generate() {
     console.log("generate is on");
 
     getData()
-    .then((data)=> {postData(data)});
+    .then((data)=> {
+        postData(data)
+
+    })
+    .then( () => {
+        getProjectData()
+    })
+
+
 }
 
 
@@ -72,4 +80,33 @@ export async function postData (data) {
         console.log("The input information is undefined")
     }
 
+}
+
+
+export async function getProjectData(){
+
+    console.log("update UI is on")
+    const request = await fetch("http://localhost:8000/all");
+    try{
+        const data = request.json();
+        Promise.resolve(data)
+        .then(function(value){
+            let projectData = value
+            return projectData
+        })
+        .then((projectData)=>{
+
+            let destination = projectData.inputData.destination;
+            destination = destination.charAt(0).toUpperCase() + destination.slice(1);
+            document.querySelector(".destination").innerText = destination;
+
+            const pictureDiv = document.querySelector(".picture")
+
+            const url = projectData.picture
+            document.querySelector("img").src = url;
+
+        })
+    }catch(error){
+        console.log(error)
+    }
 }

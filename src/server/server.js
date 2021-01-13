@@ -48,12 +48,22 @@ async function retrieveInput(req, res) {
             weatherbitForecast()
             .then( () => {
                 pixabay()
+                .then( ()=> {
+                    console.log("/all is on")
+                    allData(req, res)
+                })
             })
         })
     })
 
 }
 
+app.get("/all", allData);
+async function allData(req, res) {
+    console.log("alldata is on")
+    res.send(projectData)
+    console.log(projectData)
+}
 
 async function getInput (req, res) {
     if (req) {
@@ -112,9 +122,7 @@ async function weatherbitForecast(req, res) {
         } catch (error) {
             console.log(error)
         }
-        //console.log(projectData)
     }
-
 }
 
 async function pixabay () {
@@ -126,16 +134,16 @@ async function pixabay () {
             const data = await response.json();
             if (data.totalHits > 0) {
                 projectData.picture = data.hits[0].largeImageURL
-                console.log(projectData.picture)
-                return projectData.picture
+                //console.log(projectData.picture)
+                return projectData.picture, projectData
             } else if (data.totalHits === 0)  {
                 const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
                 const response = await fetch(url)
                 try{
                     const data = await response.json();
                     projectData.picture = data.hits[0].largeImageURL
-                    console.log(projectData.picture)
-                    return projectData.picture
+                    //console.log(projectData.picture)
+                    return projectData.picture, projectData
                 }catch(error) {
                     console.log(error)
                 }
@@ -144,5 +152,4 @@ async function pixabay () {
             console.log(error)
         }
     }
-
 }
