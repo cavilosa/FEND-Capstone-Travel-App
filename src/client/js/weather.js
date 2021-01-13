@@ -78,7 +78,6 @@ export async function postData (data) {
     }else{
         console.log("The input information is undefined")
     }
-
 }
 
 
@@ -94,22 +93,25 @@ export async function getProjectData(){
             return projectData
         })
         .then((projectData)=>{
-
+            // div to fill in with trip info
             let trip = document.querySelector(".current-trip");
+            // removing placeholder
             let placeholder = document.querySelector(".trip-placeholder");
             trip.removeChild(placeholder);
 
+            // creating destination div
+            let destinationDiv = document.createElement("div");
+            destinationDiv.className = "destination";
+
+            trip.appendChild(destinationDiv);
+
+            let destination = projectData.inputData.destination;
+            destination = destination.charAt(0).toUpperCase() + destination.slice(1);
+            document.querySelector(".destination").innerText = `My trip to: ${destination}`;
 
             const pictureDiv = document.querySelector(".picture")
             const url = projectData.picture
             document.querySelector("img").src = url;
-
-
-            let destination = projectData.inputData.destination;
-            destination = destination.charAt(0).toUpperCase() + destination.slice(1);
-            document.querySelector(".destination").innerText = destination;
-
-
 
         })
     }catch(error){
