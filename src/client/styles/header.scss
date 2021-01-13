@@ -14,7 +14,7 @@ body{
     grid-template-columns: repeat(2 1fr);
     grid-template-rows: 3 auto;
     grid-template-areas:
-    "hd hd"
-    "tr tr"
-    "nt nt";
+    "hd"
+    "tr"
+    "nt";
 }

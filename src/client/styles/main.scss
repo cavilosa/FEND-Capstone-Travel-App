@@ -1,15 +1,18 @@
 .trip {
     background-color: #ffe6ea;
     grid-area: tr;
-    display: flex;
-    flex-flow: row;
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 1;
+    grid-template-areas:
+    "add tr";
 
     .add-info {
         display: flex;
         flex-flow: column;
-        //stify-content: center;
         align-items: center;
         max-width: 30 vw;
+        grid-area: add;
 
         .picture {
             max-width: 30vw;
@@ -35,4 +38,8 @@
 .current-trip {
     grid-area: tr;
     max-width: 70vw;
+
+    .destination {
+        grid-area: 1 2;
+    }
 }

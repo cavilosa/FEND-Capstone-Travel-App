@@ -38,7 +38,11 @@
         </article>
 
         <article class="current-trip">
-            <h2>My trip to: </h2>
+            <div class="plan-trip-facts">
+
+
+            </div>
+            <!--<h2>My trip to: </h2>
             <div class="destination">
 
             </div>
@@ -46,9 +50,6 @@
             <div class="departure">
 
             </div>
-            <!--<h4>flight info: </h4>
-            <div class="flight-info">
-            </div>-->
 
             <div class="save-remove-trip">
                 <button type="button" name="remove" id="remove">remove trip
@@ -82,7 +83,7 @@
                     <div class="weather-description"></div>
                     <div class="weather-icon"></div>
                 </h5>
-            </div>
+            </div>-->
         </article>
 
     </section>
@@ -90,12 +91,12 @@
     <section class="new-trip">
             <form id="new-trip" onsubmit="return Client.generate(event)">
                 <div class="new-trip-info">
-                    <h3>My trip to:</h3>
+                    <h3>My new trip to:</h3>
                     <input type="text" id="destination" name="destination"
-                        placeholder="Enter Destination">
-                    <h3>Departing:</h3>
+                        placeholder="Enter city or country of your destination">
+                    <h3>Departing date:</h3>
                     <input type="date" id="departure" name="departure">
-                    <h3>Returning:</h3>
+                    <h3>Comeback date:</h3>
                     <input type="date" id="comeback" name="comeback">
                 </div>
                 <div class="save-remove-trip">

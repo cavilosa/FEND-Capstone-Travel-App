@@ -1,11 +1,20 @@
 section.new-trip {
     background-color: #e6e6e6;
     grid-area: nt;
-    display: grid;
-    grid-template-columns: repeat(2 1fr);
-    grid-template-rows: 3 auto;
-    grid-template-areas:
-    "tr lc"
-    "dp dt"
-    "sv rm";
+
+    .new-trip-info {
+        display: grid;
+        grid-template-columns: repeat(2 1fr);
+        grid-template-rows: 3 auto;
+        grid-template-areas:
+        "trip location"
+        "departure date"
+        "comeback date";
+
+        #destination,
+        #departure,
+        #comeback {
+            margin: 15px;
+        }
+    }
 }
