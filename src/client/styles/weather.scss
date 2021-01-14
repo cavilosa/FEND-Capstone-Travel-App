@@ -1,0 +1,11 @@
+.weather {
+    display: grid;
+    grid-template-columns: 17;
+    grid-template-rows: 5 auto;
+
+    h4.title {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+    }
+}

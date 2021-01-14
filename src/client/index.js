@@ -3,7 +3,7 @@ import { generate, getData, postData, getProjectData, upperCaseFirstChar, update
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";
-import "./styles/trip.scss";
+import "./styles/weather.scss";
 import img from "./images/travel.jpg";
 
 let picture = document.querySelector("#img");

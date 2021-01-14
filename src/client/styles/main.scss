@@ -36,7 +36,6 @@
 }
 
 .save-remove-trip {
-    grid-area: rm;
     margin: 10px;
     display: flex;
     align-items: center;
@@ -46,8 +45,17 @@
 .current-trip {
     grid-area: tr;
     max-width: 70vw;
+    display: grid;
+    grid-template-columns: 2 auto;
+    grid-template-rows: 3 auto;
+    grid-template-areas:
+    "pr ds"
+    "pr dp"
+    "pr rt";
 
-    .destination {
-        grid-area: 1 2;
+    .destination,
+    .departure,
+    .comeback {
+        padding: 20px;
     }
 }
