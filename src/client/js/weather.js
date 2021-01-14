@@ -88,8 +88,8 @@ export async function getProjectData(){
         const data = request.json();
         Promise.resolve(data)
         .then(function(value){
-            let data = value
-            return data
+                let data = value
+                return data
 
             .then((data)=>{
 
