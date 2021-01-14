@@ -35,6 +35,11 @@
     }
 }
 
+.save-remove-trip {
+    grid-area: rm;
+    margin: 10px;
+}
+
 .current-trip {
     grid-area: tr;
     max-width: 70vw;

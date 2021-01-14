@@ -1,4 +1,4 @@
-import { generate, getData, postData, getProjectData } from "./js/weather.js";
+import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, getStorageData,checkStorage } from "./js/weather.js";
 
 import "./styles/main.scss";
 import "./styles/header.scss";
@@ -11,10 +11,16 @@ picture.src = img
 
 document.getElementById("new-save").addEventListener("click", generate);
 
+window.addEventListener("load", checkStorage)
+
 
 export {
     generate,
     getData,
     postData,
-    getProjectData
+    getProjectData,
+    upperCaseFirstChar,
+    checkStorage,
+    updateUI,
+    getStorageData
 }

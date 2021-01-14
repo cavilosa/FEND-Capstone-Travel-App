@@ -11,8 +11,27 @@ export async function generate() {
         getProjectData()
     })
 
-
 }
+
+export async function checkStorage() {
+    if (!localStorage.getItem("projectData")) {
+        console.log("no local sotrage data")
+    }
+    try {
+        getStorageData()
+        .then ( async (projectData) => {
+            updateUI(projectData)
+        })
+    }catch(e) {
+        console.log(e)
+    }
+}
+
+export async function getStorageData(){
+    const projectData = JSON.parse(localStorage.getItem("projectData"))
+    return projectData
+}
+
 
 
 export async function getData() {
@@ -59,7 +78,7 @@ export async function getData() {
 
 
 export async function postData (data) {
-    console.log("data is on", data)
+    console.log("data is on")
     if (data !== undefined) {
         const request = await fetch("http://localhost:8000/data", {
             method: "POST",
@@ -83,38 +102,69 @@ export async function postData (data) {
 
 export async function getProjectData(){
 
-    console.log("update UI is on")
+    console.log("getProjectData is on")
     const request = await fetch("http://localhost:8000/all");
     try{
         const data = request.json();
         Promise.resolve(data)
         .then(function(value){
-            let projectData = value
-            return projectData
-        })
-        .then((projectData)=>{
-            // div to fill in with trip info
-            let trip = document.querySelector(".current-trip");
-            // removing placeholder
-            let placeholder = document.querySelector(".trip-placeholder");
-            trip.removeChild(placeholder);
+            let data = value
+            return data
 
-            // creating destination div
-            let destinationDiv = document.createElement("div");
-            destinationDiv.className = "destination";
+            .then((data)=>{
 
-            trip.appendChild(destinationDiv);
+            localStorage.setItem("projectData", JSON.stringify(data))
+            const projectData = JSON.parse(localStorage.getItem("projectData"))
 
-            let destination = projectData.inputData.destination;
-            destination = destination.charAt(0).toUpperCase() + destination.slice(1);
-            document.querySelector(".destination").innerText = `My trip to: ${destination}`;
+                .then( async (projectData)=> {
+                    updateUI(projectData)
+                })
 
-            const pictureDiv = document.querySelector(".picture")
-            const url = projectData.picture
-            document.querySelector("img").src = url;
+            /*let destination = decodeURIComponent(projectData.inputData.destination)
+            upperCaseFirstChar(destination)
 
+            .then ((destination)=>{
+
+                document.querySelector(".destination").innerText = `My trip to: ${destination}`;
+
+                const pictureDiv = document.querySelector(".picture")
+                const url = projectData.picture
+                document.querySelector("img").src = url;*/
+            })
         })
     }catch(error){
         console.log(error)
     }
 }
+
+async function updateUI (projectData) {
+
+    let destination = decodeURIComponent(projectData.inputData.destination)
+    upperCaseFirstChar(destination)
+
+    .then ((destination)=>{
+
+        document.querySelector(".destination").innerText = `My trip to: ${destination}`;
+
+        const pictureDiv = document.querySelector(".picture")
+        const url = projectData.picture
+        document.querySelector("img").src = url;
+
+    })
+}
+
+
+async function upperCaseFirstChar (string) {
+    const words = string.split(" ");
+
+    for ( let i = 0; i < words.length; i++) {
+        let word = words[i];
+        word = word[0].toUpperCase() + word.slice(1)
+        console.log(word)
+        words[i] = word
+    }
+    console.log(words)
+    return words.join(" ")
+}
+
+export { updateUI, upperCaseFirstChar }
