@@ -125,7 +125,7 @@ async function weatherbitForecast(req, res) {
                code: each.weather.code
             }
         });
-        //console.log(projectData.weatherForecast)
+        console.log(projectData.weatherForecast)
     } catch (error) {
         console.log(error)
     }
@@ -134,7 +134,7 @@ async function weatherbitForecast(req, res) {
 async function pixabay () {
 
     const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.city}&category=places&image_type=photo`
-    console.log("url", url)
+    //console.log("url", url)
     const response = await fetch(url)
     //console.log("respose", response)
     try {

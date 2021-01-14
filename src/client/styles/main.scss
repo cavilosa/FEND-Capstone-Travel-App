@@ -38,6 +38,9 @@
 .save-remove-trip {
     grid-area: rm;
     margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .current-trip {

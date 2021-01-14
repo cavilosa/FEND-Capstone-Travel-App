@@ -113,7 +113,12 @@ async function updateUI (projectData) {
 
     .then ((destination)=>{
 
-        document.querySelector(".destination").innerText  = destination;
+        const list = document.querySelectorAll(".destination")
+        console.log(list.length, typeof list)
+        for (let i = 0; i < list.length; i++) {
+            list[i].innerText = destination;
+        }
+
 
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
@@ -126,7 +131,21 @@ async function updateUI (projectData) {
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
 
-    })
+        //const weather = projectData.weatherForecast[0];
+        //document.querySelector(".weather").innerText = weather;
+        const days = Object.keys(projectData.weatherForecast)
+        console.log("days", days)
+        /*days.forEach( function(day) {
+            newEntry = {
+                date: day,
+                high: projectData.weatherForecast[key].max_temp,
+                low: projectData.weatherForecast[key].max_temp,
+            }
+        }*/
+
+        }
+
+    )
 }
 
 
@@ -136,10 +155,10 @@ async function upperCaseFirstChar (string) {
     for ( let i = 0; i < words.length; i++) {
         let word = words[i];
         word = word[0].toUpperCase() + word.slice(1)
-        console.log(word)
+        //console.log(word)
         words[i] = word
     }
-    console.log(words)
+    //console.log(words)
     return words.join(" ")
 }
 
