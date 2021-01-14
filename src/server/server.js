@@ -77,99 +77,86 @@ async function errorMessage(req, res){
 async function getInput (req, res) {
     if (req) {
         projectData.inputData = req.body.data // destination, departure, comeback
+        //console.log("project input", projectData.inputData)
         return projectData.inputData
     }else{
         console.log("the input is empty")
     }
 }
 
-async function getGeoInfo() {
-    if (projectData.inputData) {
-        const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
+async function getGeoInfo(req, res) {
+    const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
-        const response = await fetch(url);
+    const response = await fetch(url);
 
-        if (response.size !== 0) {
-            try {
-                errorless(response)
-            } catch (e) {
-                console.log(e)
-            }
-        } else {
-            console.log("response.size is 0")
+    try {
+        const geoInfo = await response.json();
+
+        projectData.geoData = {
+            latitude: geoInfo.geonames[0].lat,
+            longitude: geoInfo.geonames[0].lng,
+            country: geoInfo.geonames[0].countryName,
+            city: geoInfo.geonames[0].toponymName,
+            countryCode: geoInfo.geonames[0].countryCode
         }
+        //console.log("geodata", projectData.geoData)
+        return projectData.geoData
+
+    } catch (error) {
+        console.log("error", error)
     }
-}
-
-async function errorMessage() {
-
-}
-
-async function errorless(response) {
-
-    const geoInfo = await response.json();
-
-    projectData.geoData = {
-        latitude: geoInfo.geonames[0].lat,
-        longitude: geoInfo.geonames[0].lng,
-        country: geoInfo.geonames[0].countryName,
-        city: geoInfo.geonames[0].toponymName,
-        countryCode: geoInfo.geonames[0].countryCode
-    }
-    console.log(projectData.geoData)
-    return projectData.geoData
 }
 
 async function weatherbitForecast(req, res) {
 
-    if (projectData.geoData !== undefined) {
-        const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
+    //console.log(projectData.geoData)
+    const response = await fetch(url)
 
-        const response = await fetch(url)
-
-        try {
-            const data = await response.json();
-            data.data.forEach( function(each) {
-                return projectData.weatherForecast[each.valid_date] = {
-                   date: each.valid_date,
-                   max_temp: each.max_temp,
-                   min_temp: each.min_temp,
-                   description: each.weather.description,
-                   icon: each.weather.icon,
-                   code: each.weather.code
-                }
-            });
-        } catch (error) {
-            console.log(error)
-        }
+    try {
+        const data = await response.json();
+        //console.log(data)
+        data.data.forEach( function(each) {
+            return projectData.weatherForecast[each.valid_date] = {
+               date: each.valid_date,
+               max_temp: each.max_temp,
+               min_temp: each.min_temp,
+               description: each.weather.description,
+               icon: each.weather.icon,
+               code: each.weather.code
+            }
+        });
+        //console.log(projectData.weatherForecast)
+    } catch (error) {
+        console.log(error)
     }
 }
 
 async function pixabay () {
 
-    if(projectData.geoData) {
-        const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.city}&category=places&image_type=photo`
-        const response = await fetch(url)
-        try {
-            const data = await response.json();
-            if (data.totalHits > 0) {
+    const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.city}&category=places&image_type=photo`
+    const response = await fetch(url)
+    try {
+        const data = await response.json();
+        if (data.totalHits >= 1) {
+            projectData.picture = data.hits[0].largeImageURL
+            console.log("url", projectData.picture)
+            return projectData.picture, projectData
+        } else if (data.totalHits === 0)  {
+            const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
+            const response = await fetch(url)
+            try{
+                const data = await response.json();
                 projectData.picture = data.hits[0].largeImageURL
                 //console.log(projectData.picture)
                 return projectData.picture, projectData
-            } else if (data.totalHits === 0)  {
-                const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
-                const response = await fetch(url)
-                try{
-                    const data = await response.json();
-                    projectData.picture = data.hits[0].largeImageURL
-                    //console.log(projectData.picture)
-                    return projectData.picture, projectData
-                }catch(error) {
-                    console.log(error)
-                }
+            }catch(error) {
+                console.log(error)
             }
-        }catch(error) {
-            console.log(error)
         }
+    }catch(error) {
+        console.log(error)
     }
+
+
 }

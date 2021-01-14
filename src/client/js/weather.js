@@ -88,30 +88,19 @@ export async function getProjectData(){
         const data = request.json();
         Promise.resolve(data)
         .then(function(value){
-                let data = value
-                return data
-
+            let data = value
+            return data
+        })
             .then((data)=>{
-
+            console.log("data", data)
             localStorage.setItem("projectData", JSON.stringify(data))
             const projectData = JSON.parse(localStorage.getItem("projectData"))
-
+            return projectData
+            })
                 .then( async (projectData)=> {
+                    console.log("projectData", projectData)
                     updateUI(projectData)
                 })
-
-            /*let destination = decodeURIComponent(projectData.inputData.destination)
-            upperCaseFirstChar(destination)
-
-            .then ((destination)=>{
-
-                document.querySelector(".destination").innerText = `My trip to: ${destination}`;
-
-                const pictureDiv = document.querySelector(".picture")
-                const url = projectData.picture
-                document.querySelector("img").src = url;*/
-            })
-        })
     }catch(error){
         console.log(error)
     }
@@ -128,6 +117,7 @@ async function updateUI (projectData) {
 
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
+        console.log(url)
         document.querySelector("img").src = url;
 
     })
