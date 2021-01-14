@@ -11,7 +11,7 @@ picture.src = img
 
 document.getElementById("new-save").addEventListener("click", generate);
 
-window.addEventListener("load", checkStorage)
+/*window.addEventListener("load", checkStorage)
 async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
         console.log("no local sotrage data")
@@ -30,7 +30,7 @@ async function checkStorage() {
 async function getStorageData(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
-}
+}*/
 
 export {
     generate,
@@ -38,7 +38,7 @@ export {
     postData,
     getProjectData,
     upperCaseFirstChar,
-    checkStorage,
+    //checkStorage,
     updateUI,
-    getStorageData
+    //getStorageData
 }
