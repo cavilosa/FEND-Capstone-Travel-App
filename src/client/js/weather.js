@@ -113,12 +113,18 @@ async function updateUI (projectData) {
 
     .then ((destination)=>{
 
-        document.querySelector(".destination").innerText = `My trip to: ${destination}`;
+        document.querySelector(".destination").innerText  = destination;
 
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
         console.log(url)
         document.querySelector("img").src = url;
+
+        const departure = projectData.inputData.departure.split("-").reverse().join("-");
+        document.querySelector(".departure").innerText = departure;
+
+        const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
+        document.querySelector(".comeback").innerText = comeback;
 
     })
 }

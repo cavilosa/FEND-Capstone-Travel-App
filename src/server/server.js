@@ -60,7 +60,7 @@ async function retrieveInput(req, res) {
 
 app.get("/all", allData);
 async function allData(req, res) {
-    console.log("alldata is on")
+    //console.log("alldata is on")
     res.send(projectData)
     //console.log(projectData)
 }
@@ -110,7 +110,6 @@ async function getGeoInfo(req, res) {
 async function weatherbitForecast(req, res) {
 
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
-    //console.log(projectData.geoData)
     const response = await fetch(url)
 
     try {
@@ -135,12 +134,15 @@ async function weatherbitForecast(req, res) {
 async function pixabay () {
 
     const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.city}&category=places&image_type=photo`
+    console.log("url", url)
     const response = await fetch(url)
+    //console.log("respose", response)
     try {
         const data = await response.json();
+        //console.log("data", data)
         if (data.totalHits >= 1) {
             projectData.picture = data.hits[0].largeImageURL
-            console.log("url", projectData.picture)
+            console.log("picture url", projectData.picture)
             return projectData.picture, projectData
         } else if (data.totalHits === 0)  {
             const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
