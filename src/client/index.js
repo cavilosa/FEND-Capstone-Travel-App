@@ -1,5 +1,5 @@
-import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, getStorageData,checkStorage } from "./js/weather.js";
-
+import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/weather.js";
+import { getStorageData, checkStorage } from "./js/localStorage.js"
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";

@@ -13,26 +13,6 @@ export async function generate() {
 
 }
 
-export async function checkStorage() {
-    if (!localStorage.getItem("projectData")) {
-        console.log("no local sotrage data")
-    }
-    try {
-        getStorageData()
-        .then ( async (projectData) => {
-            updateUI(projectData)
-        })
-    }catch(e) {
-        console.log(e)
-    }
-}
-
-export async function getStorageData(){
-    const projectData = JSON.parse(localStorage.getItem("projectData"))
-    return projectData
-}
-
-
 
 export async function getData() {
 
