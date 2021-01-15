@@ -1,7 +1,7 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/generateInfo.js";
 //import { getStorageData } from "./js/localStorage.js"
 import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js"
-import { removeTrip } from "./js/removeTrip.js"
+import { removeTrip, clearInput } from "./js/removeTrip.js"
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";
@@ -37,7 +37,9 @@ async function getStorageData(){
 
 document.querySelector("#weather").addEventListener("click", weatherForecast);
 
-document.querySelector("#remove").addEventListener("click", removeTrip)
+document.querySelector("#remove").addEventListener("click", removeTrip);
+
+document.querySelector("#new-remove").addEventListener("click", clearInput);
 
 export {
     generate,
@@ -51,5 +53,6 @@ export {
     weatherForecast,
     newForecast,
     updateWeatherUI,
-    removeTrip
+    removeTrip,
+    clearInput
 }
