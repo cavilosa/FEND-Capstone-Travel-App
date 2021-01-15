@@ -35,7 +35,7 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
-let projectData = {inputData: {}, geoData: {}, weatherForecast: {}, picture: {}}
+let projectData = {inputData: {}, geoData: {}, picture: {}}
 
 
 app.post("/data", retrieveInput);
@@ -45,36 +45,25 @@ async function retrieveInput(req, res) {
     .then ( () => {
         getGeoInfo()
         .then( () => {
-            weatherbitForecast()
-            .then( () => {
-                pixabay()
-                .then( ()=> {
-                    console.log("/all is on")
-                    allData(req, res)
-                })
+            pixabay()
+            .then( ()=> {
+                console.log("/all is on")
+                allData(req, res)
             })
         })
     })
-
 }
 
 app.get("/all", allData);
+
 async function allData(req, res) {
     //console.log("alldata is on")
     res.send(projectData)
     //console.log(projectData)
 }
 
-let message = "error";
 
-app.get("/error", errorMessage);
-
-async function errorMessage(req, res){
-    console.log("error message");
-    res.send(message)
-}
-
-async function getInput (req, res) {
+async function getInput(req, res) {
     if (req) {
         projectData.inputData = req.body.data // destination, departure, comeback
         //console.log("project input", projectData.inputData)
@@ -107,16 +96,46 @@ async function getGeoInfo(req, res) {
     }
 }
 
-async function weatherbitForecast(req, res) {
+let weatherForecast = {};
 
-    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.geoData.latitude}&lon=${projectData.geoData.longitude}&days=16&units=M&key=${weather_key}`
+app.post("/forecast", getStorageGeoData);
+
+async function getStorageGeoData(req, res) {
+    storageInfo(req, res)
+    .then( (geoData)=>{
+        weatherbitForecast(geoData)
+        .then (()=> {
+            console.log("newforecast is starting soon")
+            newForecast(req, res)
+        })
+    })
+}
+
+app.get("/newForecast", newForecast);
+
+async function newForecast(req, res){
+    console.log("newforecast is on")
+    res.send(weatherForecast);
+    console.log("newforecast sent")
+}
+
+async function storageInfo(req, res) {
+    const geoData = req.body.data;
+    //console.log(geoData)
+    return geoData
+}
+
+
+async function weatherbitForecast(geoData) {
+    console.log(geoData)
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&days=16&units=M&key=${weather_key}`
     const response = await fetch(url)
 
     try {
         const data = await response.json();
         //console.log(data)
         data.data.forEach( function(each) {
-            return projectData.weatherForecast[each.valid_date] = {
+            return weatherForecast[each.valid_date] = {
                date: each.valid_date,
                max_temp: each.max_temp,
                min_temp: each.min_temp,
@@ -125,7 +144,8 @@ async function weatherbitForecast(req, res) {
                code: each.weather.code
             }
         });
-        console.log(projectData.weatherForecast)
+        //console.log(weatherForecast)
+        return weatherForecast
     } catch (error) {
         console.log(error)
     }

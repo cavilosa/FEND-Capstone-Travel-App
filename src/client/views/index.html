@@ -69,24 +69,13 @@
     <section>
         <div class="weather">
 
-            <h4 class="title">16 day weather forecast for &nbsp;
+            <button type="submit" name="weather" id="weather"
+                onsubmit="Client.weatherForecast(e)">
+                16 day weather forecast for &nbsp;
                 <span class="destination"> </span>
-            </h4>
+            </button>
 
-            <h5>Date:
-                <div class="forecast-date"></div>
-            </h5>
 
-            <h5>High: <div class="max-temp"></div>
-            </h5>
-
-            <h5>Low: <div class="min-temp"></div>
-            </h5>
-
-            <h5>Description:
-                <div class="weather-description"></div>
-                <div class="weather-icon"></div>
-            </h5>
         </div>
     </section>
 

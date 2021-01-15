@@ -1,5 +1,7 @@
-import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/weather.js";
-//import { getStorageData, checkStorage } from "./js/localStorage.js"
+import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/generateInfo.js";
+import { getStorageData, checkStorage } from "./js/localStorage.js"
+import { weatherForecast, newForecast } from "./js/weatherForecast.js"
+
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";
@@ -32,13 +34,17 @@ async function getStorageData(){
     return projectData
 }*/
 
+document.querySelector("#weather").addEventListener("click", weatherForecast);
+
 export {
     generate,
     getData,
     postData,
     getProjectData,
     upperCaseFirstChar,
-    //checkStorage,
+    checkStorage,
     updateUI,
-    //getStorageData
+    getStorageData,
+    weatherForecast,
+    newForecast
 }
