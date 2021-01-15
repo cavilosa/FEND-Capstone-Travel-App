@@ -2,8 +2,10 @@ export async function weatherForecast(e) {
     e.preventDefault();
     console.log("weatherForecast is on")
 
+   //localStorage.clear()
+
    if(localStorage.getItem("projectData")){
-       getStorageData()
+       getStorage()
        .then( (projectData)=>{
            const weatherGeoData = projectData.geoData
            console.log(weatherGeoData)
@@ -15,14 +17,15 @@ export async function weatherForecast(e) {
        .then( (weatherGeoData)=> {
            newForecast()
            .then ( (data) => {
-               updateWeather(data)
+               updateWeatherUI(data)
            })
        })
-
+   } else {
+       alert("Please, choose youe destination first.")
    }
 }
 
-export async function getStorageData(){
+export async function getStorage(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
 }
@@ -56,7 +59,7 @@ export async function newForecast(req, res){
     }
 }
 
-export async function updateWeather(data) {
+export async function updateWeatherUI(data) {
     const forecast = Object.values(data);
     //console.log(forecast[0].date)
 

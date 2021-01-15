@@ -1,7 +1,7 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/generateInfo.js";
-import { getStorageData, checkStorage } from "./js/localStorage.js"
-import { weatherForecast, newForecast, updateWeather } from "./js/weatherForecast.js"
-
+//import { getStorageData } from "./js/localStorage.js"
+import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js"
+import { removeTrip } from "./js/removeTrip.js"
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";
@@ -13,7 +13,8 @@ picture.src = img
 
 document.getElementById("new-save").addEventListener("click", generate);
 
-/*window.addEventListener("load", checkStorage)
+window.addEventListener("load", checkStorage)
+
 async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
         console.log("no local sotrage data")
@@ -32,9 +33,11 @@ async function checkStorage() {
 async function getStorageData(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
-}*/
+}
 
 document.querySelector("#weather").addEventListener("click", weatherForecast);
+
+document.querySelector("#remove").addEventListener("click", removeTrip)
 
 export {
     generate,
@@ -47,5 +50,6 @@ export {
     getStorageData,
     weatherForecast,
     newForecast,
-    updateWeather
+    updateWeatherUI,
+    removeTrip
 }
