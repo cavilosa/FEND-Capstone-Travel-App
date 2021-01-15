@@ -55,7 +55,7 @@ export async function newForecast(req, res){
     const response = await fetch("http://localhost:8000/newForecast")
     try{
         const forecast = response.json();
-        console.log(Object.values(forecast))
+        console.log(forecast)
     }catch(e){
         console.log(e)
     }
