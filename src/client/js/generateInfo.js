@@ -131,8 +131,8 @@ async function updateUI (projectData) {
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
 
-        const values = Object.values(projectData.weatherForecast)
-        console.log(values[0].date)
+        /*const values = Object.values(projectData.weatherForecast)
+        console.log(values[0].date)*/
 
     })
 }

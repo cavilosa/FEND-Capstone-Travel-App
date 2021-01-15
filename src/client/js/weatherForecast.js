@@ -13,24 +13,18 @@ export async function weatherForecast(e) {
             sendStorage(weatherGeoData)
        })
        .then( (weatherGeoData)=> {
-           newForecast();
+           newForecast()
+           .then ( (data) => {
+               updateWeather(data)
+           })
        })
+
    }
 }
 
 export async function getStorageData(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
-}
-
-export async function weatherAPI(){
-    const request = await fetch("http://localhost:8000/forecast")
-    try{
-        const forecast = request.json();
-        console.log(forecast00)
-    }catch(e){
-        console.log(e)
-    }
 }
 
 export async function sendStorage(weatherGeoData){
@@ -54,9 +48,31 @@ export async function sendStorage(weatherGeoData){
 export async function newForecast(req, res){
     const response = await fetch("http://localhost:8000/newForecast")
     try{
-        const forecast = response.json();
-        console.log(forecast)
+        const data = response.json();
+        console.log(data)
+        return data
     }catch(e){
         console.log(e)
+    }
+}
+
+export async function updateWeather(data) {
+    const forecast = Object.values(data);
+    //console.log(forecast[0].date)
+
+    const container = document.querySelector(".forecast")
+    container.innerHTML = "";
+    for (let x = 1; x <= 2; x ++){ // creates rows
+        let row = document.createElement("div");
+        row.classList.add("row")
+        for (let y = 1; y <= 8; y++) { // creates cells
+            let cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.innerHTML = `${forecast[0].date}<br>${forecast[0].description}
+                <br>High: ${forecast[0].max_temp}&#176 C <br>
+                Low: ${forecast[0].min_temp}&#176 C`
+            row.appendChild(cell);
+        }
+    container.appendChild(row)
     }
 }

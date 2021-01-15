@@ -66,16 +66,13 @@
 
         </article>
     </section>
-    <section>
-        <div class="weather">
+    <section class="weather">
+        <button type="submit" name="weather" id="weather"
+            onsubmit="Client.weatherForecast(e)">
+            <h3>16 day weather forecast for your destination</h3>
+        </button>
 
-            <button type="submit" name="weather" id="weather"
-                onsubmit="Client.weatherForecast(e)">
-                16 day weather forecast for &nbsp;
-                <span class="destination"> </span>
-            </button>
-
-
+        <div class="forecast">
         </div>
     </section>
 

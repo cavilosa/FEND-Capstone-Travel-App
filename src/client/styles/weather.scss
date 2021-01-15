@@ -1,11 +1,26 @@
 .weather {
     display: grid;
-    grid-template-columns: 17;
-    grid-template-rows: 5 auto;
-
     h4.title {
+        //display: flex;
+        //flex-flow: row;
+        //justify-content: center;
+    }
+
+    .row {
         display: flex;
         flex-flow: row;
+        border: solid #ffb3b3 1px;
+        background-color: inherit;
         justify-content: center;
+    }
+
+    .cell {
+        display: flex;
+        flex-flow: column;
+        background-color: #ffb3b3;
+        border-radius: 4px;
+        margin: 3px;
+        padding: 3px;
+        flex-grow: 1;
     }
 }

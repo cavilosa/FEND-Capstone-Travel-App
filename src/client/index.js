@@ -1,6 +1,6 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/generateInfo.js";
 import { getStorageData, checkStorage } from "./js/localStorage.js"
-import { weatherForecast, newForecast } from "./js/weatherForecast.js"
+import { weatherForecast, newForecast, updateWeather } from "./js/weatherForecast.js"
 
 import "./styles/main.scss";
 import "./styles/header.scss";
@@ -46,5 +46,6 @@ export {
     updateUI,
     getStorageData,
     weatherForecast,
-    newForecast
+    newForecast,
+    updateWeather
 }
