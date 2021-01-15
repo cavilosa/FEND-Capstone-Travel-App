@@ -122,7 +122,7 @@ async function updateUI (projectData) {
 
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
-        console.log(url)
+        //console.log(url)
         document.querySelector("img").src = url;
 
         const departure = projectData.inputData.departure.split("-").reverse().join("-");
@@ -131,21 +131,10 @@ async function updateUI (projectData) {
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
 
-        //const weather = projectData.weatherForecast[0];
-        //document.querySelector(".weather").innerText = weather;
-        const days = Object.keys(projectData.weatherForecast)
-        console.log("days", days)
-        /*days.forEach( function(day) {
-            newEntry = {
-                date: day,
-                high: projectData.weatherForecast[key].max_temp,
-                low: projectData.weatherForecast[key].max_temp,
-            }
-        }*/
+        const values = Object.values(projectData.weatherForecast)
+        console.log(values[0].date)
 
-        }
-
-    )
+    })
 }
 
 
