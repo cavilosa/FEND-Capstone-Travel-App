@@ -1,4 +1,4 @@
-export async function generate() {
+export async function generate(event) {
     event.preventDefault();
     console.log("generate is on");
 
@@ -16,9 +16,12 @@ export async function generate() {
 
 export async function getData() {
 
+
+
     let destination = document.getElementById("destination").value;
     let departure = document.getElementById("departure").value;
     let comeback = document.querySelector("#comeback").value;
+
 
     let regex = new RegExp(/\S/);
 
@@ -92,13 +95,13 @@ export async function getProjectData(){
             return data
         })
             .then((data)=>{
-            console.log("data", data)
+            //console.log("data", data)
             localStorage.setItem("projectData", JSON.stringify(data))
             const projectData = JSON.parse(localStorage.getItem("projectData"))
             return projectData
             })
                 .then( async (projectData)=> {
-                    console.log("projectData", projectData)
+                    //console.log("projectData", projectData)
                     updateUI(projectData)
                 })
     }catch(error){
@@ -107,14 +110,14 @@ export async function getProjectData(){
 }
 
 async function updateUI (projectData) {
-
+  if(projectData){
     let destination = decodeURIComponent(projectData.inputData.destination)
     upperCaseFirstChar(destination)
 
     .then ((destination)=>{
 
         const list = document.querySelectorAll(".destination")
-        console.log(list.length, typeof list)
+        //console.log(list.length, typeof list)
         for (let i = 0; i < list.length; i++) {
             list[i].innerText = destination;
         }
@@ -132,6 +135,7 @@ async function updateUI (projectData) {
         document.querySelector(".comeback").innerText = comeback;
 
     })
+  }
 }
 
 

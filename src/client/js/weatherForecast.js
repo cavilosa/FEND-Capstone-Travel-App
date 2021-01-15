@@ -21,7 +21,7 @@ export async function weatherForecast(e) {
            })
        })
    } else {
-       alert("Please, choose youe destination first.")
+       alert("Please, create your trip first")
    }
 }
 

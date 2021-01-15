@@ -1,6 +1,7 @@
 export async function removeTrip(e){
     console.log("removeTrip is on")
-    localStorage.clear()
+    console.log("localstorage", localStorage)
+    window.localStorage.clear()
     location.reload()
 }
 
