@@ -65,15 +65,28 @@ export async function updateWeatherUI(data) {
 
     const container = document.querySelector(".forecast")
     container.innerHTML = "";
-    for (let x = 1; x <= 2; x ++){ // creates rows
+    for (let x = 1; x <= 1; x ++){ // creates rows
         let row = document.createElement("div");
         row.classList.add("row")
-        for (let y = 1; y <= 8; y++) { // creates cells
+        for (let y = 0; y <= 7 ; y++) { // creates cells
             let cell = document.createElement("div");
             cell.classList.add("cell");
-            cell.innerHTML = `${forecast[0].date}<br>${forecast[0].description}
-                <br>High: ${forecast[0].max_temp}&#176 C <br>
-                Low: ${forecast[0].min_temp}&#176 C`
+            cell.innerHTML = `${forecast[y].date}<br>${forecast[y].description}
+                <br>High: ${forecast[y].max_temp}&#176 C <br>
+                Low: ${forecast[y].min_temp}&#176 C`
+            row.appendChild(cell);
+        }
+    container.appendChild(row)
+    }
+    for (let x = 1; x <= 1; x ++){ // creates rows
+        let row = document.createElement("div");
+        row.classList.add("row")
+        for (let y = 8; y <= 15 ; y++) { // creates cells
+            let cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.innerHTML = `${forecast[y].date}<br>${forecast[y].description}
+                <br>High: ${forecast[y].max_temp}&#176 C <br>
+                Low: ${forecast[y].min_temp}&#176 C`
             row.appendChild(cell);
         }
     container.appendChild(row)

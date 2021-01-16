@@ -1,4 +1,4 @@
-import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI } from "./js/generateInfo.js";
+import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, countdown } from "./js/generateInfo.js";
 //import { getStorageData } from "./js/localStorage.js"
 import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js"
 import { removeTrip, clearInput } from "./js/removeTrip.js"
@@ -54,5 +54,6 @@ export {
     newForecast,
     updateWeatherUI,
     removeTrip,
-    clearInput
+    clearInput,
+    countdown
 }

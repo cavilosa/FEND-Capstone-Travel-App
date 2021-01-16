@@ -26,6 +26,7 @@ export async function getData() {
     let regex = new RegExp(/\S/);
 
     let d = new Date();
+    console.log("d", d.toISOString().slice(0, 10), "departure", departure)
 
     if (destination) {
         if (regex.test(destination)) {
@@ -45,18 +46,25 @@ export async function getData() {
                                 comeback: comeback}
                     }else{
                         alert("The departure date can't be in past.")
+                        generate(e)
                     }
                 }else{
                     alert("The return date can't be before the end date");
+                    generate(e)
                 }
 
             }else{
                 alert("Please, fill in the return date")
+                generate(e)
             }
         }else{
             alert("Please, fill in the departure date")
+            generate(e)
         }
-    }else{alert("Please,fill in the destination")}
+    }else{
+        alert("Please,fill in the destination")
+        generate(e)
+    }
 }
 
 
@@ -134,10 +142,22 @@ async function updateUI (projectData) {
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
 
+        const countdown = document.querySelector("span")
+
+        let d = new Date();
+        d = d.toISOString().slice(0, 10)
+        const day = projectData.inputData.departure;
+        const count = day - d;
+        console.log()
+
+
     })
   }
 }
 
+export async function countdown(projectData) {
+
+}
 
 async function upperCaseFirstChar (string) {
     const words = string.split(" ");
