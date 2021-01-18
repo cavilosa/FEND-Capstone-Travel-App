@@ -102,9 +102,10 @@ app.post("/forecast", getStorageGeoData);
 
 async function getStorageGeoData(req, res) {
     storageInfo(req, res)
-    .then( (geoData)=>{
+    .then( async (geoData)=>{
+        const geo = await storageInfo(req, res)
         weatherbitForecast(geoData)
-        .then (()=> {
+        .then ( async ()=> {
             console.log("newforecast is starting soon")
             newForecast(req, res)
         })
@@ -115,9 +116,11 @@ app.get("/newForecast", newForecast);
 
 async function newForecast(req, res){
     if (weatherForecast !== {}){
-        console.log("weahterforecast", weatherForecast)
+        //console.log("weahterforecast", weatherForecast)
         res.send(weatherForecast);
         console.log("newforecast sent")
+    } else {
+        console.log("weatherForecast = {}")
     }
 }
 
