@@ -1,7 +1,8 @@
 export async function removeTrip(e){
+    e.preventDefault();
     console.log("removeTrip is on")
-    console.log("localstorage", localStorage)
-    window.localStorage.clear()
+    //console.log("localstorage", localStorage)
+    localStorage.clear()
     location.reload()
 }
 

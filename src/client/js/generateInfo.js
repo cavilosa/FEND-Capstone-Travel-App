@@ -1,6 +1,7 @@
 export async function generate(event) {
     event.preventDefault();
     console.log("generate is on");
+    console.log(localStorage)
 
     getData()
     .then((data)=> {
@@ -40,24 +41,19 @@ export async function getData() {
                                 comeback: comeback}
                     }else{
                         alert("The departure date can't be in past.")
-                        generate(e)
                     }
                 }else{
                     alert("The return date can't be before the end date")
-                    generate(e)
                 }
 
             }else{
                 alert("Please, fill in the return date")
-                generate(e)
             }
         }else{
             alert("Please, fill in the departure date")
-            generate(e)
         }
     }else{
-        alert("Please, fill in the destination")
-        generate(e)
+        return alert("Please, fill in the destination")
     }
 }
 
@@ -159,7 +155,9 @@ export async function countdown(projectData) {
     if (days === 1) {
         countdown.innerText = `Your trip is 1 day away.`
 
-    } else {
+    } else if (days === 0) {
+        countdown.innerText = `Your trip is today!`
+    }else {
         countdown.innerText = `Your trip is ${days} days away.`
     }
 }
