@@ -16,17 +16,13 @@ export async function generate(event) {
 
 export async function getData() {
 
-
     let destination = document.getElementById("destination").value;
     let departure = document.getElementById("departure").value;
     let comeback = document.querySelector("#comeback").value;
 
-
     let regex = new RegExp(/\S/);
 
-    const d = new Date();
-    const dateString = d.toDateString()
-    console.log((dateString))
+    let d = new Date();
 
     if (destination) {
         if (regex.test(destination)) {
@@ -39,34 +35,25 @@ export async function getData() {
             departure = encodeURIComponent(departure);
             if (comeback){
                 comeback = encodeURIComponent(comeback);
-
                 if(Date.parse(departure) <= Date.parse(comeback)){
-/*  if (Date.parse(d.toISOString().slice(0, 10)) <= Date.parse(departure) ) {
-    */
-                    if (Date.parse(departure) >= Date.parse(dateString)) {
+                    if (Date.parse(d.toISOString().slice(0, 10)) <= Date.parse(departure) ) {
+
                         return {destination: destination, departure: departure,
                                 comeback: comeback}
                     }else{
                         alert("The departure date can't be in past.")
-                        generate(e)
                     }
                 }else{
                     alert("The return date can't be before the end date");
-                    generate(e)
                 }
 
             }else{
                 alert("Please, fill in the return date")
-                generate(e)
             }
         }else{
             alert("Please, fill in the departure date")
-            generate(e)
         }
-    }else{
-        alert("Please,fill in the destination")
-        generate(e)
-    }
+    }else{alert("Please,fill in the destination")}
 }
 
 
