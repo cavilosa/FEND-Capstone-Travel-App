@@ -106,6 +106,7 @@ export async function getProjectData(){
                     //console.log("projectData", projectData)
                     updateUI(projectData)
                 })
+
     }catch(error){
         console.log(error)
     }
@@ -124,7 +125,6 @@ async function updateUI (projectData) {
             list[i].innerText = destination;
         }
 
-
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
         //console.log(url)
@@ -136,21 +136,32 @@ async function updateUI (projectData) {
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
 
-        const countdown = document.querySelector("span")
-
-        let d = new Date();
-        d = d.toISOString().slice(0, 10)
-        const day = projectData.inputData.departure;
-        const count = day - d;
-        console.log()
-
-
+        return projectData
+    })
+    .then( async(projectData) => {
+        countdown( projectData)
     })
   }
 }
 
 export async function countdown(projectData) {
 
+    let today = new Date().toISOString().slice(0, 10);
+
+    let departure = projectData.inputData.departure;
+
+    const milliseconds = Date.parse(departure) - Date.parse(today);
+
+    var days = Math.floor( milliseconds / (1000 * 60 * 60 * 24));
+
+    const countdown = document.querySelector(".countdown")
+    countdown.classList.add("countdown")
+    if (days === 1) {
+        countdown.innerText = `Your trip is 1 day away.`
+
+    } else {
+        countdown.innerText = `Your trip is ${days} days away.`
+    }
 }
 
 async function upperCaseFirstChar (string) {
