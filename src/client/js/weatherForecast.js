@@ -1,3 +1,4 @@
+const fetch = require('node-fetch')
 export async function weatherForecast(e) {
     e.preventDefault();
     console.log("weatherForecast is on")
@@ -5,17 +6,20 @@ export async function weatherForecast(e) {
 
    if(localStorage.getItem("projectData")){
        getStorage()
-       .then( (projectData)=>{
-           const weatherGeoData = projectData.geoData
-           //console.log(weatherGeoData)
+       .then( async (projectData)=>{
+           const weatherGeoData = await projectData.geoData
+           console.log(" 1 weather geo data is on", weatherGeoData)
            return weatherGeoData
        })
-       .then( (weatherGeoData) => {
+       .then( async (weatherGeoData) => {
+            //const sendStorageData = await weatherGeoData
             sendStorage(weatherGeoData)
        })
-       .then( (weatherGeoData)=> {
-           newForecast()
-           .then ( (data) => {
+       .then( async (weatherGeoData)=> {
+            const news = await weatherGeoData
+            newForecast()
+           .then ( async (data) => {
+               const update = await data
                updateWeatherUI(data)
            })
        })
@@ -30,7 +34,7 @@ export async function getStorage(){
 }
 
 export async function sendStorage(weatherGeoData){
-    console.log("sendstorage is on")
+    console.log("send storage is on", weatherGeoData)
     const req = await fetch("http://localhost:8000/forecast", {
         method: "POST",
         mode: "cors",
@@ -48,10 +52,11 @@ export async function sendStorage(weatherGeoData){
 }
 
 export async function newForecast(req, res){
+    console.log("newfirecast is on")
     const response = await fetch("http://localhost:8000/newForecast")
     try{
         const data = response.json();
-        console.log(data)
+        console.log("data from new forecast", data)
         return data
     }catch(e){
         console.log(e)
@@ -59,12 +64,15 @@ export async function newForecast(req, res){
 }
 
 export async function updateWeatherUI(data) {
-    const forecast = Object.values(data);
+    console.log("update weather ui is on", data)
+
+    const forecast = await Object.values(data);
 
     const container = document.querySelector(".forecast")
-    
+
    if (container.hasChildNodes()){
         container.innerHTML = "";
+        console.log("container.innerHTML = emptied")
    }else {
        for (let x = 1; x <= 1; x ++){ // creates rows
            let row = document.createElement("div");
@@ -93,5 +101,5 @@ export async function updateWeatherUI(data) {
        container.appendChild(row)
        }
    }
-
+    console.log("update ui end")
 }

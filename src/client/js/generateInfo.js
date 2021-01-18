@@ -4,12 +4,13 @@ export async function generate(event) {
     console.log(localStorage)
 
     getData()
-    .then((data)=> {
-        postData(data)
 
+
+    .then( async(data)=> {
+        const post = await postData(data)
     })
-    .then( () => {
-        getProjectData()
+    .then( async () => {
+        const project = await getProjectData()
     })
 
 }
@@ -90,16 +91,17 @@ export async function getProjectData(){
         Promise.resolve(data)
         .then(function(value){
             let data = value
+            console.log("getProjectData() is returning data")
             return data
         })
             .then((data)=>{
             //console.log("data", data)
             localStorage.setItem("projectData", JSON.stringify(data))
             const projectData = JSON.parse(localStorage.getItem("projectData"))
+            console.log("projectData is setting to localStorage")
             return projectData
             })
                 .then( async (projectData)=> {
-                    //console.log("projectData", projectData)
                     updateUI(projectData)
                 })
 
@@ -109,6 +111,7 @@ export async function getProjectData(){
 }
 
 async function updateUI (projectData) {
+    console.log("update ui is on")
   if(projectData){
     let destination = decodeURIComponent(projectData.inputData.destination)
     upperCaseFirstChar(destination)
@@ -123,7 +126,7 @@ async function updateUI (projectData) {
 
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
-        //console.log(url)
+        console.log("img url is on")
         document.querySelector("img").src = url;
 
         const departure = projectData.inputData.departure.split("-").reverse().join("-");
@@ -131,7 +134,7 @@ async function updateUI (projectData) {
 
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
-
+        console.log("update ui end")
         return projectData
     })
     .then( async(projectData) => {
