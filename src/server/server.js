@@ -115,10 +115,11 @@ async function getStorageGeoData(req, res) {
 app.get("/newForecast", newForecast);
 
 async function newForecast(req, res){
-    if (weatherForecast !== {}){
+    if (weatherForecast !== {}) {
         //console.log("weahterforecast", weatherForecast)
         res.send(weatherForecast);
         console.log("newforecast sent")
+        //return weatherForecast = {}
     } else {
         console.log("weatherForecast = {}")
     }

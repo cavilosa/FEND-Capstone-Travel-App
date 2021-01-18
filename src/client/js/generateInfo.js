@@ -18,6 +18,8 @@ export async function generate(event) {
 
 export async function getData() {
 
+    document.querySelector(".forecast").innerHTML = ""
+
     let destination = document.getElementById("destination").value;
     let departure = document.getElementById("departure").value;
     let comeback = document.querySelector("#comeback").value;
