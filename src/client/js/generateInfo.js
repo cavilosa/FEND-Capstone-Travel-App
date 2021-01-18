@@ -24,12 +24,10 @@ export async function getData() {
 
     let d = new Date();
 
-    if (destination) {
+    if (destination !== "") {
         if (regex.test(destination)) {
             destination = destination.trim();
             destination = encodeURIComponent(destination);
-        } else {
-            alert("Destination field cant be empty")
         }
         if (departure) {
             departure = encodeURIComponent(departure);
@@ -42,18 +40,25 @@ export async function getData() {
                                 comeback: comeback}
                     }else{
                         alert("The departure date can't be in past.")
+                        generate(e)
                     }
                 }else{
-                    alert("The return date can't be before the end date");
+                    alert("The return date can't be before the end date")
+                    generate(e)
                 }
 
             }else{
                 alert("Please, fill in the return date")
+                generate(e)
             }
         }else{
             alert("Please, fill in the departure date")
+            generate(e)
         }
-    }else{alert("Please,fill in the destination")}
+    }else{
+        alert("Please, fill in the destination")
+        generate(e)
+    }
 }
 
 
