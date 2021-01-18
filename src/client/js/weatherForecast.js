@@ -1,14 +1,13 @@
 export async function weatherForecast(e) {
     e.preventDefault();
     console.log("weatherForecast is on")
-
    //localStorage.clear()
 
    if(localStorage.getItem("projectData")){
        getStorage()
        .then( (projectData)=>{
            const weatherGeoData = projectData.geoData
-           console.log(weatherGeoData)
+           //console.log(weatherGeoData)
            return weatherGeoData
        })
        .then( (weatherGeoData) => {
@@ -61,34 +60,38 @@ export async function newForecast(req, res){
 
 export async function updateWeatherUI(data) {
     const forecast = Object.values(data);
-    //console.log(forecast[0].date)
 
     const container = document.querySelector(".forecast")
-    container.innerHTML = "";
-    for (let x = 1; x <= 1; x ++){ // creates rows
-        let row = document.createElement("div");
-        row.classList.add("row")
-        for (let y = 0; y <= 7 ; y++) { // creates cells
-            let cell = document.createElement("div");
-            cell.classList.add("cell");
-            cell.innerHTML = `${forecast[y].date}<br>${forecast[y].description}
-                <br>High: ${forecast[y].max_temp}&#176 C <br>
-                Low: ${forecast[y].min_temp}&#176 C`
-            row.appendChild(cell);
-        }
-    container.appendChild(row)
-    }
-    for (let x = 1; x <= 1; x ++){ // creates rows
-        let row = document.createElement("div");
-        row.classList.add("row")
-        for (let y = 8; y <= 15 ; y++) { // creates cells
-            let cell = document.createElement("div");
-            cell.classList.add("cell");
-            cell.innerHTML = `${forecast[y].date}<br>${forecast[y].description}
-                <br>High: ${forecast[y].max_temp}&#176 C <br>
-                Low: ${forecast[y].min_temp}&#176 C`
-            row.appendChild(cell);
-        }
-    container.appendChild(row)
-    }
+    
+   if (container.hasChildNodes()){
+        container.innerHTML = "";
+   }else {
+       for (let x = 1; x <= 1; x ++){ // creates rows
+           let row = document.createElement("div");
+           row.classList.add("row")
+           for (let y = 0; y <= 7 ; y++) { // creates cells
+               let cell = document.createElement("div");
+               cell.classList.add("cell");
+               cell.innerHTML = `${forecast[y].date}<br>${forecast[y].description}
+                   <br>High: ${forecast[y].max_temp}&#176 C <br>
+                   Low: ${forecast[y].min_temp}&#176 C`
+               row.appendChild(cell);
+           }
+       container.appendChild(row)
+       }
+       for (let x = 1; x <= 1; x ++){ // creates rows
+           let row = document.createElement("div");
+           row.classList.add("row")
+           for (let y = 8; y <= 15 ; y++) { // creates cells
+               let cell = document.createElement("div");
+               cell.classList.add("cell");
+               cell.innerHTML = `${forecast[y].date}<br>${forecast[y].description}
+                   <br>High: ${forecast[y].max_temp}&#176 C <br>
+                   Low: ${forecast[y].min_temp}&#176 C`
+               row.appendChild(cell);
+           }
+       container.appendChild(row)
+       }
+   }
+
 }
