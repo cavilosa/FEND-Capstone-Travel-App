@@ -17,7 +17,6 @@ export async function generate(event) {
 export async function getData() {
 
 
-
     let destination = document.getElementById("destination").value;
     let departure = document.getElementById("departure").value;
     let comeback = document.querySelector("#comeback").value;
@@ -25,8 +24,9 @@ export async function getData() {
 
     let regex = new RegExp(/\S/);
 
-    let d = new Date();
-    console.log("d", d.toISOString().slice(0, 10), "departure", departure)
+    const d = new Date();
+    const dateString = d.toDateString()
+    console.log((dateString))
 
     if (destination) {
         if (regex.test(destination)) {
@@ -39,9 +39,11 @@ export async function getData() {
             departure = encodeURIComponent(departure);
             if (comeback){
                 comeback = encodeURIComponent(comeback);
-                if(Date.parse(departure) <= Date.parse(comeback)){
-                    if (Date.parse(d.toISOString().slice(0, 10)) <= Date.parse(departure) ) {
 
+                if(Date.parse(departure) <= Date.parse(comeback)){
+/*  if (Date.parse(d.toISOString().slice(0, 10)) <= Date.parse(departure) ) {
+    */
+                    if (Date.parse(departure) >= Date.parse(dateString)) {
                         return {destination: destination, departure: departure,
                                 comeback: comeback}
                     }else{
