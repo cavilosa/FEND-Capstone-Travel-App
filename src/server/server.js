@@ -102,13 +102,25 @@ app.post("/forecast", getStorageGeoData);
 
 async function getStorageGeoData(req, res) {
     storageInfo(req, res)
+
     .then( async (geoData)=>{
-        const geo = await storageInfo(req, res)
-        weatherbitForecast(geoData)
-        .then ( async ()=> {
-            console.log("newforecast is starting soon")
-            newForecast(req, res)
-        })
+        //const geo = await storageInfo(req, res)
+
+        //const geo = await storageInfo(req, res)
+        //console.log("geo", geo)
+        const geo = await weatherbitForecast(geoData)
+        console.log("geo", geo)
+    })
+    .then ( async ()=> {
+        //console.log("newforecast is starting soon")
+        //const bitbit = await weatherbitForecast(geoData);
+        //console.log("bitbit", bit)
+        //const bit = await weatherbitForecast(geoData)
+
+        const bit = await newForecast(req, res)
+        console.log("weatherForecast", weatherForecast)
+        //const newWeather = await newForecast(req, res)
+        //console.log("newWeather", newWeather)
     })
 }
 
