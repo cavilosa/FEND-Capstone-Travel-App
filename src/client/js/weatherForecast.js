@@ -48,10 +48,10 @@ export async function sendStorage(weatherGeoData){
 
 export async function newForecast(req, res){
     console.log("new forecast is on")
-    const response = await fetch("http://localhost:8000/newForecast")
+    const response = await fetch("http://localhost:8000/forecast")
     try{
         const data = await response.json();
-        console.log("data from new forecast", data)
+        console.log("data from new forecast", typeof data, data)
         return data
     }catch(e){
         console.log(e)
