@@ -109,7 +109,7 @@ async function getStorageGeoData(req, res) {
         //const geo = await storageInfo(req, res)
         //console.log("geo", geo)
         const geo = await weatherbitForecast(geoData)
-        console.log("geo", geo)
+        console.log("geo", Object.values(geo)[0])
     })
     .then ( async ()=> {
         //console.log("newforecast is starting soon")
@@ -118,7 +118,7 @@ async function getStorageGeoData(req, res) {
         //const bit = await weatherbitForecast(geoData)
 
         const bit = await newForecast(req, res)
-        console.log("weatherForecast", weatherForecast)
+        console.log("weatherForecast", Object.values(weatherForecast)[0])
         //const newWeather = await newForecast(req, res)
         //console.log("newWeather", newWeather)
     })
