@@ -101,40 +101,22 @@ let weatherForecast = {};
 app.post("/forecast", getStorageGeoData);
 
 async function getStorageGeoData(req, res) {
+
     storageInfo(req, res)
 
     .then( async (geoData)=>{
-        //const geo = await storageInfo(req, res)
 
-        //const geo = await storageInfo(req, res)
-        //console.log("geo", geo)
         const geo = await weatherbitForecast(geoData)
         console.log("geo", Object.values(geo)[0])
     })
     .then ( async ()=> {
-        //console.log("newforecast is starting soon")
-        //const bitbit = await weatherbitForecast(geoData);
-        //console.log("bitbit", bit)
-        //const bit = await weatherbitForecast(geoData)
 
         const bit = await newForecast(req, res)
         console.log("weatherForecast", Object.values(weatherForecast)[0])
-        //const newWeather = await newForecast(req, res)
-        //console.log("newWeather", newWeather)
+
     })
 }
 
-app.get("/newForecast", newForecast);
-
-async function newForecast(req, res){
-    if (weatherForecast !== {}){
-        //console.log("weahterforecast", weatherForecast)
-        res.send(weatherForecast);
-        console.log("newforecast sent")
-    } else {
-        console.log("weatherForecast = {}")
-    }
-}
 
 async function storageInfo(req, res) {
     const geoData = req.body.data;
@@ -196,6 +178,13 @@ async function pixabay () {
     }catch(error) {
         console.log(error)
     }
+}
 
 
+
+app.get("/newForecast", newForecast);
+
+async function newForecast(req, res){
+    res.send(weatherForecast);
+    console.log("newforecast sent", Object.values(weatherForecast)[0])
 }
