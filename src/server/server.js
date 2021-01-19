@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
@@ -97,36 +96,33 @@ async function getGeoInfo(req, res) {
 }
 
 let weatherForecast = {};
+let geoData = {};
+//let router = express.Router();
 
-app.post("/forecast", getStorageGeoData);
+app.route("/forecast")
 
-async function getStorageGeoData(req, res) {
+    .post(async function(req, res){
+        storageInfo(req, res)
+    })
 
-    storageInfo(req, res)
-
-    .then( async (geoData)=>{
-
+    .get(async function(req, res){
+        weatherbitForecast(geoData)
         const geo = await weatherbitForecast(geoData)
-        console.log("geo", Object.values(geo)[0])
+        console.log(" 3 geo", Object.values(geo)[0])
+        res.send(weatherForecast);
+        console.log("4 newforecast sent", Object.values(weatherForecast)[0])
     })
-    .then ( async ()=> {
-
-        const bit = await newForecast(req, res)
-        console.log("weatherForecast", Object.values(weatherForecast)[0])
-
-    })
-}
 
 
 async function storageInfo(req, res) {
-    const geoData = req.body.data;
-    //console.log(geoData)
+    geoData = req.body.data;
+    console.log("1", geoData)
     return geoData
 }
 
 
 async function weatherbitForecast(geoData) {
-    console.log(geoData)
+    console.log("2", geoData)
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&days=16&units=M&key=${weather_key}`
     const response = await fetch(url)
 
@@ -143,7 +139,7 @@ async function weatherbitForecast(geoData) {
                code: each.weather.code
             }
         });
-        //console.log(weatherForecast)
+        //console.log("bit func", Object.values(weatherForecast)[0])
         return weatherForecast
     } catch (error) {
         console.log(error)
@@ -178,13 +174,4 @@ async function pixabay () {
     }catch(error) {
         console.log(error)
     }
-}
-
-
-
-app.get("/newForecast", newForecast);
-
-async function newForecast(req, res){
-    res.send(weatherForecast);
-    console.log("newforecast sent", Object.values(weatherForecast)[0])
 }
