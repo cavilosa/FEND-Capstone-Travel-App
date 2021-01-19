@@ -1,7 +1,7 @@
 export async function generate(event) {
     event.preventDefault();
     console.log("generate is on");
-    console.log(localStorage)
+    console.log("generate local storage", localStorage.getItem("projectData"))
 
     getData()
 

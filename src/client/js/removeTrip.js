@@ -4,7 +4,6 @@ export async function removeTrip(e){
     //console.log("localstorage", localStorage
     localStorage.clear()
     location.reload()
-
 }
 
 export async function clearInput(){
