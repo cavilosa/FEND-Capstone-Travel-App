@@ -4,20 +4,17 @@ export async function generate(event) {
     console.log("generate local storage", localStorage.getItem("projectData"))
 
     getData()
-
-
     .then( async(data)=> {
         const post = await postData(data)
     })
     .then( async () => {
         const project = await getProjectData()
     })
-
 }
 
 
 export async function getData() {
-
+    console.log("getdata is on")
     document.querySelector(".forecast").innerHTML = ""
 
     let destination = document.getElementById("destination").value;
@@ -43,26 +40,26 @@ export async function getData() {
                         return {destination: destination, departure: departure,
                                 comeback: comeback}
                     }else{
-                        alert("The departure date can't be in past.")
+                        throw alert("The departure date can't be in past.")
                     }
                 }else{
-                    alert("The return date can't be before the end date")
+                    throw alert("The return date can't be before the end date")
                 }
 
             }else{
-                alert("Please, fill in the return date")
+                throw alert("Please, fill in the return date")
             }
         }else{
-            alert("Please, fill in the departure date")
+            throw alert("Please, fill in the departure date")
         }
     }else{
-        return alert("Please, fill in the destination")
+        throw alert ("Please, fill in the destination")
     }
 }
 
 
 export async function postData (data) {
-    console.log("data is on")
+    console.log("postdata is on")
     if (data !== undefined) {
         const request = await fetch("http://localhost:8000/data", {
             method: "POST",
@@ -89,18 +86,18 @@ export async function getProjectData(){
     console.log("getProjectData is on")
     const request = await fetch("http://localhost:8000/all");
     try{
-        const data = request.json();
+        const data = await request.json();
         Promise.resolve(data)
         .then(function(value){
             let data = value
-            console.log("getProjectData() is returning data")
+            //console.log("getProjectData() is returning data")
             return data
         })
             .then((data)=>{
             //console.log("data", data)
             localStorage.setItem("projectData", JSON.stringify(data))
             const projectData = JSON.parse(localStorage.getItem("projectData"))
-            console.log("projectData is setting to localStorage")
+            //console.log("projectData is setting to localStorage")
             return projectData
             })
                 .then( async (projectData)=> {
@@ -112,7 +109,7 @@ export async function getProjectData(){
     }
 }
 
-async function updateUI (projectData) {
+export async function updateUI (projectData) {
     console.log("update ui is on")
   if(projectData){
     let destination = decodeURIComponent(projectData.inputData.destination)
@@ -167,7 +164,7 @@ export async function countdown(projectData) {
     }
 }
 
-async function upperCaseFirstChar (string) {
+export async function upperCaseFirstChar (string) {
     const words = string.split(" ");
 
     for ( let i = 0; i < words.length; i++) {
@@ -179,5 +176,3 @@ async function upperCaseFirstChar (string) {
     //console.log(words)
     return words.join(" ")
 }
-
-export { updateUI, upperCaseFirstChar }

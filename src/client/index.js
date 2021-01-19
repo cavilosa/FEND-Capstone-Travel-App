@@ -18,19 +18,20 @@ window.addEventListener("load", checkStorage)
 async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
         console.log("no local sotrage data")
-    }
-    //console.log(localStorage)
-    try {
-        getStorageData()
-        .then ( async (projectData) => {
-            updateUI(projectData)
-        })
-    }catch(e) {
-        console.log(e)
+    } else {
+        try {
+            getStorageData()
+            .then ( async (projectData) => {
+                updateUI(projectData)
+            })
+        }catch(e) {
+            console.log(e)
+        }
     }
 }
 
 async function getStorageData(){
+    console.log("get storage data is on")
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
 }
