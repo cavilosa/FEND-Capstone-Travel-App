@@ -87,6 +87,10 @@ export async function getProjectData(){
     const request = await fetch("http://localhost:8000/all");
     try{
         const data = await request.json();
+        console.log("latitude", Object.values(data), "city", Object.values(data)[1].city)
+        if (Object.values(data)[1].city !== Object.values(data)[0].destination) {
+            throw alert("The destination is incorrect, please choose other destination")
+        }
         Promise.resolve(data)
         .then(function(value){
             let data = value
