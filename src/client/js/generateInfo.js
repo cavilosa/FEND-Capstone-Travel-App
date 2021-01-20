@@ -169,10 +169,12 @@ export async function countdown(projectData) {
         countdown.innerText = `Your trip is today!`
         return projectData
 
-    }else {
+    }else if (days < 0){
+        countdown.innerText = `This trip expired!`
+        return projectData
+    } else {
         countdown.innerText = `Your trip is ${days} days away.`
         return projectData
-
     }
 }
 
