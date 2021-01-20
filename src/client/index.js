@@ -1,5 +1,5 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, countdown } from "./js/generateInfo.js";
-//import { getStorageData } from "./js/localStorage.js"
+//import { , countdown } from "./js/localStorage.js"
 import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js"
 import { removeTrip, clearInput } from "./js/removeTrip.js"
 import "./styles/main.scss";
@@ -22,8 +22,12 @@ async function checkStorage() {
         try {
             getStorageData()
             .then ( async (projectData) => {
-                updateUI(projectData)
+                countdown( projectData)
+                .then( async(projectData) => {
+                    updateUI(projectData)
+                })
             })
+
         }catch(e) {
             console.log(e)
         }
@@ -35,6 +39,8 @@ async function getStorageData(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
 }
+
+
 
 document.querySelector("#weather").addEventListener("click", weatherForecast);
 
@@ -55,6 +61,5 @@ export {
     newForecast,
     updateWeatherUI,
     removeTrip,
-    clearInput,
-    countdown
+    clearInput
 }

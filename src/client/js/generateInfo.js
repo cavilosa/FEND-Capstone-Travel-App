@@ -151,7 +151,7 @@ export async function updateUI (projectData) {
 }
 
 export async function countdown(projectData) {
-
+    console.log("project data from countdow", projectData)
     let today = new Date().toISOString().slice(0, 10);
 
     let departure = projectData.inputData.departure;
@@ -164,11 +164,15 @@ export async function countdown(projectData) {
     countdown.classList.add("countdown")
     if (days === 1) {
         countdown.innerText = `Your trip is 1 day away.`
-
+       return projectData
     } else if (days === 0) {
         countdown.innerText = `Your trip is today!`
+        return projectData
+
     }else {
         countdown.innerText = `Your trip is ${days} days away.`
+        return projectData
+
     }
 }
 
