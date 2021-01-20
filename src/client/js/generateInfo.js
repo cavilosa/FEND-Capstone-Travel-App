@@ -130,7 +130,11 @@ export async function updateUI (projectData) {
         const pictureDiv = document.querySelector(".picture")
         const url = projectData.picture
         console.log("img url is on")
-        document.querySelector("img").src = url;
+        if (projectData.picture !== ""){
+            document.querySelector("img").src = url;
+        } else {
+            console.log("no picture")
+        }
 
         const departure = projectData.inputData.departure.split("-").reverse().join("-");
         document.querySelector(".departure").innerText = departure;

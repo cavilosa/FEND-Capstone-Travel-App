@@ -115,16 +115,22 @@ async function pixabay () {
         //console.log("data", data)
         if (data.totalHits >= 1) {
             projectData.picture = data.hits[0].largeImageURL
-            console.log("picture url", projectData.picture)
+            //console.log("picture url", projectData.picture)
             return projectData.picture, projectData
         } else if (data.totalHits === 0)  {
+            console.log("no city image, going by country")
             const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
             const response = await fetch(url)
             try{
                 const data = await response.json();
-                projectData.picture = data.hits[0].largeImageURL
-                //console.log(projectData.picture)
-                return projectData.picture, projectData
+                if (data.totalHits === 0) {
+                    projectData.picture = ""
+                    return projectData.picture, projectData
+                } else {
+                    projectData.picture = data.hits[0].largeImageURL
+                    //console.log(projectData.picture)
+                    return projectData.picture, projectData
+                }
             }catch(error) {
                 console.log(error)
             }
