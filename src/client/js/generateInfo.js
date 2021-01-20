@@ -1,3 +1,5 @@
+import img from "../images/travel.jpg";
+
 export async function generate(event) {
     event.preventDefault();
     console.log("generate is on");
@@ -128,12 +130,13 @@ export async function updateUI (projectData) {
         }
 
         const pictureDiv = document.querySelector(".picture")
+
         const url = projectData.picture
-        console.log("img url is on")
+        //console.log("img url is on")
         if (projectData.picture !== ""){
             document.querySelector("img").src = url;
         } else {
-            console.log("no picture")
+            document.querySelector("img").src = img;
         }
 
         const departure = projectData.inputData.departure.split("-").reverse().join("-");
