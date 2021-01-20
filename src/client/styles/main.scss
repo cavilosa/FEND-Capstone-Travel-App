@@ -1,3 +1,20 @@
+body{
+    display: grid;
+    grid-template-columns: repeat(2 1fr);
+    grid-template-rows: 3 auto;
+    grid-template-areas:
+    "hd"
+    "tr"
+    "rm"
+    "nt";
+    button#weather:hover,
+    #remove:hover,
+    #new-save:hover,
+    #new-remove:hover{
+        background-color: #b8acd2;
+    }
+}
+
 .trip {
     background-color: #ffe6ea;
     grid-area: tr;
@@ -39,7 +56,7 @@
     margin: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .current-trip {
@@ -57,5 +74,13 @@
     .departure,
     .comeback {
         padding: 20px;
+        color: #330066;
+        font-weight: bolder;
     }
+}
+
+.countdown {
+    padding: 10px;
+    color: #330066;
+    //font-weight: bold;
 }

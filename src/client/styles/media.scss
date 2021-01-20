@@ -1,0 +1,75 @@
+
+@media screen and (max-width: 417px) {
+    h1{
+        font-size: 1.5em;
+    }
+
+    h2{
+        font-size: 0.8em;
+    }
+
+    article.current-trip * {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    .destination,
+    .departure,
+    .comeback {
+        font-size: 0.8em;
+        color: #330066;
+        font-weight: bolder;
+    }
+
+    button#weather {
+        font-size: 0.6em;
+    }
+
+    .countdow {
+        font-size: 0.6em;
+    }
+
+    .new-trip-info {
+        padding: 5px;
+        font-size: 0.6em;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .weather {
+        .forecast {
+            .row {
+                display: flex;
+                flex-flow: column;
+            }
+        }
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+    .destination,
+    .departure,
+    .comeback {
+        font-size: 1.3em;
+        color: #330066;
+        font-weight: bolder;
+    }
+
+}
+
+@media (min-width: 1201px) {
+    body{
+        max-width: 80vw;
+        padding-left: 10vw;
+
+        .destination,
+        .departure,
+        .comeback {
+            font-size: 2em;
+            color: #330066;
+            font-weight: bolder;
+        }
+    }
+
+}

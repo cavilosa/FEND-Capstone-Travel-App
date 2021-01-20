@@ -5,11 +5,21 @@ import { removeTrip, clearInput } from "./js/removeTrip.js"
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";
+import "./styles/footer.scss";
+import "./styles/media.scss";
 import "./styles/weather.scss";
 import img from "./images/travel.jpg";
+import geoNames from "./images/geoNames.png";
+import weatherbit from "./images/weatherbit.png";
 
 let picture = document.querySelector("#img");
 picture.src = img
+
+let image = document.querySelector("#geoNames");
+image.src = geoNames
+
+let weatherbitPic = document.querySelector("#weatherbit");
+weatherbitPic.src = weatherbit
 
 document.getElementById("new-save").addEventListener("click", generate);
 

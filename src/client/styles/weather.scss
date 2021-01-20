@@ -1,11 +1,6 @@
 .weather {
     display: grid;
-    h4.title {
-        //display: flex;
-        //flex-flow: row;
-        //justify-content: center;
-    }
-
+    //width: 100vw;
     .row {
         display: flex;
         flex-flow: row;
@@ -22,5 +17,6 @@
         padding: 10px;
         flex-grow: 1;
         align-items: center;
+
     }
 }

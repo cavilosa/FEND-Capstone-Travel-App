@@ -10,11 +10,13 @@ section.new-trip {
         "trip location"
         "departure date"
         "comeback date";
-
-        #destination,
-        #departure,
-        #comeback {
-            margin: 15px;
-        }
+        gap: 10px;
+        padding: 10px;
     }
+
+    .save-remove-trip {
+        padding-bottom: 10px;
+    }
+
+    padding-bottom: 20px;
 }
