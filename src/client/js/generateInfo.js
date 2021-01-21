@@ -118,7 +118,8 @@ export async function getProjectData(){
 export async function updateUI (projectData) {
     console.log("update ui is on")
   if(projectData){
-    let destination = decodeURIComponent(projectData.inputData.destination)
+    let destination = decodeURIComponent(projectData.geoData.city)
+    let country = decodeURIComponent(projectData.geoData.country)
     upperCaseFirstChar(destination)
 
     .then ((destination)=>{
@@ -126,7 +127,7 @@ export async function updateUI (projectData) {
         const list = document.querySelectorAll(".destination")
         //console.log(list.length, typeof list)
         for (let i = 0; i < list.length; i++) {
-            list[i].innerText = destination;
+            list[i].innerText = `${destination}, ${country}`
         }
 
         const pictureDiv = document.querySelector(".picture")
