@@ -1,7 +1,8 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, countdown } from "./js/generateInfo.js";
-//import { , countdown } from "./js/localStorage.js"
-import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js"
-import { removeTrip, clearInput } from "./js/removeTrip.js"
+import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js";
+import { removeTrip, clearInput } from "./js/removeTrip.js";
+import { lodging, saveLodging } from "./js/add.js";
+
 import "./styles/main.scss";
 import "./styles/header.scss";
 import "./styles/newtrip.scss";
@@ -22,6 +23,16 @@ let weatherbitPic = document.querySelector("#weatherbit");
 weatherbitPic.src = weatherbit
 
 document.getElementById("new-save").addEventListener("click", generate);
+
+document.querySelector("#lodging").addEventListener("click", lodging);
+
+document.querySelector("#weather").addEventListener("click", weatherForecast);
+
+document.querySelector("#remove").addEventListener("click", removeTrip);
+
+document.querySelector("#new-remove").addEventListener("click", clearInput);
+
+//document.querySelector(".save-lodging").addEventListener("click", saveLodging);
 
 window.addEventListener("load", checkStorage)
 
@@ -50,14 +61,6 @@ async function getStorageData(){
     return projectData
 }
 
-
-
-document.querySelector("#weather").addEventListener("click", weatherForecast);
-
-document.querySelector("#remove").addEventListener("click", removeTrip);
-
-document.querySelector("#new-remove").addEventListener("click", clearInput);
-
 export {
     generate,
     getData,
@@ -71,5 +74,7 @@ export {
     newForecast,
     updateWeatherUI,
     removeTrip,
-    clearInput
+    clearInput,
+    lodging,
+    saveLodging
 }

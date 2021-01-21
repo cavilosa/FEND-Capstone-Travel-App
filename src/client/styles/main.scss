@@ -10,7 +10,10 @@ body{
     button#weather:hover,
     #remove:hover,
     #new-save:hover,
-    #new-remove:hover{
+    #new-remove:hover,
+    #lodging:hover,
+    #list:hover,
+    #notes:hover {
         background-color: #b8acd2;
     }
 }
@@ -44,7 +47,7 @@ body{
             flex-flow: column;
             padding:20px;
 
-            #add {
+            * {
                 border-radius: 5px;
                 margin: 6px;
             }
