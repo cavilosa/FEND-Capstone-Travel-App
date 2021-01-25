@@ -1,6 +1,10 @@
 .weather {
-    display: grid;
+    //display: grid;
     //width: 100vw;
+    grid-area: ww;
+    #weather {
+        width: 100vw;
+    }
     .row {
         display: flex;
         flex-flow: row;

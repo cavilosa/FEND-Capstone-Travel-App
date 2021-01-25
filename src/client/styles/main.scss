@@ -5,7 +5,6 @@ body{
     grid-template-areas:
     "hd"
     "tr"
-    "rm"
     "nt";
     button#weather:hover,
     #remove:hover,
@@ -25,7 +24,9 @@ body{
     grid-template-columns: 2;
     grid-template-rows: 1;
     grid-template-areas:
-    "add tr";
+    "add tr"
+    "rm cd"
+    "ww ww";
 
     .add-info {
         display: flex;
@@ -45,7 +46,7 @@ body{
 
             input #departure,
             input #comeback {
-                
+
             }
         }
 

@@ -13,7 +13,7 @@
             <h1>Travel Planner</h1>
             <div class="header">
                 <h3>My trips</h3>
-                <h3>+add trip</h3>
+                <h3 class="addTrip">+add trip</h3>
             </div>
         </header>
 
@@ -64,16 +64,18 @@
                 East or West, Home is best!
             </div>
         </article>
-    </section>
-    <section class="weather">
-        <button type="submit" name="weather" id="weather"
-            onsubmit="Client.weatherForecast(e)">
-            <h3>Fresh 16 day weather forecast for your destination</h3>
-        </button>
+        
+        <article class="weather">
+            <button type="submit" name="weather" id="weather"
+                onsubmit="Client.weatherForecast(e)">
+                <h3>Fresh 16 day weather forecast for your destination</h3>
+            </button>
 
-        <div class="forecast">
-        </div>
+            <div class="forecast">
+            </div>
+        </article>
     </section>
+
 
     <section class="new-trip">
             <form id="new-trip" onsubmit="return Client.generate(event)">
