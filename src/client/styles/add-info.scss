@@ -1,4 +1,11 @@
-.divLodging {
+.divLodging, {
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    width: 30vw ;
+}
+
+.divList {
     background-color: white;
     display: flex;
     flex-flow: column;

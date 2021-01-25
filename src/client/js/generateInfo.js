@@ -160,6 +160,21 @@ export async function updateUI (projectData) {
 
         }
 
+        if(projectData.packingList){
+            console.log("list", projectData.packingList)
+
+            const list = document.querySelector("#list")
+            list.style.display = "none";
+
+            const addList = document.createElement("div");
+            addList.classList.add("packingList");
+            addList.innerText = `Packing List: ${projectData.packingList}` ;
+
+            let parent = document.querySelector(".add-more-info")
+            parent.insertBefore(addList, parent.firstElementChild.nextSibling)
+
+        }
+
         console.log("update ui end")
         return projectData
     })
