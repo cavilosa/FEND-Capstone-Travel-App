@@ -1,36 +1,44 @@
-
+import { updateUI } from "./generateInfo.js"
 
 export async function lodging(e){
     e.preventDefault();
     console.log("add lodging")
 
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
-    //console.log(oldItems)
+    console.log(oldItems)
 
-    const lodging = document.querySelector("#lodging");
+    if (oldItems === null) {
+        return alert("Create a trip first")
+    } else {
+        let oldItems = JSON.parse(localStorage.getItem("projectData"))
+        //console.log(oldItems)
 
-    let parent = document.querySelector(".add-more-info")
+        const lodging = document.querySelector("#lodging");
 
-    const divLodging = document.createElement("div")
-    divLodging.classList.add("divLodging");
+        let parent = document.querySelector(".add-more-info")
 
-    let input = document.createElement("INPUT");
-    input.classList.add("input-lodging")
-    //console.log(input.classList)
+        const divLodging = document.createElement("div")
+        divLodging.classList.add("divLodging");
 
-    divLodging.insertBefore(input, divLodging.firstChild)
+        let input = document.createElement("INPUT");
+        input.classList.add("input-lodging")
+        //console.log(input.classList)
 
-    lodging.style.display = "none";
+        divLodging.insertBefore(input, divLodging.firstChild)
 
-    let submit = document.createElement("BUTTON")
-    submit.innerHTML = "Save Lodging"
-    submit.classList.add("save-lodging");
+        lodging.style.display = "none";
 
-    divLodging.insertBefore(submit, divLodging.firstElementChild.nextSibling)
+        let submit = document.createElement("BUTTON")
+        submit.innerHTML = "Save Lodging"
+        submit.classList.add("save-lodging");
 
-    submit.addEventListener("click", saveLodging)
+        divLodging.insertBefore(submit, divLodging.firstElementChild.nextSibling)
 
-    parent.insertBefore(divLodging, parent.firstChild)
+        submit.addEventListener("click", saveLodging)
+
+        parent.insertBefore(divLodging, parent.firstChild)
+    }
+
 }
 
 export async function saveLodging(e){
@@ -49,8 +57,9 @@ export async function saveLodging(e){
     localStorage.setItem("projectData", JSON.stringify(projectData))
     console.log(localStorage)
 
+    updateUI(projectData)
 
-
+    document.querySelector(".divLodging").style.display = "none";
 
 
 

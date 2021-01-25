@@ -144,6 +144,22 @@ export async function updateUI (projectData) {
 
         const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
         document.querySelector(".comeback").innerText = comeback;
+
+
+        if (projectData.lodging){
+
+            const lodgingButton = document.querySelector("#lodging");
+            lodging.style.display ="none";
+
+            const addLodging = document.createElement("div");
+            addLodging.classList.add("addLodging");
+            addLodging.innerHTML = projectData.lodging;
+
+            let parent = document.querySelector(".add-more-info")
+            parent.insertBefore(addLodging, parent.firstChild)
+
+        }
+
         console.log("update ui end")
         return projectData
     })
