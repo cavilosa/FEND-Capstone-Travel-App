@@ -40,6 +40,7 @@ body{
                 font-size: 1em;
                 padding: 1px;
                 margin: 1px;
+                max-width: 50vw;
             }
         }
 
@@ -68,6 +69,19 @@ body{
                 color: #330066;
                 font-weight: bolder;
                 padding: 5px;
+                margin: 5px;
+                max-width: 50vw;
+                contain: paint;
+            }
+
+            .additions {
+                max-width: 50vw;
+            }
+
+            span {
+                text-decoration: underline;
+                color: #000000;
+                padding-left: 40px;
             }
         }
     }

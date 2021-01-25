@@ -25,6 +25,7 @@ export async function lodging(e){
 
         let input = document.createElement("textarea");
         input.classList.add("input-lodging")
+        input.columns = "20"
         //console.log(input.classList)
 
         divLodging.insertBefore(input, divLodging.firstChild)

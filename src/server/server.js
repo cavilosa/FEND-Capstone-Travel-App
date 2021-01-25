@@ -105,9 +105,10 @@ async function getGeoInfo(req, res) {
 
 async function pixabay () {
     console.log("3 pixabay")
-
-    const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.city}&category=places&image_type=photo`
-    //console.log("url", url)
+    const city = encodeURIComponent(projectData.geoData.city)
+    console.log("city", city)
+    const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${city}&category=places&image_type=photo`
+    console.log("url", url)
     const response = await fetch(url)
     //console.log("respose", response)
     try {
@@ -119,7 +120,9 @@ async function pixabay () {
             return projectData.picture, projectData
         } else if (data.totalHits === 0)  {
             console.log("no city image, going by country")
-            const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${projectData.geoData.country}&category=places&image_type=photo`
+            const country = encodeURIComponent(projectData.geoData.country)
+            console.log("country", country)
+            const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${country}&category=places&image_type=photo`
             const response = await fetch(url)
             try{
                 const data = await response.json();
