@@ -155,30 +155,35 @@ export async function updateUI (projectData) {
 
 export async function countdown(projectData) {
     console.log("project data from countdow", projectData)
+
     let today = new Date().toISOString().slice(0, 10);
+    if (projectData){
+        let departure = projectData.inputData.departure;
 
-    let departure = projectData.inputData.departure;
+        const milliseconds = Date.parse(departure) - Date.parse(today);
 
-    const milliseconds = Date.parse(departure) - Date.parse(today);
+        var days = Math.floor( milliseconds / (1000 * 60 * 60 * 24));
 
-    var days = Math.floor( milliseconds / (1000 * 60 * 60 * 24));
+        const countdown = document.querySelector(".countdown")
+        countdown.classList.add("countdown")
+        if (days === 1) {
+            countdown.innerText = `Your trip is 1 day away.`
+           return projectData
+        } else if (days === 0) {
+            countdown.innerText = `Your trip is today!`
+            return projectData
 
-    const countdown = document.querySelector(".countdown")
-    countdown.classList.add("countdown")
-    if (days === 1) {
-        countdown.innerText = `Your trip is 1 day away.`
-       return projectData
-    } else if (days === 0) {
-        countdown.innerText = `Your trip is today!`
-        return projectData
-
-    }else if (days < 0){
-        countdown.innerText = `This trip expired!`
-        return projectData
+        }else if (days < 0){
+            countdown.innerText = `This trip expired!`
+            return projectData
+        } else {
+            countdown.innerText = `Your trip is ${days} days away.`
+            return projectData
+        }
     } else {
-        countdown.innerText = `Your trip is ${days} days away.`
-        return projectData
+        console.log("no project is stored")
     }
+
 }
 
 export async function upperCaseFirstChar (string) {

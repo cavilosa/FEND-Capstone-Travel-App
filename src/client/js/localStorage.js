@@ -1,3 +1,5 @@
+import { updateUI, countdown } from "./generateInfo.js"
+
 export async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
         console.log("no local sotrage data")
@@ -6,11 +8,16 @@ export async function checkStorage() {
     try {
         getStorageData()
         .then ( async (projectData) => {
-            Client.updateUI(projectData)
+            updateUI(projectData)
         })
 
         .then( async(projectData) => {
-            countdown( projectData)
+            if (localStorage){
+                countdown( projectData)
+            } else {
+                console.log("no local")
+            }
+
         })
 
     }catch(e) {
@@ -22,7 +29,7 @@ export async function getStorageData(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
 }
-
+/*
 export async function countdown(projectData) {
 
     let today = new Date().toISOString().slice(0, 10);
@@ -43,4 +50,4 @@ export async function countdown(projectData) {
     }else {
         countdown.innerText = `Your trip is ${days} days away.`
     }
-}
+}*/

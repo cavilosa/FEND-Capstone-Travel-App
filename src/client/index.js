@@ -2,6 +2,7 @@ import { generate, getData, postData, getProjectData, upperCaseFirstChar, update
 import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js";
 import { removeTrip, clearInput } from "./js/removeTrip.js";
 import { lodging, saveLodging } from "./js/add.js";
+import { checkStorage, getStorageData } from "./js/localStorage.js"
 
 import "./styles/main.scss";
 import "./styles/header.scss";
@@ -9,6 +10,7 @@ import "./styles/newtrip.scss";
 import "./styles/footer.scss";
 import "./styles/media.scss";
 import "./styles/weather.scss";
+import "./styles/add-info.scss";
 import img from "./images/travel.jpg";
 import geoNames from "./images/geoNames.png";
 import weatherbit from "./images/weatherbit.png";
@@ -35,7 +37,7 @@ document.querySelector("#new-remove").addEventListener("click", clearInput);
 //document.querySelector(".save-lodging").addEventListener("click", saveLodging);
 
 window.addEventListener("load", checkStorage)
-
+/*
 async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
         console.log("no local sotrage data")
@@ -59,7 +61,7 @@ async function getStorageData(){
     console.log("get storage data is on")
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData
-}
+}*/
 
 export {
     generate,

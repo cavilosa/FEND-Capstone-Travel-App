@@ -9,33 +9,55 @@ export async function lodging(e){
 
     const lodging = document.querySelector("#lodging");
 
-    if (lodging.childNodes.length === 1){
+    let parent = document.querySelector(".add-more-info")
 
-        let parent = document.querySelector(".add-more-info")
+    const divLodging = document.createElement("div")
+    divLodging.classList.add("divLodging");
 
-        let input = document.createElement("INPUT");
-        input.classList.add("input-lodging")
-        console.log(input.classList)
+    let input = document.createElement("INPUT");
+    input.classList.add("input-lodging")
+    //console.log(input.classList)
 
-        parent.insertBefore(input, parent.firstChild)
+    divLodging.insertBefore(input, divLodging.firstChild)
 
-        lodging.style.display = "none";
+    lodging.style.display = "none";
 
-        let submit = document.createElement("BUTTON")
-        submit.innerHTML = "Save Lodging"
-        submit.classList.add("save-lodging");
+    let submit = document.createElement("BUTTON")
+    submit.innerHTML = "Save Lodging"
+    submit.classList.add("save-lodging");
 
-        parent.insertBefore(submit, parent.firstElementChild.nextSibling)
+    divLodging.insertBefore(submit, divLodging.firstElementChild.nextSibling)
 
-        submit.addEventListener("click", saveLodging)
-    }
+    submit.addEventListener("click", saveLodging)
+
+    parent.insertBefore(divLodging, parent.firstChild)
 }
 
 export async function saveLodging(e){
     e.preventDefault();
     console.log("save lodging")
 
-    let input = document.querySelector(".input-lodging").value;
+    let projectData = JSON.parse(localStorage.getItem("projectData"))
 
-    console.log(input)
+    let inputValue = document.querySelector(".input-lodging").value;
+
+    let input = {"lodging" : `${inputValue}`}
+    //console.log(projectData.inputData, input)
+
+    projectData.lodging = inputValue
+
+    localStorage.setItem("projectData", JSON.stringify(projectData))
+    console.log(localStorage)
+
+
+
+
+
+
+
+
+
+
+
+
 }
