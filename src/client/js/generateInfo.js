@@ -153,7 +153,7 @@ export async function updateUI (projectData) {
 
             const addLodging = document.createElement("div");
             addLodging.classList.add("addLodging");
-            addLodging.innerHTML = projectData.lodging;
+            addLodging.innerText = `Lodging: ${projectData.lodging}` ;
 
             let parent = document.querySelector(".add-more-info")
             parent.insertBefore(addLodging, parent.firstChild)

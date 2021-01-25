@@ -34,6 +34,14 @@ body{
         max-width: 30 vw;
         grid-area: add;
 
+        .add-more-info {
+            .addLodging {
+                font-size: 1em;
+                padding: 1px;
+                margin: 1px;
+            }
+        }
+
         .picture {
             max-width: 30vw;
         }
@@ -50,6 +58,12 @@ body{
             * {
                 border-radius: 5px;
                 margin: 6px;
+            }
+
+            .addLodging {
+                padding: 20px;
+                color: #330066;
+                font-weight: bolder;
             }
         }
     }

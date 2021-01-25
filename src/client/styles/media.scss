@@ -34,6 +34,7 @@
         padding: 5px;
         font-size: 0.6em;
     }
+
 }
 
 @media screen and (max-width:500px) {
@@ -42,6 +43,17 @@
             .row {
                 display: flex;
                 flex-flow: column;
+            }
+        }
+    }
+    .trip{
+        .add-info {
+            .add-more-info{
+                .addLodging{
+                    font-size: 0.8em;
+                    padding: 1px;
+                    margin: 1px;
+                }
             }
         }
     }
@@ -56,6 +68,17 @@
         font-weight: bolder;
     }
 
+    .trip{
+        .add-info {
+            .add-more-info{
+                .addLodging{
+                    font-size: 1.3em;
+                    padding: 1px;
+                    margin: 1px;
+                }
+            }
+        }
+    }
 }
 
 @media (min-width: 1201px) {
@@ -69,6 +92,18 @@
             font-size: 2em;
             color: #330066;
             font-weight: bolder;
+        }
+
+        .trip{
+            .add-info {
+                .add-more-info{
+                    .addLodging{
+                        font-size: 1.5em;
+                        padding: 1px;
+                        margin: 1px;
+                    }
+                }
+            }
         }
     }
 
