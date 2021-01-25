@@ -65,7 +65,7 @@ export async function updateWeatherUI(data) {
     console.log(forecast)
 
     const container = document.querySelector(".forecast")
-
+    container.parentElement.scrollIntoView();
     if (container.children.length > 0){
         container.innerHTML = "";
         //console.log("empty containter data", data)

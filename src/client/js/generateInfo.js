@@ -117,22 +117,15 @@ export async function getProjectData(){
 
 export async function updateUI (projectData) {
     console.log("update ui is on")
-  if(projectData){
-    let destination = decodeURIComponent(projectData.inputData.destination)
-    upperCaseFirstChar(destination)
-
-    .then ((destination)=>{
-        console.log(projectData)
+    if(projectData){
         const list = document.querySelectorAll(".destination")
-        //console.log(list.length, typeof list)
-        for (let i = 0; i < list.length; i++) {
-            list[i].innerText = `${destination}, ${projectData.geoData.country}`;
-        }
+
+        list[0].innerText = `${projectData.geoData.city}, ${projectData.geoData.country}`;
 
         const pictureDiv = document.querySelector(".picture")
 
         const url = projectData.picture
-        //console.log("img url is on")
+      //console.log("img url is on")
         if (projectData.picture !== ""){
             document.querySelector("img").src = url;
         } else {
@@ -154,42 +147,38 @@ export async function updateUI (projectData) {
             const addLodging = document.createElement("div");
             addLodging.classList.add("addLodging");
 
-            //let info = document.createElement("p")
-            //info.innerText = projectData.lodging
-            //info.classList.add("additions")
+          //let info = document.createElement("p")
+          //info.innerText = projectData.lodging
+          //info.classList.add("additions")
             let info = projectData.lodging
 
             addLodging.innerHTML = `<span>Lodging:</span> <br>
                 <p>${info}`;
-            //addLodging.innerText = new;
+          //addLodging.innerText = new;
 
             let parent = document.querySelector(".add-more-info")
             parent.insertBefore(addLodging, parent.firstChild)
-
         }
 
-        if(projectData.packingList){
-            console.log("list", projectData.packingList)
+        if(projectData.notes){
+          console.log("notes", projectData.notes)
 
-            const list = document.querySelector("#list")
-            list.style.display = "none";
+          const notes = document.querySelector("#notes")
+          notes.style.display = "none";
 
-            const addList = document.createElement("div");
-            addList.classList.add("packingList");
-            addList.innerHTML = `<span>Packing List:</span><br> ${projectData.packingList}` ;
+          const addNotes = document.createElement("div");
+          addNotes.classList.add("notes");
+          addNotes.innerHTML = `<span>Notes:</span><br> <p> ${projectData.notes}` ;
 
-            let parent = document.querySelector(".add-more-info")
-            parent.insertBefore(addList, parent.firstElementChild.nextSibling)
-
+          let parent = document.querySelector(".add-more-info")
+          parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)
         }
+
+        countdown( projectData)
 
         console.log("update ui end")
         return projectData
-    })
-    .then( async(projectData) => {
-        countdown( projectData)
-    })
-  }
+    }
 }
 
 export async function countdown(projectData) {

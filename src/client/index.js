@@ -1,7 +1,7 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, countdown } from "./js/generateInfo.js";
 import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js";
 import { removeTrip, clearInput } from "./js/removeTrip.js";
-import { lodging, saveLodging, saveList, addList } from "./js/add.js";
+import { lodging, saveLodging, saveNotes, addNotes } from "./js/add.js";
 import { checkStorage, getStorageData } from "./js/localStorage.js"
 
 import "./styles/main.scss";
@@ -34,7 +34,7 @@ document.querySelector("#remove").addEventListener("click", removeTrip);
 
 document.querySelector("#new-remove").addEventListener("click", clearInput);
 
-document.querySelector("#list").addEventListener("click", addList);
+document.querySelector("#notes").addEventListener("click", addNotes);
 
 window.addEventListener("load", checkStorage)
 /*
@@ -79,6 +79,6 @@ export {
     clearInput,
     lodging,
     saveLodging,
-    saveList,
-    addList
+    saveNotes,
+    addNotes
 }

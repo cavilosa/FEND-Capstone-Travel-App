@@ -73,11 +73,11 @@ export async function saveLodging(e){
 }
 
 
-export async function addList(e){
+export async function addNotes(e){
     console.log("save list is on")
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
 
-    const list = document.querySelector("#list")
+    const notes = document.querySelector("#notes")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
 
@@ -88,51 +88,51 @@ export async function addList(e){
     } else {
         let parent = document.querySelector(".add-more-info")
 
-        const divList = document.createElement("div")
-        divList.classList.add("divList");
+        const divNotes = document.createElement("div")
+        divNotes.classList.add("divNotes");
 
         let input = document.createElement("textarea");
-        input.classList.add("input-list")
+        input.classList.add("input-notes")
         //console.log(input.classList)
 
-        divList.insertBefore(input, divList.firstChild)
+        divNotes.insertBefore(input, divNotes.firstChild)
 
-        list.style.display = "none";
+        notes.style.display = "none";
 
         let submit = document.createElement("BUTTON")
-        submit.innerHTML = "Save List"
+        submit.innerHTML = "Save Notes"
         submit.classList.add("save-info");
 
-        divList.insertBefore(submit, divList.firstElementChild.nextSibling)
+        divNotes.insertBefore(submit, divNotes.firstElementChild.nextSibling)
 
-        submit.addEventListener("click", saveList)
+        submit.addEventListener("click", saveNotes)
 
-        parent.insertBefore(divList, parent.firstElementChild.nextSibling)
+        parent.insertBefore(divNotes, parent.firstElementChild.nextSibling)
     }
 }
 
-export async function saveList(e){
+export async function saveNotes(e){
     console.log("saveList")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
 
-    let listValue = document.querySelector(".input-list").value;
+    let notesValue = document.querySelector(".input-notes").value;
 
     let regex = new RegExp(/\S/);
 
-    if (regex.test(listValue)) {
+    if (regex.test(notesValue)) {
 
-        let input = {"packingList" : `${listValue}`}
+        let input = {"notes": `${notesValue}`}
         //console.log(projectData.inputData, input)
 
-        projectData.packingList = listValue
+        projectData.notes = notesValue
 
         localStorage.setItem("projectData", JSON.stringify(projectData))
         console.log(localStorage)
 
         updateUI(projectData)
 
-        document.querySelector(".divList").style.display = "none";
+        //document.querySelector(".divNotes").style.display = "none";
     } else {
         return alert("Lodging info is empty")
     }
