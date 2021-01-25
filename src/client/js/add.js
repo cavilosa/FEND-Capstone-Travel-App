@@ -132,7 +132,7 @@ export async function saveNotes(e){
 
         updateUI(projectData)
 
-        //document.querySelector(".divNotes").style.display = "none";
+        document.querySelector(".divNotes").style.display = "none";
     } else {
         return alert("Lodging info is empty")
     }

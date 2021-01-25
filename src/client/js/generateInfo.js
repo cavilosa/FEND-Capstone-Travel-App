@@ -140,38 +140,39 @@ export async function updateUI (projectData) {
 
 
         if (projectData.lodging){
-
             const lodgingButton = document.querySelector("#lodging");
             lodgingButton.style.display ="none";
 
             const addLodging = document.createElement("div");
             addLodging.classList.add("addLodging");
 
-          //let info = document.createElement("p")
-          //info.innerText = projectData.lodging
-          //info.classList.add("additions")
             let info = projectData.lodging
 
-            addLodging.innerHTML = `<span>Lodging:</span> <br>
-                <p>${info}`;
-          //addLodging.innerText = new;
+            addLodging.innerHTML = `<span>Lodging:</span> <br> <p>${info}</p>`;
 
             let parent = document.querySelector(".add-more-info")
-            parent.insertBefore(addLodging, parent.firstChild)
+            if (!document.querySelector(".addLodging")){
+                parent.insertBefore(addLodging, parent.firstChild)
+            }
+            console.log("parent.insertBefore(addLodging, parent.firstChild)")
         }
 
         if(projectData.notes){
-          console.log("notes", projectData.notes)
+            console.log("notes", projectData.notes)
 
-          const notes = document.querySelector("#notes")
-          notes.style.display = "none";
+            const notes = document.querySelector("#notes")
+            notes.style.display = "none";
 
-          const addNotes = document.createElement("div");
-          addNotes.classList.add("notes");
-          addNotes.innerHTML = `<span>Notes:</span><br> <p> ${projectData.notes}` ;
+            const addNotes = document.createElement("div");
+            addNotes.classList.add("notes");
+            addNotes.innerHTML = `<span>Notes:</span><br> <p>${projectData.notes}</p>`;
 
-          let parent = document.querySelector(".add-more-info")
-          parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)
+            let parent = document.querySelector(".add-more-info")
+            if (!document.querySelector(".notes")){
+                parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)
+
+            }
+            console.log("parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)")
         }
 
         countdown( projectData)
