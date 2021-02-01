@@ -12,8 +12,7 @@
         <header>
             <h1>Travel Planner</h1>
             <div class="header">
-                <h3>My trips</h3>
-                <h3 class="addTrip">+add trip</h3>
+                <h3>My trip</h3>
             </div>
         </header>
 
@@ -64,7 +63,7 @@
                 East or West, Home is best!
             </div>
         </article>
-        
+
         <article class="weather">
             <button type="submit" name="weather" id="weather"
                 onsubmit="Client.weatherForecast(e)">
@@ -89,11 +88,13 @@
                     <input type="date" id="comeback" name="comeback">
                 </div>
                 <div class="save-remove-trip">
-                    <button type="submit" name="save" id="new-save"
-                        onsubmit="Client.generate(event)">
-                        save trip</button>
+
                     <button type="submit" name="remove" id="new-remove">
                         clear form</button>
+
+                    <button type="submit" name="save" id="new-save"
+                            onsubmit="Client.generate(event)">
+                            save trip</button>
                 </div>
             </form>
     </section>
