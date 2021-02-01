@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node src/server/server.js",
-    "build-prod": "webpack --config webpack.prod.js",
-    "build-dev": "webpack-dev-server --config webpack.dev.js --open"
+    "build-prod": "webpack --define process.env.NODE_ENV='\"production\"' --config webpack.prod.js",
+    "build-dev": "webpack-dev-server --define process.env.NODE_ENV='\"development\"' --config webpack.dev.js --open"
   },
   "repository": {
     "type": "git",
@@ -28,13 +28,14 @@
     "node": "^15.4.0",
     "node-fetch": "^2.6.1",
     "v3": "0.0.0",
-    "webpack": "^5.11.1",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.1",
     "workbox-webpack-plugin": "^6.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",
@@ -49,7 +50,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "terser-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^4.2.3",
     "webpack-bundle-analyzer": "^4.3.0"
   }
 }

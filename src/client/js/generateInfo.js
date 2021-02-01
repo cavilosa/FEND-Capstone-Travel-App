@@ -2,8 +2,8 @@ import img from "../images/travel.jpg";
 
 export async function generate(event) {
     event.preventDefault();
-    console.log("generate is on");
-    console.log("generate local storage", localStorage.getItem("projectData"))
+    //console.log("generate is on");
+    //console.log("generate local storage", localStorage.getItem("projectData"))
 
     getData()
     .then( async(data)=> {
@@ -12,12 +12,15 @@ export async function generate(event) {
     .then( async () => {
         const project = await getProjectData()
     })
+    .then( async() => {
+        Client.clearInput();
+    })
 }
 
 
 export async function getData() {
-    console.log("getdata is on")
-    document.querySelector(".forecast").innerHTML = ""
+    //console.log("getdata is on")
+    //document.querySelector(".forecast").innerHTML = ""
 
     let destination = document.getElementById("destination").value;
     let departure = document.getElementById("departure").value;
@@ -61,7 +64,7 @@ export async function getData() {
 
 
 export async function postData (data) {
-    console.log("postdata is on")
+    //console.log("postdata is on")
     if (data !== undefined) {
         const request = await fetch("http://localhost:8000/data", {
             method: "POST",
@@ -85,11 +88,11 @@ export async function postData (data) {
 
 export async function getProjectData(){
 
-    console.log("getProjectData is on")
+    //console.log("getProjectData is on")
     const request = await fetch("http://localhost:8000/all");
     try{
         const data = await request.json();
-        console.log("data", Object.values(data))
+        //console.log("data", Object.values(data))
         if (Object.values(data)[1].longitude === undefined) {
             throw alert("The destination is incorrect, please choose other destination")
         }
@@ -110,13 +113,14 @@ export async function getProjectData(){
                     updateUI(projectData)
                 })
 
+
     }catch(error){
         console.log(error)
     }
 }
 
 export async function updateUI (projectData) {
-    console.log("update ui is on")
+    //console.log("update ui is on")
     if(projectData){
         const list = document.querySelectorAll(".destination")
 
@@ -131,7 +135,7 @@ export async function updateUI (projectData) {
         } else {
             document.querySelector("img").src = img;
         }
-        console.log("string", projectData.inputData.departure)
+        //console.log("string", projectData.inputData.departure)
         changeDate(projectData)
         .then (async(newDate) => {
             document.querySelector(".departure").innerText = `${newDate[0]} ${newDate[1]}, ${newDate[2]}`;
@@ -139,28 +143,6 @@ export async function updateUI (projectData) {
             const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
             document.querySelector(".comeback").innerText = `${newDate[3]} ${newDate[4]}, ${newDate[5]}`;;
         })
-        /*const monthNames = ["January", "February", "March", "April", "May", "June",
-           "July", "August", "September", "October", "November", "December"];
-
-        let day = projectData.inputData.departure.toString();
-        day = day[8] + day[9]
-
-        let month = projectData.inputData.departure.toString()
-        let monthNumber = month[5] + month[6]
-        if(monthNumber[0] === "0"){
-            month = month[6]
-        } else {
-            month = month[5] + month[6]
-        }
-        month = month - 1
-
-        let year = projectData.inputData.departure.toString()
-        year = year[0] + year[1] + year[2] + year[3]*/
-        //console.log("day and month", day, monthNames[month])
-
-        //const departure = projectData.inputData.departure.split("-").reverse().join("-");
-
-
 
         if (projectData.lodging){
             const lodgingButton = document.querySelector("#lodging");
@@ -195,12 +177,12 @@ export async function updateUI (projectData) {
                 parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)
 
             }
-            console.log("parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)")
+            //console.log("parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)")
         }
 
         countdown( projectData)
 
-        console.log("update ui end")
+        //console.log("update ui end")
         return projectData
     }
 }
@@ -245,7 +227,7 @@ export async function changeDate(projectData){
 }
 
 export async function countdown(projectData) {
-    console.log("project data from countdow", projectData)
+    //console.log("project data from countdow", projectData)
 
     let today = new Date().toISOString().slice(0, 10);
     if (projectData){

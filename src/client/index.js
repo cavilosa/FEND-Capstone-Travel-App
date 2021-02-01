@@ -15,6 +15,19 @@ import img from "./images/travel.jpg";
 import geoNames from "./images/geoNames.png";
 import weatherbit from "./images/weatherbit.png";
 
+if (process.env.NODE_ENV === "production") {
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+    // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            console.log("Installing service workers in production")
+            navigator.serviceWorker.register('./service-worker.js');
+        });
+    } else {
+    console.log("Service worker insallation skipped!");
+    }
+}
+
 let picture = document.querySelector("#img");
 picture.src = img
 
