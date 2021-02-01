@@ -87,7 +87,7 @@ export async function updateWeatherUI(data) {
                 cell.classList.add("cell");
 
                 dateFormat(forecast, z)
-                
+
                 .then ( async(newDate) => {
                     console.log("day", newDate)
                     cell.innerHTML = `<span class="date">${newDate[0]} ${monthNames[newDate[1]]}</span><br>${forecast[z].description}
@@ -117,6 +117,8 @@ export async function dateFormat(forecast, z){
     } else {
         dateMonth = month
     }
+
+    dateMonth = dateMonth - 1
     console.log(dateMonth, day)
     const newDate = [day, dateMonth]
     return (newDate)

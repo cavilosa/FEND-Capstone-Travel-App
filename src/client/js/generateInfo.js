@@ -125,18 +125,41 @@ export async function updateUI (projectData) {
         const pictureDiv = document.querySelector(".picture")
 
         const url = projectData.picture
-      //console.log("img url is on")
+
         if (projectData.picture !== ""){
             document.querySelector("img").src = url;
         } else {
             document.querySelector("img").src = img;
         }
         console.log("string", projectData.inputData.departure)
-        const departure = projectData.inputData.departure.split("-").reverse().join("-");
-        document.querySelector(".departure").innerText = departure;
+        changeDate(projectData)
+        .then (async(newDate) => {
+            document.querySelector(".departure").innerText = `${newDate[0]} ${newDate[1]}, ${newDate[2]}`;
 
-        const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
-        document.querySelector(".comeback").innerText = comeback;
+            const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
+            document.querySelector(".comeback").innerText = `${newDate[3]} ${newDate[4]}, ${newDate[5]}`;;
+        })
+        /*const monthNames = ["January", "February", "March", "April", "May", "June",
+           "July", "August", "September", "October", "November", "December"];
+
+        let day = projectData.inputData.departure.toString();
+        day = day[8] + day[9]
+
+        let month = projectData.inputData.departure.toString()
+        let monthNumber = month[5] + month[6]
+        if(monthNumber[0] === "0"){
+            month = month[6]
+        } else {
+            month = month[5] + month[6]
+        }
+        month = month - 1
+
+        let year = projectData.inputData.departure.toString()
+        year = year[0] + year[1] + year[2] + year[3]*/
+        //console.log("day and month", day, monthNames[month])
+
+        //const departure = projectData.inputData.departure.split("-").reverse().join("-");
+
 
 
         if (projectData.lodging){
@@ -180,6 +203,45 @@ export async function updateUI (projectData) {
         console.log("update ui end")
         return projectData
     }
+}
+
+export async function changeDate(projectData){
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+       "July", "August", "September", "October", "November", "December"];
+
+    let day = projectData.inputData.departure.toString();
+    day = day[8] + day[9]
+
+    let month = projectData.inputData.departure.toString()
+    let monthNumber = month[5] + month[6]
+    if(monthNumber[0] === "0"){
+        month = month[6]
+    } else {
+        month = month[5] + month[6]
+    }
+    month = monthNames[month - 1]
+
+    let year = projectData.inputData.departure.toString()
+    year = year[0] + year[1] + year[2] + year[3]
+
+    let day2 = projectData.inputData.comeback.toString();
+    day2 = day2[8] + day2[9]
+
+    let month2 = projectData.inputData.comeback.toString()
+    let monthNumber2 = month2[5] + month2[6]
+    if(monthNumber2[0] === "0"){
+        month2 = month2[6]
+    } else {
+        month2 = month2[5] + month2[6]
+    }
+    month2 = monthNames[month2 - 1]
+
+    let year2 = projectData.inputData.comeback.toString()
+    year2 = year2[0] + year2[1] + year2[2] + year2[3]
+
+    let newDate = [day, month, year, day2, month2, year2]
+
+    return newDate
 }
 
 export async function countdown(projectData) {
