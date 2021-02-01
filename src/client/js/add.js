@@ -2,10 +2,10 @@ import { updateUI } from "./generateInfo.js"
 
 export async function lodging(e){
     e.preventDefault();
-    console.log("add lodging")
+    //console.log("add lodging")
 
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
-    console.log(oldItems)
+    //console.log(oldItems)
 
     if (oldItems === null) {
 
@@ -47,7 +47,7 @@ export async function lodging(e){
 
 export async function saveLodging(e){
     e.preventDefault();
-    console.log("save lodging")
+    //console.log("save lodging")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
 
@@ -62,7 +62,7 @@ export async function saveLodging(e){
         projectData.lodging = inputValue
 
         localStorage.setItem("projectData", JSON.stringify(projectData))
-        console.log(localStorage)
+        //console.log(localStorage)
 
         updateUI(projectData)
 
@@ -74,7 +74,7 @@ export async function saveLodging(e){
 
 
 export async function addNotes(e){
-    console.log("save list is on")
+    //console.log("save list is on")
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
 
     const notes = document.querySelector("#notes")
@@ -112,7 +112,7 @@ export async function addNotes(e){
 }
 
 export async function saveNotes(e){
-    console.log("saveList")
+    //console.log("saveList")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
 
@@ -128,7 +128,7 @@ export async function saveNotes(e){
         projectData.notes = notesValue
 
         localStorage.setItem("projectData", JSON.stringify(projectData))
-        console.log(localStorage)
+        //console.log(localStorage)
 
         updateUI(projectData)
 

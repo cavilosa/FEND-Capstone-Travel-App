@@ -159,11 +159,11 @@ export async function updateUI (projectData) {
             if (!document.querySelector(".addLodging")){
                 parent.insertBefore(addLodging, parent.firstChild)
             }
-            console.log("parent.insertBefore(addLodging, parent.firstChild)")
+            //console.log("parent.insertBefore(addLodging, parent.firstChild)")
         }
 
         if(projectData.notes){
-            console.log("notes", projectData.notes)
+            //console.log("notes", projectData.notes)
 
             const notes = document.querySelector("#notes")
             notes.style.display = "none";
