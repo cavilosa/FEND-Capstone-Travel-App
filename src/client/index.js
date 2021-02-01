@@ -33,7 +33,7 @@ picture.src = img
 
 let image = document.querySelector("#geoNames");
 image.src = geoNames
-I
+
 let weatherbitPic = document.querySelector("#weatherbit");
 weatherbitPic.src = weatherbit
 
