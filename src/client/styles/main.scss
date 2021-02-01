@@ -16,6 +16,11 @@ body{
     #print:hover {
         background-color: #b8acd2;
     }
+
+    * {
+       max-width: 100vw;
+    }
+
 }
 
 .trip {
@@ -96,8 +101,12 @@ body{
 .save-remove-trip {
     margin: 10px;
     display: flex;
+    flex-flow: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    * {
+        margin: 5px;
+    }
 }
 
 .current-trip {

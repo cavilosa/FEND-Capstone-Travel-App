@@ -81,17 +81,24 @@
             }
         }
     }
+
+    #img {
+        max-height: 20vw;
+        max-width: 20vw;
+    }
 }
 
 @media (min-width: 1201px) {
     body{
-        max-width: 80vw;
-        padding-left: 10vw;
+        margin: 150px;
 
+        * {
+           max-width: 80vw;
+        }
         .destination,
         .departure,
         .comeback {
-            font-size: 2em;
+            font-size: 1.3em;
             color: #330066;
             font-weight: bolder;
         }
@@ -101,12 +108,17 @@
                 .add-more-info{
                     .addLodging,
                     .notes {
-                        font-size: 1.5em;
+                        font-size: 1em;
                         padding: 1px;
                         margin: 1px;
                     }
                 }
             }
+        }
+
+        #img {
+            max-height: 20vw;
+            max-width: 20vw;
         }
     }
 
