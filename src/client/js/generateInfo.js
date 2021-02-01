@@ -131,7 +131,7 @@ export async function updateUI (projectData) {
         } else {
             document.querySelector("img").src = img;
         }
-
+        console.log("string", projectData.inputData.departure)
         const departure = projectData.inputData.departure.split("-").reverse().join("-");
         document.querySelector(".departure").innerText = departure;
 

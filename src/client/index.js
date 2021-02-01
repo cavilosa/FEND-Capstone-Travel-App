@@ -1,5 +1,5 @@
 import { generate, getData, postData, getProjectData, upperCaseFirstChar, updateUI, countdown } from "./js/generateInfo.js";
-import { weatherForecast, newForecast, updateWeatherUI } from "./js/weatherForecast.js";
+import { weatherForecast, newForecast, updateWeatherUI, dateFormat } from "./js/weatherForecast.js";
 import { removeTrip, clearInput } from "./js/removeTrip.js";
 import { lodging, saveLodging, saveNotes, addNotes } from "./js/add.js";
 import { checkStorage, getStorageData } from "./js/localStorage.js"
@@ -80,5 +80,6 @@ export {
     lodging,
     saveLodging,
     saveNotes,
-    addNotes
+    addNotes,
+    dateFormat
 }

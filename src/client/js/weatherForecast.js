@@ -86,23 +86,15 @@ export async function updateWeatherUI(data) {
                 let cell = document.createElement("div");
                 cell.classList.add("cell");
 
-                console.log("forecast[z].date", forecast[z].date)
-                const l = forecast[z].date.toString()
-                const day = `${l[8]}${l[9]}`
-                console.log(day)
+                dateFormat(forecast, z)
+                
+                .then ( async(newDate) => {
+                    console.log("day", newDate)
+                    cell.innerHTML = `<span class="date">${newDate[0]} ${monthNames[newDate[1]]}</span><br>${forecast[z].description}
+                       <br>High: ${forecast[z].max_temp}&#176C <br>
+                       Low: ${forecast[z].min_temp}&#176C`
+                })
 
-                let dateMonth;
-                const month =  `${l[5]}${l[6]}`
-                if(month[0] === "0"){
-                    dateMonth = `${l[6]}`
-                } else {
-                    dateMonth = month
-                }
-                console.log(dateMonth, month)
-
-                cell.innerHTML = `${day} ${monthNames[dateMonth]}<br>${forecast[z].description}
-                   <br>High: ${forecast[z].max_temp}&#176C <br>
-                   Low: ${forecast[z].min_temp}&#176C`
                row.appendChild(cell);
            }
         container.appendChild(row)
@@ -110,4 +102,22 @@ export async function updateWeatherUI(data) {
 
     console.log("update ui end")
     }
+}
+
+export async function dateFormat(forecast, z){
+    console.log("forecast[z].date", forecast[z].date)
+    const l = forecast[z].date.toString()
+    const day = `${l[8]}${l[9]}`
+    //console.log(day)
+
+    let dateMonth;
+    const month =  `${l[5]}${l[6]}`
+    if(month[0] === "0"){
+        dateMonth = `${l[6]}`
+    } else {
+        dateMonth = month
+    }
+    console.log(dateMonth, day)
+    const newDate = [day, dateMonth]
+    return (newDate)
 }
