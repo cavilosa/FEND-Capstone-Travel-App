@@ -1,13 +1,6 @@
-.divLodging, {
-    background-color: white;
-    display: flex;
-    flex-flow: column;
-    width: 30vw ;
-}
-
+.divLodging,
 .divNotes {
-    background-color: white;
-    display: flex;
-    flex-flow: column;
-    width: 30vw ;
+    display: grid;
+    width: 30vw;
+    gap: 10px;
 }

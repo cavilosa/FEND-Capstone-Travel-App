@@ -134,6 +134,6 @@ export async function saveNotes(e){
 
         document.querySelector(".divNotes").style.display = "none";
     } else {
-        return alert("Lodging info is empty")
+        return alert("Notes are empty")
     }
 }

@@ -12,6 +12,12 @@ section.new-trip {
         "comeback date";
         gap: 10px;
         padding: 10px;
+
+        #departure,
+        #comeback,
+        #destination {
+            width: 35vw;
+        }
     }
 
     .save-remove-trip {

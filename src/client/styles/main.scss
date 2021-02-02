@@ -13,14 +13,17 @@ body{
     #lodging:hover,
     #list:hover,
     #notes:hover,
-    #print:hover {
+    #print:hover,
+    .save-info:hover
+     {
         background-color: #b8acd2;
-    }
+    };
 
     * {
-       max-width: 100vw;
-    }
+      max-width: 95vw;
+    };
 
+    //max-width: 90vw;
 }
 
 .trip {
