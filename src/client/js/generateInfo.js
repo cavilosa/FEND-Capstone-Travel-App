@@ -18,6 +18,7 @@ export async function generate(event) {
 }
 
 
+
 export async function getData() {
     //console.log("getdata is on")
     //document.querySelector(".forecast").innerHTML = ""

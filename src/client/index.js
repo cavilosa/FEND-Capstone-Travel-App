@@ -50,31 +50,6 @@ document.querySelector("#new-remove").addEventListener("click", clearInput);
 document.querySelector("#notes").addEventListener("click", addNotes);
 
 window.addEventListener("load", checkStorage)
-/*
-async function checkStorage() {
-    if (!localStorage.getItem("projectData")) {
-        console.log("no local sotrage data")
-    } else {
-        try {
-            getStorageData()
-            .then ( async (projectData) => {
-                countdown( projectData)
-                .then( async(projectData) => {
-                    updateUI(projectData)
-                })
-            })
-
-        }catch(e) {
-            console.log(e)
-        }
-    }
-}
-
-async function getStorageData(){
-    console.log("get storage data is on")
-    const projectData = JSON.parse(localStorage.getItem("projectData"))
-    return projectData
-}*/
 
 export {
     generate,

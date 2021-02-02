@@ -56,17 +56,18 @@ async function retrieveInput(req, res) {
 app.get("/all", allData);
 
 async function allData(req, res) {
-    console.log("/all is on")
+    //console.log("/all is on")
     res.send(projectData)
     //console.log(projectData)
+    //console.log("project length", Object.keys(projectData).length)
 }
 
 
 async function getInput(req, res) {
-    console.log("1 get input")
+    //console.log("1 get input")
     if (req) {
         projectData.inputData = req.body.data // destination, departure, comeback
-        //console.log("project input", projectData.inputData)
+        console.log("project input", projectData.inputData)
         return projectData.inputData
     }else{
         console.log("the input is empty")
@@ -74,7 +75,7 @@ async function getInput(req, res) {
 }
 
 async function getGeoInfo(req, res) {
-    console.log("2 get geo info")
+    //console.log("2 get geo info")
 
     const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
@@ -82,7 +83,7 @@ async function getGeoInfo(req, res) {
 
     try {
         const geoInfo = await response.json();
-        console.log("geoinfo", geoInfo)
+        //console.log("geoinfo", geoInfo)
         if (geoInfo.totalResultsCount === 0){
             return projectData.geoData = {};
         }else{
@@ -96,7 +97,7 @@ async function getGeoInfo(req, res) {
             //console.log("geodata", projectData.geoData)
             return projectData.geoData
         }
-        console.log("2 geo info geo data", projectData.geoData)
+        //console.log("2 geo info geo data", projectData.geoData)
     } catch (error) {
         console.log("error", error)
     }
@@ -104,11 +105,11 @@ async function getGeoInfo(req, res) {
 
 
 async function pixabay () {
-    console.log("3 pixabay")
+    //console.log("3 pixabay")
     const city = encodeURIComponent(projectData.geoData.city)
-    console.log("city", city)
+    //console.log("city", city)
     const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${city}&category=places&image_type=photo`
-    console.log("url", url)
+    //console.log("url", url)
     const response = await fetch(url)
     //console.log("respose", response)
     try {
@@ -119,9 +120,9 @@ async function pixabay () {
             //console.log("picture url", projectData.picture)
             return projectData.picture, projectData
         } else if (data.totalHits === 0)  {
-            console.log("no city image, going by country")
+            //console.log("no city image, going by country")
             const country = encodeURIComponent(projectData.geoData.country)
-            console.log("country", country)
+            //console.log("country", country)
             const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${country}&category=places&image_type=photo`
             const response = await fetch(url)
             try{
@@ -158,21 +159,21 @@ app.route("/forecast")
     .get(async function(req, res){
         weatherbitForecast(geoData)
         const geo = await weatherbitForecast(geoData)
-        console.log(" 3 geo", Object.values(geo)[0])
+        //console.log(" 3 geo", Object.values(geo)[0])
         res.send(weatherForecast);
-        console.log("4 newforecast sent", Object.values(weatherForecast)[0])
+        //console.log("4 newforecast sent", Object.values(weatherForecast)[0])
     })
 
 
 async function storageInfo(req, res) {
     geoData = req.body.data;
-    console.log("1", geoData)
+    //console.log("1", geoData)
     return geoData
 }
 
 
 async function weatherbitForecast(geoData) {
-    console.log("2", geoData)
+    //console.log("2", geoData)
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&days=16&units=M&key=${weather_key}`
     const response = await fetch(url)
 
@@ -195,3 +196,5 @@ async function weatherbitForecast(geoData) {
         console.log(error)
     }
 }
+
+module.exports = server;
