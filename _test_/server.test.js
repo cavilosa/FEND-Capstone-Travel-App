@@ -4,35 +4,25 @@ const app = require("../src/server/server");
 const supertest = require("supertest");
 const request = supertest(app);
 
-import { getInput } from "../src/server/server.js"
+import { getInput, storageInfo, weatherbitForecast } from "../src/server/server"
 
-//const axios = require('axios');
-//jest.mock('axios');
-/*
-beforeAll(()=>{
+/*const axios = require('axios');
+jest.mock('axios');
+
+/*beforeAll(()=>{
     require("whatwg-fetch");
 })*/
 
 describe ("test the server", () => {
-    /*test("test /data endpoint", async (done) => {
-        const expected = [
-            { inputData:
-                {destination: "Kiev",
-                departure: "2024-01-01",
-                comeback:"2024-01-01"}
-            }
-        ];
-        const json = await getInput();
-        expect(json).toMatchObject(expected)
 
-        //const res = await request.post("/data")
-            //expect(res.status).not.toBe(200)
-            //expect(res.status).toBe(200)
-            //expect(res.body).not.toBeNull();
-            //expect("Content-Type", /json/)
-            //expect(res.body).toHaveProperty("inputData")
-            done();
-    });*/
+    test("get input", async () => {
+        expect(getInput).not.toBeNull();
+    });
+
+    test("get /data", async () => {
+        const res = await request.get("/data")
+        .expect("Content-Type", /text/)
+    });
 
     test("GET method test", async (done) => {
         const res = await request.get("/all")
@@ -48,4 +38,17 @@ describe ("test the server", () => {
 
             done();
     });
+
+    test("/forecast rout", async () => {
+        const res = await request.get("/forecast")
+        .expect("Content-Type", /json/)
+        expect(res.status).toBe(200)
+        expect(res.body).not.toBeNull();
+        //expect(res.body).toHaveProperty("headers")
+        //expect(res.body).toHaveProperty("post")
+    });
+
+    test("weatherbitforecast", async () => {
+        expect()
+    })
 });

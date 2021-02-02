@@ -176,7 +176,7 @@ async function weatherbitForecast(geoData) {
     //console.log("2", geoData)
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&days=16&units=M&key=${weather_key}`
     const response = await fetch(url)
-
+    //console.log("response", response)
     try {
         const data = await response.json();
         //console.log(data)
@@ -197,4 +197,4 @@ async function weatherbitForecast(geoData) {
     }
 }
 
-module.exports = server;
+module.exports = server, getInput, storageInfo, weatherbitForecast;
