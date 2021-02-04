@@ -15,6 +15,8 @@ import img from "./images/travel.jpg";
 import geoNames from "./images/geoNames.png";
 import weatherbit from "./images/weatherbit.png";
 
+
+// Unstalling service worker for poduction mode only
 if (process.env.NODE_ENV === "production") {
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
@@ -28,27 +30,37 @@ if (process.env.NODE_ENV === "production") {
     }
 }
 
+// Initial main app picture
 let picture = document.querySelector("#img");
 picture.src = img
 
+// Geonames picture
 let image = document.querySelector("#geoNames");
 image.src = geoNames
 
+// Weatherbit picture
 let weatherbitPic = document.querySelector("#weatherbit");
 weatherbitPic.src = weatherbit
 
+// Main funcion
 document.getElementById("new-save").addEventListener("click", generate);
 
+// Add lodging info to existing trip
 document.querySelector("#lodging").addEventListener("click", lodging);
 
+// Get weather forecast
 document.querySelector("#weather").addEventListener("click", weatherForecast);
 
+// Delete trip
 document.querySelector("#remove").addEventListener("click", removeTrip);
 
+// Clear the input fields
 document.querySelector("#new-remove").addEventListener("click", clearInput);
 
+// Add notes to existing trip
 document.querySelector("#notes").addEventListener("click", addNotes);
 
+// Use localStorage to fill in the trip info on load
 window.addEventListener("load", checkStorage)
 
 export {

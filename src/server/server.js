@@ -19,7 +19,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.urlencoded({extended: false}));
-//app.use(bodyParser.text());
 app.use(bodyParser.json());
 
 
@@ -34,8 +33,8 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8000");
 })
 
+// Main project object that sores all the information
 let projectData = {inputData: {}, geoData: {}, picture: {}}
-
 
 app.post("/data", retrieveInput);
 
@@ -53,29 +52,28 @@ async function retrieveInput(req, res) {
     })
 }
 
+
+// The route to send mainobject to clint side
 app.get("/all", allData);
 
 async function allData(req, res) {
-    //console.log("/all is on")
     res.send(projectData)
-    //console.log(projectData)
-    //console.log("project length", Object.keys(projectData).length)
 }
 
 
+// Receives input info from client side
 async function getInput(req, res) {
-    //console.log("1 get input")
     if (req) {
         projectData.inputData = req.body.data // destination, departure, comeback
-        console.log("project input", projectData.inputData)
         return projectData.inputData
     }else{
         console.log("the input is empty")
     }
 }
 
+
+// API to fetch geo information regardinf the input destination
 async function getGeoInfo(req, res) {
-    //console.log("2 get geo info")
 
     const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
 
@@ -83,10 +81,9 @@ async function getGeoInfo(req, res) {
 
     try {
         const geoInfo = await response.json();
-        //console.log("geoinfo", geoInfo)
         if (geoInfo.totalResultsCount === 0){
             return projectData.geoData = {};
-        }else{
+        } else {
             projectData.geoData = {
                 latitude: geoInfo.geonames[0].lat,
                 longitude: geoInfo.geonames[0].lng,
@@ -94,35 +91,27 @@ async function getGeoInfo(req, res) {
                 city: geoInfo.geonames[0].toponymName,
                 countryCode: geoInfo.geonames[0].countryCode
             }
-            //console.log("geodata", projectData.geoData)
             return projectData.geoData
         }
-        //console.log("2 geo info geo data", projectData.geoData)
     } catch (error) {
         console.log("error", error)
     }
 }
 
 
+// API call to et picture of the city or f the country of destination
+// On the client side, when there is no city of country img, will return initial picture
 async function pixabay () {
-    //console.log("3 pixabay")
     const city = encodeURIComponent(projectData.geoData.city)
-    //console.log("city", city)
     const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${city}&category=places&image_type=photo`
-    //console.log("url", url)
     const response = await fetch(url)
-    //console.log("respose", response)
     try {
         const data = await response.json();
-        //console.log("data", data)
         if (data.totalHits >= 1) {
             projectData.picture = data.hits[0].largeImageURL
-            //console.log("picture url", projectData.picture)
             return projectData.picture, projectData
-        } else if (data.totalHits === 0)  {
-            //console.log("no city image, going by country")
+        } else if (data.totalHits === 0)  { // if no city image is available,  will fetch county img
             const country = encodeURIComponent(projectData.geoData.country)
-            //console.log("country", country)
             const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${country}&category=places&image_type=photo`
             const response = await fetch(url)
             try{
@@ -132,7 +121,6 @@ async function pixabay () {
                     return projectData.picture, projectData
                 } else {
                     projectData.picture = data.hits[0].largeImageURL
-                    //console.log(projectData.picture)
                     return projectData.picture, projectData
                 }
             }catch(error) {
@@ -145,12 +133,13 @@ async function pixabay () {
 }
 
 
-
+// Main weather forecast object
 let weatherForecast = {};
-let geoData = {};
-//let router = express.Router();
 
-app.route("/forecast")
+// Geo info objety received fom localSotrage
+let geoData = {};
+
+app.route("/forecast") // Using same route for post and get requests
 
     .post(async function(req, res){
         storageInfo(req, res)
@@ -159,27 +148,23 @@ app.route("/forecast")
     .get(async function(req, res){
         weatherbitForecast(geoData)
         const geo = await weatherbitForecast(geoData)
-        //console.log(" 3 geo", Object.values(geo)[0])
         res.send(weatherForecast);
-        //console.log("4 newforecast sent", Object.values(weatherForecast)[0])
     })
 
 
+// Getting geo info from localStorage on the client side
 async function storageInfo(req, res) {
     geoData = req.body.data;
-    //console.log("1", geoData)
     return geoData
 }
 
 
+// API to get wather forecast, uses global geoData oject
 async function weatherbitForecast(geoData) {
-    //console.log("2", geoData)
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&days=16&units=M&key=${weather_key}`
     const response = await fetch(url)
-    //console.log("response", response)
     try {
         const data = await response.json();
-        //console.log(data)
         data.data.forEach( function(each) {
             return weatherForecast[each.valid_date] = {
                date: each.valid_date,
@@ -190,11 +175,11 @@ async function weatherbitForecast(geoData) {
                code: each.weather.code
             }
         });
-        //console.log("bit func", Object.values(weatherForecast)[0])
         return weatherForecast
     } catch (error) {
         console.log(error)
     }
 }
 
+// exporting functions and srver for jest testings
 module.exports = server, getInput, storageInfo, weatherbitForecast;

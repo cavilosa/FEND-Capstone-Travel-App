@@ -1,9 +1,9 @@
-import img from "../images/travel.jpg";
+import img from "../images/travel.jpg"; // Original image
 
+
+// Initial function to save a trip
 export async function generate(event) {
     event.preventDefault();
-    //console.log("generate is on");
-    //console.log("generate local storage", localStorage.getItem("projectData"))
 
     getData()
     .then( async(data)=> {
@@ -18,10 +18,8 @@ export async function generate(event) {
 }
 
 
-
+// To get valid input information
 export async function getData() {
-    //console.log("getdata is on")
-    //document.querySelector(".forecast").innerHTML = ""
 
     let destination = document.getElementById("destination").value;
     let departure = document.getElementById("departure").value;
