@@ -4,27 +4,26 @@ export async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
         console.log("no local sotrage data")
     }
-    //console.log(localStorage)
     try {
         getStorageData()
         .then ( async (projectData) => {
-            updateUI(projectData)
+            updateUI(projectData) // Fill in the UI with savedtrip info
         })
 
         .then( async(projectData) => {
             if (localStorage){
-                countdown( projectData)
+                countdown( projectData) // Calculate remaining days till departure
             } else {
                 console.log("no local")
             }
-
         })
-
     }catch(e) {
         console.log(e)
     }
 }
 
+
+// Check if local Storage has saved trip
 export async function getStorageData(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     return projectData

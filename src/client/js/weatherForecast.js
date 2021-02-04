@@ -1,8 +1,6 @@
-//const fetch = require('node-fetch')
+// Getting 16 day weather forecast
 export async function weatherForecast(e) {
     e.preventDefault();
-    console.log("weatherForecast is on")
-   //localStorage.clear()
 
    if(localStorage.getItem("projectData")){
        getStorage()
@@ -20,14 +18,14 @@ export async function weatherForecast(e) {
    }
 }
 
+// Getting data from localStorage is any
 export async function getStorage(){
     const projectData = JSON.parse(localStorage.getItem("projectData"))
     const weatherGeoData = await projectData.geoData
-    console.log("getstorage", weatherGeoData)
     return weatherGeoData
 }
 
-
+// Sending info to server side for API call the weatherbit
 export async function sendStorage(weatherGeoData){
     console.log("send storage is on", weatherGeoData)
     const req = await fetch("http://localhost:8000/forecast", {
@@ -46,50 +44,45 @@ export async function sendStorage(weatherGeoData){
     }
 }
 
+// Returning the received data from server side with forecast
 export async function newForecast(req, res){
-    console.log("new forecast is on")
     const response = await fetch("http://localhost:8000/forecast")
     try{
         const data = await response.json();
-        console.log("data from new forecast", typeof data, data)
         return data
     }catch(e){
         console.log(e)
     }
 }
 
+
+// Updating weatherUI
 export async function updateWeatherUI(data) {
-    console.log("update weather ui is on", data)
 
     const forecast = await Object.values(data);
-    console.log(forecast)
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"];
 
     const container = document.querySelector(".forecast")
     container.parentElement.scrollIntoView();
+    // On second click the weather forecast will disappear
     if (container.children.length > 0){
         container.innerHTML = "";
-        //console.log("empty containter data", data)
    } else {
         container.innerHTML = "";
         for (let y = 0; y <=3; y ++){ // creates rows
             let row = document.createElement("div");
             row.classList.add("row")
-            console.log("y", y)
-            //for (let z = 0; z <= 2 ; z++) { // creates cells
             let x = y * 4;
             let m = x + 3
-            for ( let z = x; z<=m; z++) {
-                console.log("1z", z)
+            for ( let z = x; z<=m; z++) { // creates cells
                 let cell = document.createElement("div");
                 cell.classList.add("cell");
 
-                dateFormat(forecast, z)
+                dateFormat(forecast, z) // Making the date look better
 
                 .then ( async(newDate) => {
-                    console.log("day", newDate)
                     cell.innerHTML = `<span class="date">${newDate[0]} ${monthNames[newDate[1]]}</span><br>${forecast[z].description}
                        <br>High: ${forecast[z].max_temp}&#176C <br>
                        Low: ${forecast[z].min_temp}&#176C`
@@ -99,16 +92,13 @@ export async function updateWeatherUI(data) {
            }
         container.appendChild(row)
        }
-
-    console.log("update ui end")
     }
 }
 
+// Changing the date format to user firendly appearance
 export async function dateFormat(forecast, z){
-    console.log("forecast[z].date", forecast[z].date)
     const l = forecast[z].date.toString()
     const day = `${l[8]}${l[9]}`
-    //console.log(day)
 
     let dateMonth;
     const month =  `${l[5]}${l[6]}`
@@ -119,7 +109,6 @@ export async function dateFormat(forecast, z){
     }
 
     dateMonth = dateMonth - 1
-    console.log(dateMonth, day)
     const newDate = [day, dateMonth]
     return (newDate)
 }

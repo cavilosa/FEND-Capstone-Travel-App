@@ -25,7 +25,7 @@ export async function getData() {
     let departure = document.getElementById("departure").value;
     let comeback = document.querySelector("#comeback").value;
 
-    let regex = new RegExp(/\S/);
+    let regex = new RegExp(/\S/);// To check if the input containes only empty spaces or tabs
 
     let d = new Date();
 
@@ -62,8 +62,8 @@ export async function getData() {
 }
 
 
+// Sending input to seerver side for further api calles
 export async function postData (data) {
-    //console.log("postdata is on")
     if (data !== undefined) {
         const request = await fetch("http://localhost:8000/data", {
             method: "POST",
@@ -85,64 +85,59 @@ export async function postData (data) {
 }
 
 
+// Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
-
-    //console.log("getProjectData is on")
     const request = await fetch("http://localhost:8000/all");
     try{
         const data = await request.json();
-        //console.log("data", Object.values(data))
+        // If API received no geo info, will trigger the alert on the client side to change the destination
         if (Object.values(data)[1].longitude === undefined) {
             throw alert("The destination is incorrect, please choose other destination")
         }
         Promise.resolve(data)
         .then(function(value){
             let data = value
-            //console.log("getProjectData() is returning data")
             return data
         })
             .then((data)=>{
-            //console.log("data", data)
+            // Setting localStorage
             localStorage.setItem("projectData", JSON.stringify(data))
             const projectData = JSON.parse(localStorage.getItem("projectData"))
-            //console.log("projectData is setting to localStorage")
             return projectData
             })
                 .then( async (projectData)=> {
                     updateUI(projectData)
                 })
-
-
     }catch(error){
         console.log(error)
     }
 }
 
+
+// Filling the user interface with information about the trip
 export async function updateUI (projectData) {
-    //console.log("update ui is on")
     if(projectData){
+        // Destination
         const list = document.querySelectorAll(".destination")
-
         list[0].innerText = `${projectData.geoData.city}, ${projectData.geoData.country}`;
-
+        // Picture
         const pictureDiv = document.querySelector(".picture")
-
         const url = projectData.picture
-
+        // If there is no picture - leave the current picture
         if (projectData.picture !== ""){
             document.querySelector("img").src = url;
         } else {
             document.querySelector("img").src = img;
         }
-        //console.log("string", projectData.inputData.departure)
-        changeDate(projectData)
-        .then (async(newDate) => {
-            document.querySelector(".departure").innerText = `${newDate[0]} ${newDate[1]}, ${newDate[2]}`;
 
+        changeDate(projectData) // Changing date format to be more user friendly
+        .then (async(newDate) => {
+            // Extracting dates and filling them into the UI
+            document.querySelector(".departure").innerText = `${newDate[0]} ${newDate[1]}, ${newDate[2]}`;
             const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
             document.querySelector(".comeback").innerText = `${newDate[3]} ${newDate[4]}, ${newDate[5]}`;;
         })
-
+        // Filling the lodging info from localStorage
         if (projectData.lodging){
             const lodgingButton = document.querySelector("#lodging");
             lodgingButton.style.display ="none";
@@ -158,12 +153,9 @@ export async function updateUI (projectData) {
             if (!document.querySelector(".addLodging")){
                 parent.insertBefore(addLodging, parent.firstChild)
             }
-            //console.log("parent.insertBefore(addLodging, parent.firstChild)")
         }
-
+        // Filling notes info from localStorage
         if(projectData.notes){
-            //console.log("notes", projectData.notes)
-
             const notes = document.querySelector("#notes")
             notes.style.display = "none";
 
@@ -174,25 +166,24 @@ export async function updateUI (projectData) {
             let parent = document.querySelector(".add-more-info")
             if (!document.querySelector(".notes")){
                 parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)
-
             }
-            //console.log("parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)")
         }
-
-        countdown( projectData)
-
-        //console.log("update ui end")
+        countdown(projectData) // Countdown till departure date
         return projectData
     }
 }
 
+
+// Make the date appearence user friendly and more readable
 export async function changeDate(projectData){
     const monthNames = ["January", "February", "March", "April", "May", "June",
        "July", "August", "September", "October", "November", "December"];
 
+    // Getting the day of departure
     let day = projectData.inputData.departure.toString();
     day = day[8] + day[9]
 
+    // Getting the month of departure
     let month = projectData.inputData.departure.toString()
     let monthNumber = month[5] + month[6]
     if(monthNumber[0] === "0"){
@@ -202,12 +193,14 @@ export async function changeDate(projectData){
     }
     month = monthNames[month - 1]
 
+    // Getting the year of departure
     let year = projectData.inputData.departure.toString()
     year = year[0] + year[1] + year[2] + year[3]
 
+    // Getting the day of return date
     let day2 = projectData.inputData.comeback.toString();
     day2 = day2[8] + day2[9]
-
+    // Getting the month of the return
     let month2 = projectData.inputData.comeback.toString()
     let monthNumber2 = month2[5] + month2[6]
     if(monthNumber2[0] === "0"){
@@ -216,17 +209,17 @@ export async function changeDate(projectData){
         month2 = month2[5] + month2[6]
     }
     month2 = monthNames[month2 - 1]
-
+    // Getting the year of the return
     let year2 = projectData.inputData.comeback.toString()
     year2 = year2[0] + year2[1] + year2[2] + year2[3]
-
+    // Date object to be returned at once with changed date format
     let newDate = [day, month, year, day2, month2, year2]
-
     return newDate
 }
 
+
+// To calculate the days left before the departure
 export async function countdown(projectData) {
-    //console.log("project data from countdow", projectData)
 
     let today = new Date().toISOString().slice(0, 10);
     if (projectData){
@@ -255,18 +248,4 @@ export async function countdown(projectData) {
     } else {
         console.log("no project is stored")
     }
-
-}
-
-export async function upperCaseFirstChar (string) {
-    const words = string.split(" ");
-
-    for ( let i = 0; i < words.length; i++) {
-        let word = words[i];
-        word = word[0].toUpperCase() + word.slice(1)
-        //console.log(word)
-        words[i] = word
-    }
-    //console.log(words)
-    return words.join(" ")
 }

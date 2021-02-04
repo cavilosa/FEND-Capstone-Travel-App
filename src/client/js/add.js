@@ -1,35 +1,29 @@
 import { updateUI } from "./generateInfo.js"
 
+// Saving lodging info
 export async function lodging(e){
     e.preventDefault();
-    //console.log("add lodging")
 
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
-    //console.log(oldItems)
 
+    // Lodging can be added only to existing trip
     if (oldItems === null) {
-
         return alert("Create a trip first")
-
     } else {
-
-        //let oldItems = JSON.parse(localStorage.getItem("projectData"))
-        //console.log(oldItems)
 
         const lodging = document.querySelector("#lodging");
 
         let parent = document.querySelector(".add-more-info")
-
+        // Creates a div with input and save fields
         const divLodging = document.createElement("div")
         divLodging.classList.add("divLodging");
 
         let input = document.createElement("textarea");
         input.classList.add("input-lodging")
         input.columns = "20"
-        //console.log(input.classList)
 
         divLodging.insertBefore(input, divLodging.firstChild)
-
+        // add lodging button is not needed anymore
         lodging.style.display = "none";
 
         let submit = document.createElement("BUTTON")
@@ -37,7 +31,7 @@ export async function lodging(e){
         submit.classList.add("save-info");
 
         divLodging.insertBefore(submit, divLodging.firstElementChild.nextSibling)
-
+        // On sabmit saves the loading info to localStorage and updates the UI
         submit.addEventListener("click", saveLodging)
 
         parent.insertBefore(divLodging, parent.firstChild)
@@ -47,53 +41,47 @@ export async function lodging(e){
 
 export async function saveLodging(e){
     e.preventDefault();
-    //console.log("save lodging")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
-
+    // User input
     let inputValue = document.querySelector(".input-lodging").value;
 
-    let regex = new RegExp(/\S/);
+    let regex = new RegExp(/\S/);// To chech if the lodging input is not empty
 
     if (regex.test(inputValue)) {
         let input = {"lodging" : `${inputValue}`}
-        //console.log(projectData.inputData, input)
 
         projectData.lodging = inputValue
 
-        localStorage.setItem("projectData", JSON.stringify(projectData))
-        //console.log(localStorage)
+        localStorage.setItem("projectData", JSON.stringify(projectData)) // setting the value to local sotrage
 
-        updateUI(projectData)
+        updateUI(projectData) // uopdating the Ui inclinding lodging info now
 
-        document.querySelector(".divLodging").style.display = "none";
+        document.querySelector(".divLodging").style.display = "none"; // add lodging button is gone
     } else {
         return alert("Lodging info is empty")
     }
 }
 
 
+// Addding notes to existing trip
 export async function addNotes(e){
-    //console.log("save list is on")
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
 
     const notes = document.querySelector("#notes")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
-
+    // Notes can be added to existing trip only
     if (oldItems === null) {
-
         return alert("Create your trip first")
-
     } else {
         let parent = document.querySelector(".add-more-info")
-
+        // Creating div with input and save fields
         const divNotes = document.createElement("div")
         divNotes.classList.add("divNotes");
 
         let input = document.createElement("textarea");
         input.classList.add("input-notes")
-        //console.log(input.classList)
 
         divNotes.insertBefore(input, divNotes.firstChild)
 
@@ -104,18 +92,19 @@ export async function addNotes(e){
         submit.classList.add("save-info");
 
         divNotes.insertBefore(submit, divNotes.firstElementChild.nextSibling)
-
+        // eventlistener to a button for saving the notes
         submit.addEventListener("click", saveNotes)
 
         parent.insertBefore(divNotes, parent.firstElementChild.nextSibling)
     }
 }
 
+
+// Savign the notes
 export async function saveNotes(e){
-    //console.log("saveList")
 
     let projectData = JSON.parse(localStorage.getItem("projectData"))
-
+    // Input notes value
     let notesValue = document.querySelector(".input-notes").value;
 
     let regex = new RegExp(/\S/);
@@ -123,12 +112,10 @@ export async function saveNotes(e){
     if (regex.test(notesValue)) {
 
         let input = {"notes": `${notesValue}`}
-        //console.log(projectData.inputData, input)
 
         projectData.notes = notesValue
 
         localStorage.setItem("projectData", JSON.stringify(projectData))
-        //console.log(localStorage)
 
         updateUI(projectData)
 
