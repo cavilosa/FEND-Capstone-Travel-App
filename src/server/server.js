@@ -74,10 +74,9 @@ async function getInput(req, res) {
 // API to fetch geo information regardinf the input destination
 async function getGeoInfo(req, res) {
 
-const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}${api_key}`
+const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}&maxRows=10&username=${api_key}`
 
     const response = await fetch(url);
-    console.log("response", response)
     try {
         const geoInfo = await response.json();
         if (geoInfo.totalResultsCount === 0){
