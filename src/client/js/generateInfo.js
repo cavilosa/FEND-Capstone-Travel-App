@@ -1,5 +1,4 @@
-import img from "../images/travel.jpg"; // Original image
-
+import { imageMain } from "../index.js"; // Original image
 
 // Initial function to save a trip
 export async function generate(event) {
@@ -126,7 +125,7 @@ export async function updateUI (projectData) {
         if (projectData.picture !== ""){
             document.querySelector("img").src = url;
         } else {
-            document.querySelector("img").src = img;
+            imageMain()
         }
 
         changeDate(projectData) // Changing date format to be more user friendly

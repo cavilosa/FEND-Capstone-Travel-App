@@ -30,9 +30,13 @@ if (process.env.NODE_ENV === "production") {
     }
 }
 
-// Initial main app picture
-let picture = document.querySelector("#img");
-picture.src = img
+// Exporting main image for further use in other js files
+export async function imageMain () {
+    let picture = document.querySelector("#img");
+    return picture.src = img
+}
+
+imageMain();
 
 // Geonames picture
 let image = document.querySelector("#geoNames");
