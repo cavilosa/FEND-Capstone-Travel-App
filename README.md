@@ -8,7 +8,7 @@ in order to create a trip, a user needs to add **_destination_, _departure_ and 
 The trip will show a **photo of a city or a country of destination**, including a **countdown** to the departure day.
 
 ### additional options:
-There is a fresh **16 day weather forecast** available that shows forecast starting from the current date of request.
+There is fresh **16 day weather forecast** available, when clicking on the weather button, displays forecast starting from the current date.
 
 There is a button to **print** a page with all the travel information.
 
@@ -19,6 +19,7 @@ There is additional **clear input** button, to clear input fields if desired.
 #### Lodging and Notes additional fields:
 
 After creating the trip, a user can **add lodging info or/and notes**, that added to localStorage as well.
+Lodging and notes can be added only to existing trip.
 
 #### The Footer
- shows links to all APIs used in the app.
+Shows links to all APIs used in the app.

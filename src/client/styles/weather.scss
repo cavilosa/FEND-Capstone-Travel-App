@@ -1,12 +1,11 @@
 .weather {
-    //display: grid;
-    //width: 100vw;
     grid-area: ww;
     width: 100vw;
     padding-left: 0px;
     #weather {
         width: 100vw;
     }
+
     .row {
         display: flex;
         flex-flow: row;
@@ -23,10 +22,14 @@
         padding: 10px;
         flex-grow: 1;
         align-items: center;
-
     }
 
     .date {
         font-weight: bold;
+    }
+
+    .weatherButton{
+        font-weight: bold;
+        line-height: 3em;
     }
 }

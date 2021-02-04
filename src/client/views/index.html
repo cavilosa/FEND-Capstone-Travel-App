@@ -3,7 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+        </script>
         <link rel="shortcut icon" href="#">
         <title>FEND Capstone - Travel APP</title>
     </head>
@@ -21,46 +23,39 @@
         <article class="add-info">
 
             <div class="picture">
-                <img id="img" alt="Great picture" />
+                <img id="img" alt="Great picture" src="#"/>
             </div>
 
             <div class="add-more-info">
                 <button id="lodging" type="submit" name="lodging"
                     onsubmit="Client.lodging(e)">
                     +add lodging info</button>
-                <!--<button id="list" type="submit" name="list">
-                    +add packing list</button>-->
                 <button id="notes" name="notes"
                     onsubmit="Client.addNotes(e)">
                     +add notes</button>
-
             </div>
-
         </article>
 
         <div class="save-remove-trip">
             <button type="submit" name="remove" id="remove"
             onsubmit="Client.removeTrip(e)">remove trip
             </button>
-
             <div class="print">
                 <button id="print" onclick="window.print()">print page</button>
             </div>
         </div>
 
         <div class="countdown">
-
         </div>
 
         <article class="current-trip">
-
             <h2>Next trip to: </h2>
             <div class="destination">
-                Your next trip
+                New places are waiting for you!
             </div>
             <h2>Departing date: </h2>
             <div class="departure">
-                Very soon you will start a new journey
+                Your journey is about to begin!
             </div>
             <h2>Returning date: </h2>
             <div class="comeback">
@@ -71,9 +66,9 @@
         <article class="weather">
             <button type="submit" name="weather" id="weather"
                 onsubmit="Client.weatherForecast(e)">
-                <h3>Fresh 16 day weather forecast for your destination</h3>
+                <span class="weatherButton">
+                    Fresh 16 day weather forecast for your destination</span>
             </button>
-
             <div class="forecast">
             </div>
         </article>
@@ -103,20 +98,22 @@
                 </div>
             </form>
     </section>
+
     <footer>
         <h6>APIs used for this App:</h6>
         <div class="apis">
             <a href="https://pixabay.com/">
-                <img id="pixabay" src="https://pixabay.com/static/img/public/leaderboard_a.png"
+                <img id="pixabay"
+                src="https://pixabay.com/static/img/public/leaderboard_a.png"
                 alt="Pixabay">
             </a>
 
             <a href="http://www.geonames.org/export/web-services.html">
-                <img id="geoNames" alt="GeoNames">
+                <img id="geoNames" alt="GeoNames" src="#">
             </a>
 
             <a href="https://www.weatherbit.io/api">
-                <img id="weatherbit" alt="Weatherbit" >
+                <img id="weatherbit" alt="Weatherbit" src="#">
             </a>
         </div>
     </footer>

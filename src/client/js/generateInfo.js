@@ -7,10 +7,10 @@ export async function generate(event) {
 
     getData()
     .then( async(data)=> {
-        const post = await postData(data)
+        const post = await postData(data);
     })
     .then( async () => {
-        const project = await getProjectData()
+        const project = await getProjectData();
     })
     .then( async() => {
         Client.clearInput();
@@ -42,22 +42,21 @@ export async function getData() {
                     if (Date.parse(d.toISOString().slice(0, 10)) <= Date.parse(departure) ) {
 
                         return {destination: destination, departure: departure,
-                                comeback: comeback}
+                                comeback: comeback};
                     }else{
-                        throw alert("The departure date can't be in past.")
+                        throw alert("The departure date can't be in past.");
                     }
                 }else{
-                    throw alert("The return date can't be before the end date")
+                    throw alert("The return date can't be before the end date");
                 }
-
             }else{
-                throw alert("Please, fill in the return date")
+                throw alert("Please, fill in the return date");
             }
         }else{
-            throw alert("Please, fill in the departure date")
+            throw alert("Please, fill in the departure date");
         }
     }else{
-        throw alert ("Please, fill in the destination")
+        throw alert ("Please, fill in the destination");
     }
 }
 
@@ -77,10 +76,10 @@ export async function postData (data) {
             const data = await request.json();
             return data
         }catch(error){
-            console.log(error)
+            console.log(error);
         }
     }else{
-        console.log("The input information is undefined")
+        console.log("The input information is undefined");
     }
 }
 
@@ -92,24 +91,24 @@ export async function getProjectData(){
         const data = await request.json();
         // If API received no geo info, will trigger the alert on the client side to change the destination
         if (Object.values(data)[1].longitude === undefined) {
-            throw alert("The destination is incorrect, please choose other destination")
+            throw alert("The destination is incorrect, please choose other destination");
         }
         Promise.resolve(data)
         .then(function(value){
             let data = value
-            return data
+            return data;
         })
             .then((data)=>{
             // Setting localStorage
             localStorage.setItem("projectData", JSON.stringify(data))
             const projectData = JSON.parse(localStorage.getItem("projectData"))
-            return projectData
+            return projectData;
             })
                 .then( async (projectData)=> {
-                    updateUI(projectData)
+                    updateUI(projectData);
                 })
     }catch(error){
-        console.log(error)
+        console.log(error);
     }
 }
 
@@ -136,7 +135,7 @@ export async function updateUI (projectData) {
             document.querySelector(".departure").innerText = `${newDate[0]} ${newDate[1]}, ${newDate[2]}`;
             const comeback = projectData.inputData.comeback.split("-").reverse().join("-");
             document.querySelector(".comeback").innerText = `${newDate[3]} ${newDate[4]}, ${newDate[5]}`;;
-        })
+        });
         // Filling the lodging info from localStorage
         if (projectData.lodging){
             const lodgingButton = document.querySelector("#lodging");
@@ -168,8 +167,8 @@ export async function updateUI (projectData) {
                 parent.insertBefore(addNotes, parent.firstElementChild.nextSibling)
             }
         }
-        countdown(projectData) // Countdown till departure date
-        return projectData
+        countdown(projectData); // Countdown till departure date
+        return projectData;
     }
 }
 
@@ -191,11 +190,11 @@ export async function changeDate(projectData){
     } else {
         month = month[5] + month[6]
     }
-    month = monthNames[month - 1]
+    month = monthNames[month - 1];
 
     // Getting the year of departure
     let year = projectData.inputData.departure.toString()
-    year = year[0] + year[1] + year[2] + year[3]
+    year = year[0] + year[1] + year[2] + year[3];
 
     // Getting the day of return date
     let day2 = projectData.inputData.comeback.toString();
@@ -208,13 +207,13 @@ export async function changeDate(projectData){
     } else {
         month2 = month2[5] + month2[6]
     }
-    month2 = monthNames[month2 - 1]
+    month2 = monthNames[month2 - 1];
     // Getting the year of the return
     let year2 = projectData.inputData.comeback.toString()
     year2 = year2[0] + year2[1] + year2[2] + year2[3]
     // Date object to be returned at once with changed date format
     let newDate = [day, month, year, day2, month2, year2]
-    return newDate
+    return newDate;
 }
 
 
@@ -233,19 +232,19 @@ export async function countdown(projectData) {
         countdown.classList.add("countdown")
         if (days === 1) {
             countdown.innerText = `Your trip is 1 day away.`
-           return projectData
+           return projectData;
         } else if (days === 0) {
             countdown.innerText = `Your trip is today!`
-            return projectData
+            return projectData;
 
         }else if (days < 0){
             countdown.innerText = `This trip expired!`
-            return projectData
+            return projectData;
         } else {
             countdown.innerText = `Your trip is ${days} days away.`
-            return projectData
+            return projectData;
         }
     } else {
-        console.log("no project is stored")
+        console.log("no project is stored");
     }
 }

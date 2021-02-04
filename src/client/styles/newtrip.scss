@@ -1,6 +1,7 @@
 section.new-trip {
     background-color: #e6e6e6;
     grid-area: nt;
+    padding-bottom: 20px;
 
     .new-trip-info {
         display: grid;
@@ -23,6 +24,4 @@ section.new-trip {
     .save-remove-trip {
         padding-bottom: 10px;
     }
-
-    padding-bottom: 20px;
 }
