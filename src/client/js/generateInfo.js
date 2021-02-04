@@ -125,7 +125,7 @@ export async function updateUI (projectData) {
         if (projectData.picture !== ""){
             document.querySelector("img").src = url;
         } else {
-            imageMain()
+            imageMain();
         }
 
         changeDate(projectData) // Changing date format to be more user friendly

@@ -51,7 +51,7 @@ export async function newForecast(req, res){
         const data = await response.json();
         return data
     }catch(e){
-        console.log(e)
+        return alert("The weather forecast is unavailable at the moment.")
     }
 }
 

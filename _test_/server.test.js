@@ -1,17 +1,9 @@
 const fetch = require("node-fetch");
-/*const request = require("supertest");*/
 const app = require("../src/server/server");
 const supertest = require("supertest");
 const request = supertest(app);
 
 import { getInput, storageInfo, weatherbitForecast } from "../src/server/server"
-
-/*const axios = require('axios');
-jest.mock('axios');
-
-/*beforeAll(()=>{
-    require("whatwg-fetch");
-})*/
 
 describe ("test the server", () => {
 
@@ -44,8 +36,6 @@ describe ("test the server", () => {
         .expect("Content-Type", /json/)
         expect(res.status).toBe(200)
         expect(res.body).not.toBeNull();
-        //expect(res.body).toHaveProperty("headers")
-        //expect(res.body).toHaveProperty("post")
     });
 
     test("weatherbitforecast", async () => {
