@@ -71,7 +71,7 @@ async function getInput(req, res) {
 }
 
 
-// API to fetch geo information regardinf the input destination
+// API to fetch geo information regarding the input destination
 async function getGeoInfo(req, res) {
 
 const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destination}&maxRows=10&username=${api_key}`
@@ -97,8 +97,8 @@ const url = `http://api.geonames.org/searchJSON?q=${projectData.inputData.destin
 }
 
 
-// API call to et picture of the city or f the country of destination
-// On the client side, when there is no city of country img, will return initial picture
+// API call to add picture of the city or of the country to the destination
+// On the client side, if there is no city of country img, will return initial picture
 async function pixabay () {
     const city = encodeURIComponent(projectData.geoData.city)
     const url = `https://pixabay.com/api/?key=${pixabay_key}&q=${city}&category=places&image_type=photo`
@@ -134,7 +134,7 @@ async function pixabay () {
 // Main weather forecast object
 let weatherForecast = {};
 
-// Geo info objety received fom localSotrage
+// Geo info object received fom localStorage
 let geoData = {};
 
 app.route("/forecast") // Using same route for post and get requests
@@ -157,7 +157,7 @@ async function storageInfo(req, res) {
 }
 
 
-// API to get wather forecast, uses global geoData oject
+// API to get weather forecast, uses global geoData object
 async function weatherbitForecast(geoData) {
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${geoData.latitude}&lon=${geoData.longitude}&days=16&units=M&key=${weather_key}`
     const response = await fetch(url)
@@ -179,5 +179,5 @@ async function weatherbitForecast(geoData) {
     }
 }
 
-// exporting functions and srver for jest testings
+// exporting functions and server for jest testings
 module.exports = server, getInput, storageInfo, weatherbitForecast;
