@@ -1,1 +1,1 @@
-web: "npm run build-prod && node src/server/server.js"
+web: "npm run build-prod && npm run start"
