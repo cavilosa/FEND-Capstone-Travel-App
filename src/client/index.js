@@ -16,7 +16,7 @@ import geoNames from "./images/geoNames.png";
 import weatherbit from "./images/weatherbit.png";
 
 
-// Installing service worker for poduction mode only
+// Installing service worker for production mode only
 if (process.env.NODE_ENV === "production") {
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
             navigator.serviceWorker.register('./service-worker.js');
         });
     } else {
-    console.log("Service worker installation skipped!");
+        console.log("Service worker installation skipped!");
     }
 }
 

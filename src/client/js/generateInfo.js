@@ -24,7 +24,7 @@ export async function getData() {
     let departure = document.getElementById("departure").value;
     let comeback = document.querySelector("#comeback").value;
 
-    let regex = new RegExp(/\S/);// To check if the input containes only empty spaces or tabs
+    let regex = new RegExp(/\S/);// To check if the input contains only empty spaces or tabs
 
     let d = new Date();
 
