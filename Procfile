@@ -1,2 +1,1 @@
-web: npm i && npm run start && npm run build-prod
-server: cd source/server && npm run start
+web: "npm run build-prod && node src/server/server.js"
