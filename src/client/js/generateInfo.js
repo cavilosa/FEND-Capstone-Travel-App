@@ -1,4 +1,5 @@
 import { imageMain } from "../index.js"; // Original image
+let heroku_url = process.env.heroku_url
 
 // Initial function to save a trip
 export async function generate(event) {
@@ -63,7 +64,7 @@ export async function getData() {
 // Sending input to seerver side for further api calles
 export async function postData (data) {
     if (data !== undefined) {
-        const request = await fetch("http://localhost:8080/data", {
+        const request = await fetch("${heroku_url}/data", {
             method: "POST",
             mode: "cors",
             headers: {
@@ -85,7 +86,7 @@ export async function postData (data) {
 
 // Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
-    const request = await fetch("http://localhost:8080/all");
+    const request = await fetch("${heroku_url}/all");
     try{
         const data = await request.json();
         // If API received no geo info, will trigger the alert on the client side to change the destination

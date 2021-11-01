@@ -11,6 +11,7 @@ dotenv.config();
 let api_key = process.env.api_key;
 let weather_key = process.env.weather_key;
 let pixabay_key = process.env.pixabay_key;
+let heroku_url = process.env.heroku_url
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -23,14 +24,14 @@ app.use(bodyParser.json());
 
 
 app.use(express.static("dist"));
-const port = 8080;
+const port = heroku_url;
 
 app.get("/", function (req, res) {
     res.sendFile("dist/index.html")
 })
 
 const server = app.listen(port, () => {
-    console.log("Server is running on port 8080");
+    console.log("Server is running on port ${heroku_url}");
 })
 
 // Main project object that stores all the information
