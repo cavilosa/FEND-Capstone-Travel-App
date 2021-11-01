@@ -24,14 +24,14 @@ app.use(bodyParser.json());
 
 
 app.use(express.static("dist"));
-const port = 8080;
+const port = process.env.PORT || 80;
 
 app.get("/", function (req, res) {
     res.sendFile("dist/index.html")
 })
 
 const server = app.listen(port, () => {
-    console.log("Server is running on port 8080");
+    console.log("Server is running on port 80");
 })
 
 // Main project object that stores all the information
