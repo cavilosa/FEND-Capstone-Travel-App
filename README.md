@@ -13,7 +13,55 @@ In order to create a trip, a user needs to add **_destination_, _departure_ and 
 
 The trip will show a **photo of a city or a country of destination**, including a **countdown** to the departure day.
 
-### Additional options:
+
+### SETTING UP VIRTUAL ENVIRONMENT:
+
+1. First, let's install Node.js virtual environment - <a href="https://pypi.org/project/nodeenv/">nodeenv</a>:
+
+    pip install nodeenv
+
+    Create virtual environment:
+
+        nodeenv env
+
+    <a href="https://pypi.org/project/nodeenv/">It’s much faster to install from the prebuilt package than Install & compile node.js from source:</a>
+
+        nodeenv --prebuilt env
+
+    Activate virtual environment:
+
+        . env/bin/activate
+
+    To deactivate:
+
+        deactivate_node
+
+2. Update gitignore file to exclude env folder.
+
+###  INSTALLING DEPENDENCIES:
+
+    npm install
+
+### Starting Node.js server:
+
+    npm start
+
+### Start the application in development mode:
+
+    npm run build-dev
+
+### Start the application in production mode:
+
+    npm run build-prod
+
+Production mode equipped with **service workers** that allow offline access if the server can not be reached, by creating a cached version of the website.
+
+
+
+
+
+### STANDOUT FEATURES:
+
 There is fresh **16 day weather forecast** available, when clicking on the weather button, displays forecast starting from the current date.
 
 There is a button to **print** a page with all the travel information.
@@ -21,6 +69,7 @@ There is a button to **print** a page with all the travel information.
 Remove trip button will **delete current trip**, that is located on the localStorage.
 
 There is additional **clear input** button, to clear input fields if desired.
+
 
 #### Lodging and Notes additional fields:
 
