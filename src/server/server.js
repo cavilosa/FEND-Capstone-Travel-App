@@ -33,7 +33,7 @@ const server = app.listen(port, () => {
     console.log("Server is running on port 8080");
 })
 
-// Main project object that sores all the information
+// Main project object that stores all the information
 let projectData = {inputData: {}, geoData: {}, picture: {}}
 
 app.post("/data", retrieveInput);
