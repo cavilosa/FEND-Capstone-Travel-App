@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "start": "node src/server/server.js && webpack-dev-server --define process.env.NODE_ENV='\"development\"' --config webpack.dev.js --open",
+    "start": "node src/server/server.js",
     "build-prod": "webpack --define process.env.NODE_ENV='\"production\"' --config webpack.prod.js",
     "build-dev": "webpack-dev-server --define process.env.NODE_ENV='\"development\"' --config webpack.dev.js --open"
   },
