@@ -57,8 +57,10 @@ The trip will show a **photo of a city or a country of destination**, including 
 Production mode equipped with **service workers** that allow offline access if the server can not be reached, by creating a cached version of the website.
 
 
+### TESTING
+To run jest tests:
 
-
+    npm run test
 
 ### STANDOUT FEATURES:
 
