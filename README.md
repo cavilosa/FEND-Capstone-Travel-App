@@ -36,8 +36,6 @@ The trip will show a **photo of a city or a country of destination**, including 
 
         deactivate_node
 
-2. Update gitignore file to exclude env folder.
-
 ###  INSTALLING DEPENDENCIES:
 
     npm install
