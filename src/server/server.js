@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 
 app.use(express.static("dist"));
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 app.get("/", function (req, res) {
     res.sendFile("dist/index.html")
