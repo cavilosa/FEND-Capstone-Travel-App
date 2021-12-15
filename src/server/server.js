@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use(express.static("dist"));
 const port = process.env.PORT;
-console.log(`Server is running on port ${port}`);
+// console.log(`Server is running on port ${port}`);
 
 app.get("/", function (req, res) {
     res.sendFile("dist/index.html")
