@@ -1,4 +1,4 @@
-# The Final Front End Project - Travel App!!!
+# Travel App
 
 The app uses these APIs: <a href="https://www.weatherbit.io/account/create">Weatherbit</a>, <a href="http://www.geonames.org/export/web-services.html">Geonames</a> and <a href="https://pixabay.com/api/docs/">Pixabay</a>.
 
