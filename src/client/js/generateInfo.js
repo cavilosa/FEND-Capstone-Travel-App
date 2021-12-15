@@ -1,11 +1,13 @@
 import { imageMain } from "../index.js"; // Original image
 
+const domain = process.env.DOMAIN
+
 // Initial function to save a trip
 export async function generate(event) {
     event.preventDefault();
 
-    const port = process.env.PORT
-    console.log("PORT", port)
+    // const port = process.env.PORT
+    // console.log("PORT", port)
 
     getData()
     .then( async(data)=> {
@@ -63,10 +65,11 @@ export async function getData() {
 }
 
 
-// Sending input to seerver side for further api calles
+// Sending input to server side for further api calls
 export async function postData (data) {
+    console.log("DOMAIN", domain)
     if (data !== undefined) {
-        const request = await fetch("http://localhost:8080/data", {
+        const request = await fetch(`${domain}/data`, {
             method: "POST",
             mode: "cors",
             headers: {
@@ -88,7 +91,7 @@ export async function postData (data) {
 
 // Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
-    const request = await fetch("http://localhost:8080/all");
+    const request = await fetch(`${domain}/all`);
     try{
         const data = await request.json();
         // If API received no geo info, will trigger the alert on the client side to change the destination
@@ -175,7 +178,7 @@ export async function updateUI (projectData) {
 }
 
 
-// Make the date appearence user friendly and more readable
+// Make the date appearance user friendly and more readable
 export async function changeDate(projectData){
     const monthNames = ["January", "February", "March", "April", "May", "June",
        "July", "August", "September", "October", "November", "December"];

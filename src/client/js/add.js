@@ -46,16 +46,16 @@ export async function saveLodging(e){
     // User input
     let inputValue = document.querySelector(".input-lodging").value;
 
-    let regex = new RegExp(/\S/);// To chech if the lodging input is not empty
+    let regex = new RegExp(/\S/);// To check if the lodging input is not empty
 
     if (regex.test(inputValue)) {
         let input = {"lodging" : `${inputValue}`}
 
         projectData.lodging = inputValue
 
-        localStorage.setItem("projectData", JSON.stringify(projectData)) // setting the value to local sotrage
+        localStorage.setItem("projectData", JSON.stringify(projectData)) // setting the value to local storage
 
-        updateUI(projectData) // uopdating the Ui inclinding lodging info now
+        updateUI(projectData) // updating the Ui including lodging info now
 
         document.querySelector(".divLodging").style.display = "none"; // add lodging button is gone
     } else {
@@ -64,7 +64,7 @@ export async function saveLodging(e){
 }
 
 
-// Addding notes to existing trip
+// Addling notes to existing trip
 export async function addNotes(e){
     let oldItems = JSON.parse(localStorage.getItem("projectData"))
 
