@@ -27,8 +27,8 @@ const port = process.env.PORT;
 console.log(`Server is running on port ${port}`);
 
 app.get("/", function (req, res) {
-    // res.sendFile("dist/index.html")
-    res.sendFile("dist/index.html", {root: '.'});
+    res.sendFile("dist/index.html")
+    // res.sendFile("dist/index.html", {root: '.'});
 })
 
 const server = app.listen(port, () => {
