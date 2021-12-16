@@ -62,7 +62,7 @@ export async function getData() {
 
 // Sending input to seerver side for further api calles
 export async function postData (data) {
-    console.log("changed log")
+    console.log("Check for changes")
     if (data !== undefined) {
         const request = await fetch("http://localhost:8081/data", {
             method: "POST",

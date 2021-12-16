@@ -12,10 +12,15 @@ module.exports = {
     output: {
         libraryTarget: "var",
         library: "Client"
-    },/*
+    },
     devServer: {
-        port: 8081
-    },*/
+        watchOptions:{
+          poll: true
+        },
+        // watchContentBase: true,
+        compress: true,
+        // hot: true
+    },
     module: {
         rules: [
             {
