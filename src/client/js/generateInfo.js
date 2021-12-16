@@ -6,9 +6,6 @@ const domain = process.env.DOMAIN
 export async function generate(event) {
     event.preventDefault();
 
-    // const port = process.env.PORT
-    // console.log("PORT", port)
-
     getData()
     .then( async(data)=> {
         const post = await postData(data);
