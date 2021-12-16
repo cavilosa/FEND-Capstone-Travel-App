@@ -4,9 +4,6 @@ import { imageMain } from "../index.js"; // Original image
 export async function generate(event) {
     event.preventDefault();
 
-    const port = process.env.PORT
-    console.log("PORT", port)
-
     getData()
     .then( async(data)=> {
         const post = await postData(data);
@@ -65,8 +62,9 @@ export async function getData() {
 
 // Sending input to seerver side for further api calles
 export async function postData (data) {
+    console.log("changed log")
     if (data !== undefined) {
-        const request = await fetch("http://localhost:8080/data", {
+        const request = await fetch("http://localhost:8081/data", {
             method: "POST",
             mode: "cors",
             headers: {
@@ -88,7 +86,7 @@ export async function postData (data) {
 
 // Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
-    const request = await fetch("http://localhost:8080/all");
+    const request = await fetch("http://localhost:8081/all");
     try{
         const data = await request.json();
         // If API received no geo info, will trigger the alert on the client side to change the destination

@@ -23,14 +23,15 @@ app.use(bodyParser.json());
 
 
 app.use(express.static("dist"));
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 app.get("/", function (req, res) {
     res.sendFile("dist/index.html")
 })
 
 const server = app.listen(port, () => {
-    console.log(`Server is running on port ${PORT}`);
+    const port = process.env.PORT
+    console.log(`Server is running on port ${port}`);
 })
 
 // Main project object that stores all the information
