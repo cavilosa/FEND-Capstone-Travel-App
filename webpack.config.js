@@ -59,7 +59,7 @@ module.exports = (env, {
           // Automatically remove all unused webpack assets on rebuild
           cleanStaleWebpackAssets: true,
           protectWebpackAssets: false
-        }),
+        })
         mode
       ),
       new MiniCssExtractPlugin({
