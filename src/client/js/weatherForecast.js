@@ -95,7 +95,7 @@ export async function updateWeatherUI(data) {
     }
 }
 
-// Changing the date format to user firendly appearance
+// Changing the date format to user friendly appearance
 export async function dateFormat(forecast, z){
     const l = forecast[z].date.toString()
     const day = `${l[8]}${l[9]}`
