@@ -40,17 +40,19 @@ The trip will show a **photo of a city or a country of destination**, including 
 
     npm install
 
-### Starting Node.js server:
-
-    npm start
-
-### Start the application in development mode:
+### Start the application in development mode, development server will run on
+### port 8080:
 
     npm run build-dev
 
 ### Start the application in production mode:
 
     npm run build-prod
+
+### Starting Node.js server (in same terminal for production and in second
+### terminal for development), Node server will be running on port 8081:
+
+    npm start
 
 Production mode equipped with **service workers** that allow offline access if the server can not be reached, by creating a cached version of the website.
 
