@@ -29,8 +29,8 @@ export async function getStorage(){
 
 // Sending info to server side for API call the weatherbit
 export async function sendStorage(weatherGeoData){
-    console.log("send storage is on", weatherGeoData)
-    const req = await fetch("/forecast", {
+    const domain = process.env.DOMAIN
+    const req = await fetch(`${domain}/forecast`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -48,7 +48,8 @@ export async function sendStorage(weatherGeoData){
 
 // Returning the received data from server side with forecast
 export async function newForecast(req, res){
-    const response = await fetch("/forecast")
+    const domain = process.env.DOMAIN
+    const response = await fetch(`${domain}/forecast`)
     try{
         const data = await response.json();
         return data

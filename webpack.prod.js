@@ -6,7 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const regeneratorRuntime = require("regenerator-runtime");
-const WorkboxPlugin = require('workbox-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+
 
 module.exports = {
     mode: "production",
