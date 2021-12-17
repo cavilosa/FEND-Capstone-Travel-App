@@ -72,6 +72,7 @@ module.exports = {
             protectWebpackAssets: false
         }),
         new MiniCssExtractPlugin({ filename: "[name].css" }),
-        new WorkboxPlugin.GenerateSW()
+        new WorkboxPlugin.GenerateSW(),
+        new Dotenv()
     ]
 }
