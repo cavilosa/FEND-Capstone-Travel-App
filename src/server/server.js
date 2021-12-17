@@ -53,7 +53,7 @@ async function retrieveInput(req, res) {
 }
 
 
-// The route to send mainobject to clint side
+// The route to send main object to clint side
 app.get("/all", allData);
 
 async function allData(req, res) {
