@@ -60,9 +60,8 @@ export async function getData() {
 }
 
 
-// Sending input to seerver side for further api calles
+// Sending input to server side for further api calls
 export async function postData (data) {
-    console.log("Check for changes")
     if (data !== undefined) {
         const request = await fetch("http://localhost:8081/data", {
             method: "POST",
@@ -245,6 +244,6 @@ export async function countdown(projectData) {
             return projectData;
         }
     } else {
-        console.log("no project is stored");
+        console.log("No project is stored");
     }
 }

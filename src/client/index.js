@@ -18,7 +18,6 @@ import weatherbit from "./images/weatherbit.png";
 
 // Installing service worker for production mode only
 if (process.env.NODE_ENV === "production") {
-    console.log("process.env.NODE_ENV", process.env.NODE_ENV)
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
     // Use the window load event to keep the page load performant
@@ -31,7 +30,6 @@ if (process.env.NODE_ENV === "production") {
     }
 } else {
     console.log("Service worker installation skipped!");
-    console.log("CHECK second")
 }
 
 // Exporting main image for further use in other js files
