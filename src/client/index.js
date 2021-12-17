@@ -28,6 +28,8 @@ if (process.env.NODE_ENV === "production") {
     } else {
         console.log("Service worker installation skipped!");
     }
+} else {
+    console.log("Service worker installation skipped!");
 }
 
 // Exporting main image for further use in other js files

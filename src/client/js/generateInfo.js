@@ -1,7 +1,5 @@
 import { imageMain } from "../index.js"; // Original image
 
-const domain = process.env.DOMAIN
-
 // Initial function to save a trip
 export async function generate(event) {
     event.preventDefault();
@@ -64,9 +62,8 @@ export async function getData() {
 
 // Sending input to server side for further api calls
 export async function postData (data) {
-    console.log("DOMAIN", domain)
     if (data !== undefined) {
-        const request = await fetch(`${domain}/data`, {
+        const request = await fetch("/data", {
             method: "POST",
             mode: "cors",
             headers: {
@@ -88,7 +85,7 @@ export async function postData (data) {
 
 // Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
-    const request = await fetch(`${domain}/all`);
+    const request = await fetch("/all");
     try{
         const data = await request.json();
         // If API received no geo info, will trigger the alert on the client side to change the destination
