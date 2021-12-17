@@ -15,6 +15,7 @@ import img from "./images/travel.jpg";
 import geoNames from "./images/geoNames.png";
 import weatherbit from "./images/weatherbit.png";
 
+console.log("${process.env.DOMAIN}", process.env.DOMAIN)
 
 // Installing service worker for production mode only
 if (process.env.NODE_ENV === "production") {
