@@ -62,9 +62,8 @@ export async function getData() {
 
 // Sending input to server side for further api calls
 export async function postData (data) {
-    const domain = process.env.DOMAIN
     if (data !== undefined) {
-        const request = await fetch(`${domain}/data`, {
+        const request = await fetch(`${process.env.DOMAIN}/data`, {
             method: "POST",
             mode: "cors",
             headers: {
@@ -86,8 +85,7 @@ export async function postData (data) {
 
 // Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
-    const domain = process.env.DOMAIN
-    const request = await fetch(`${domain}/all`);
+    const request = await fetch(`${process.env.DOMAIN}/all`);
     try{
         const data = await request.json();
         // If API received no geo info, will trigger the alert on the client side to change the destination
