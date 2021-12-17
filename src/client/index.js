@@ -48,7 +48,7 @@ image.src = geoNames
 let weatherbitPic = document.querySelector("#weatherbit");
 weatherbitPic.src = weatherbit
 
-// Main funcion
+// Main function
 document.getElementById("new-save").addEventListener("click", generate);
 
 // Add lodging info to existing trip

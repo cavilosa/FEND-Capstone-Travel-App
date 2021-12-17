@@ -1,4 +1,6 @@
 // Getting 16 day weather forecast
+
+const domain = process.env.DOMAIN
 export async function weatherForecast(e) {
     e.preventDefault();
 
@@ -27,8 +29,7 @@ export async function getStorage(){
 
 // Sending info to server side for API call the weatherbit
 export async function sendStorage(weatherGeoData){
-    console.log("send storage is on", weatherGeoData)
-    const req = await fetch("http://localhost:8081/forecast", {
+    const req = await fetch(`${process.env.DOMAIN}/forecast`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -46,7 +47,7 @@ export async function sendStorage(weatherGeoData){
 
 // Returning the received data from server side with forecast
 export async function newForecast(req, res){
-    const response = await fetch("http://localhost:8081/forecast")
+    const response = await fetch(`${process.env.DOMAIN}/forecast`)
     try{
         const data = await response.json();
         return data
