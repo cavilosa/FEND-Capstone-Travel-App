@@ -8,7 +8,7 @@
     "test:watch": "jest --watch",
     "start": "node src/server/server.js",
     "build-prod": "webpack --define process.env.NODE_ENV='\"production\"' --config webpack.prod.js",
-    "build": "c && webpack --define process.env.NODE_ENV='\"production\"' --config webpack.prod.js",
+    "build": "npm install && webpack --define process.env.NODE_ENV='\"production\"' --config webpack.prod.js",
     "build-dev": "webpack-dev-server --define process.env.NODE_ENV='\"development\"' --config webpack.dev.js --open"
   },
   "repository": {
