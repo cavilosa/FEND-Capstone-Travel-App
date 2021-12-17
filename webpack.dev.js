@@ -15,7 +15,12 @@ module.exports = {
         library: "Client"
     },
     devServer: {
-        port: 8080
+        watchOptions:{
+          poll: true
+        },
+        // watchContentBase: true,
+        compress: true,
+        // hot: true
     },
     module: {
         rules: [

@@ -86,6 +86,7 @@ export async function postData (data) {
 
 // Getting main project object with all the information received from the APIs: geo, picture, input
 export async function getProjectData(){
+    const domain = process.env.DOMAIN
     const request = await fetch(`${domain}/all`);
     try{
         const data = await request.json();
