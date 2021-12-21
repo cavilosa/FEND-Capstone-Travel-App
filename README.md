@@ -40,10 +40,6 @@ The trip will show a **photo of a city or a country of destination**, including 
 
     npm install
 
-### Starting Node.js server:
-
-    npm start
-
 ### Start the application in development mode:
 
     npm run build-dev
@@ -51,6 +47,14 @@ The trip will show a **photo of a city or a country of destination**, including 
 ### Start the application in production mode:
 
     npm run build-prod
+
+### Starting Node.js server:
+
+    npm start
+
+For development server you will need to start the dev-server and node in separate
+console windows, as dev-server and node server will be activated on different ports at once.
+Production mode can be run in the same one. First, the dist folder will be generated and then you can start the node.js server.
 
 Production mode equipped with **service workers** that allow offline access if the server can not be reached, by creating a cached version of the website.
 
