@@ -2,28 +2,33 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-app.use(cors());
+
+const corsOptions = {
+    origin: '*', // Or specify exact origins for production
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Handle preflight requests
+
 
 const fetch = require('node-fetch');
 
 const dotenv = require('dotenv');
 dotenv.config();
+require('dotenv').config();
 let api_key = process.env.api_key;
 let weather_key = process.env.weather_key;
 let pixabay_key = process.env.pixabay_key;
-
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-});
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
 app.use(express.static("dist"));
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 // console.log(`Server is running on port ${port}`);
 
 app.get("/", function (req, res) {
@@ -32,7 +37,6 @@ app.get("/", function (req, res) {
 })
 
 const server = app.listen(port, () => {
-    const port = process.env.PORT;
     console.log(`Server is running on port ${port}`);
 })
 
