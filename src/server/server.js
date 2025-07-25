@@ -11,7 +11,7 @@ dotenv.config();
 const api_key = process.env.api_key;
 const weather_key = process.env.weather_key;
 const pixabay_key = process.env.pixabay_key;
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8081; // Server's port
 
 // Apply CORS first
 const corsOptions = {
@@ -27,9 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("dist"));
 
+
 // Serve index.html
 app.get("/", function (req, res) {
-  console.log("Serving index.html");
   res.sendFile("index.html", { root: path.join(__dirname, "../../dist") });
 });
 
