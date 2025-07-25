@@ -1,68 +1,55 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-
 module.exports = {
-    entry: './src/client/index.js',
-    mode: 'development',
-    devtool: 'source-map',
-    output: {
-        libraryTarget: "var",
-        library: "Client"
+  mode: 'development',
+  entry: './src/client/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    libraryTarget: 'var',
+    library: 'Client',
+    clean: true // ✅ Replaces CleanWebpackPlugin in many cases
+  },
+  devtool: 'eval-source-map',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
     },
-    devServer: {
-        port: 8080
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpe?g|gif)$/i,
-                use: [
-                   {
-                    loader: 'file-loader',
-                    }
-                ],
-            },
-            {
-                test: '/\.js$/',
-                exclude: /node_modules/,
-                loader: "babel-loader"
-            },
-            {
-                test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-            },
-            {
-              test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-              use: [
-                {
-                  loader: 'file-loader',
-                  options: {
-                    name: '[name].[ext]',
-                    outputPath: 'fonts/'
-                  }
-                }
-              ]
-            }
-        ]
-    },
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/client/views/index.html",
-            filename: "./index.html",
-        }),
-        new CleanWebpackPlugin({
-            // Simulate the removal of files
-            dry: true,
-            // Write Logs to Console
-            verbose: true,
-            // Automatically remove all unused webpack assets on rebuild
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: false
-        }),
-        new BundleAnalyzerPlugin()
+    port: 8080,
+    open: true,
+    hot: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf)$/i,
+        type: 'asset/resource', // ✅ Webpack 5 native asset handling
+        generator: {
+          filename: 'assets/[name][ext][query]'
+        }
+      },
+      {
+        test: /\.js$/, // ✅ fixed RegExp
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
     ]
-}
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/client/views/index.html",
+      filename: "./index.html"
+    }),
+    new CleanWebpackPlugin({
+      verbose: true
+    }),
+    new BundleAnalyzerPlugin()
+  ]
+};

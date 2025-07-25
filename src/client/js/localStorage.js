@@ -2,12 +2,12 @@ import { updateUI, countdown } from "./generateInfo.js"
 
 export async function checkStorage() {
     if (!localStorage.getItem("projectData")) {
-        console.log("no local sotrage data")
+        console.log("no local storage data")
     }
     try {
         getStorageData()
         .then ( async (projectData) => {
-            updateUI(projectData) // Fill in the UI with savedtrip info
+            updateUI(projectData) // Fill in the UI with saved trip info
         })
 
         .then( async(projectData) => {

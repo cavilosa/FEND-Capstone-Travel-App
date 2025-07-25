@@ -1,6 +1,5 @@
 // Getting 16 day weather forecast
 
-const domain = process.env.DOMAIN
 export async function weatherForecast(e) {
     e.preventDefault();
 

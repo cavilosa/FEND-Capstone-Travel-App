@@ -1,13 +1,14 @@
 {
   "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "exclude": ["transform-regenerator"]
-            }
-        ]
-    ],
-    "plugins": [
-        "@babel/plugin-transform-runtime"
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": "3.36"
+      }
     ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ]
 }
