@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"No tests configured\" && exit 0",
     "start": "node src/server/server.js",
-    "dev-server": "nodemon src/server/server.js",
+    "dev-server": "nodemon",
     "build:prod": "webpack --mode production --config webpack.prod.js",
     "build:dev": "webpack serve --mode development --config webpack.dev.js --open",
     "check:unused": "npx depcheck",

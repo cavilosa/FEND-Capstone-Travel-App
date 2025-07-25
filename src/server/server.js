@@ -29,6 +29,7 @@ app.use(express.static("dist"));
 
 // Serve index.html
 app.get("/", function (req, res) {
+  console.log("Serving index.html");
   res.sendFile("index.html", { root: path.join(__dirname, "../../dist") });
 });
 

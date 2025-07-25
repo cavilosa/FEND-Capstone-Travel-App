@@ -11,7 +11,7 @@ module.exports = {
     filename: 'bundle.js',
     libraryTarget: 'var',
     library: 'Client',
-    clean: true // ✅ Replaces CleanWebpackPlugin in many cases
+    clean: true 
   },
   devtool: 'eval-source-map',
   devServer: {
@@ -20,7 +20,8 @@ module.exports = {
     },
     port: 8080,
     open: true,
-    hot: true
+    hot: true,
+    liveReload: true
   },
   module: {
     rules: [
