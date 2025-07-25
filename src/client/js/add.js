@@ -31,7 +31,7 @@ export async function lodging(e){
         submit.classList.add("save-info");
 
         divLodging.insertBefore(submit, divLodging.firstElementChild.nextSibling)
-        // On sabmit saves the loading info to localStorage and updates the UI
+        // On submit saves the loading info to localStorage and updates the UI
         submit.addEventListener("click", saveLodging)
 
         parent.insertBefore(divLodging, parent.firstChild)

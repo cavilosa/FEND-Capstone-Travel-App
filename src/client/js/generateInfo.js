@@ -59,12 +59,16 @@ export async function getData() {
     }
 }
 
-
 // Sending input to server side for further api calls
 export async function postData (data) {
+    console.log("Data to be sent to the server: ", data);
     if (data !== undefined) {
-        const request = await fetch("http://localhost:8081/data", {
+        let domain = process.env.DOMAIN
+        console.log("Domain: ", domain);
+
+        const request = await fetch('domain', {
             method: "POST",
+            credentials: 'include', 
             mode: "cors",
             headers: {
                 "Content-Type": "application/json; charset=utf-8"
@@ -79,6 +83,7 @@ export async function postData (data) {
         }
     }else{
         console.log("The input information is undefined");
+        return undefined;
     }
 }
 

@@ -5,6 +5,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 function prodPlugin(plugin, mode) {
   return mode === "production" ? plugin : () => {};
@@ -64,6 +65,7 @@ module.exports = (env, { mode }) => {
         }),
         mode
       ),
+      new Dotenv(),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash].css"
       }),

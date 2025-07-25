@@ -2,9 +2,12 @@
   "watch": ["src/server"],
   "ext": "js,json",
   "ignore": ["dist", "node_modules"],
-  "exec": "node src/server/server.js",
+  "exec": "echo 🚀 Nodemon starting server... && node src/server/server.js",
   "verbose": true,
   "events": {
-    "restart": "echo 🔄 Nodemon restarted due to file changes"
+    "restart": "echo 🔄 Nodemon restarted due to file changes",
+    "crash": "echo 💥 Server crashed!",
+    "exit": "echo 👋 Server exited cleanly",
+    "quit": "echo 🛑 Nodemon has quit"
   }
 }

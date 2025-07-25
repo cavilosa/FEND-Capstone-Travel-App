@@ -15,14 +15,13 @@ import img from "./images/travel.jpg";
 import geoNames from "./images/geoNames.png";
 import weatherbit from "./images/weatherbit.png";
 
-
 // Installing service worker for production mode only
 if (process.env.NODE_ENV === "production") {
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
     // Use the window load event to keep the page load performant
         window.addEventListener('load', () => {
-            console.log("Installing service workers in production")
+            // console.log("Installing service workers in production")
             navigator.serviceWorker.register('./service-worker.js');
         });
     } else {
@@ -40,7 +39,7 @@ export async function imageMain () {
 
 imageMain();
 
-// Geonames picture
+// GeoNames picture
 let image = document.querySelector("#geoNames");
 image.src = geoNames
 
@@ -68,6 +67,14 @@ document.querySelector("#notes").addEventListener("click", addNotes);
 
 // Use localStorage to fill in the trip info on load
 window.addEventListener("load", checkStorage)
+
+if (module.hot) {
+  console.log("♻️ HMR active");
+  module.hot.accept(() => {
+    console.log("♻️ HMR triggered — full page reload");
+    window.location.reload();
+  });
+}
 
 export {
     generate,

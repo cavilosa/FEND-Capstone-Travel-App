@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -18,22 +20,45 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
+    watchFiles: ['src/client/*'],
     port: 8080,
     open: true,
     hot: true,
-    liveReload: true
+    liveReload: true,
+    client: {
+      logging: 'info',         // Show messages in browser console (e.g. [HMR] updates)
+      overlay: true,           // Show build errors as overlay in browser
+      progress: true,          // Show build progress in terminal
+    },
   },
+  // ✅ ADD HERE: Logging config for terminal
+  infrastructureLogging: {
+    level: 'info', // Logs when modules are rebuilt
+  },
+  stats: {
+    all: false,
+    modules: true,
+    builtAt: true,
+    assets: true,
+    errors: true,
+    warnings: true,
+    timings: true,
+    moduleAssets: true,
+    moduleTrace: true,
+  },
+  // stats: 'minimal',            // Controls terminal output verbosity
+
   module: {
     rules: [
       {
         test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf)$/i,
-        type: 'asset/resource', // ✅ Webpack 5 native asset handling
+        type: 'asset/resource',
         generator: {
           filename: 'assets/[name][ext][query]'
         }
       },
       {
-        test: /\.js$/, // ✅ fixed RegExp
+        test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader'
       },
@@ -51,6 +76,7 @@ module.exports = {
     new CleanWebpackPlugin({
       verbose: true
     }),
-    new BundleAnalyzerPlugin()
+    new Dotenv()
+    // new BundleAnalyzerPlugin()
   ]
 };
