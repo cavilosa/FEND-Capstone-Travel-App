@@ -63,6 +63,6 @@ module.exports = {
       filename: '[name].[contenthash].css'
     }),
     new WorkboxPlugin.GenerateSW(),
-    new Dotenv()
+    new Dotenv(),
   ]
 };
