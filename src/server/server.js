@@ -16,7 +16,7 @@ const port = process.env.PORT || 8081;
 
 const allowedOrigins = [
   process.env.DOMAIN, // e.g., http://localhost:8080
-  'http://localhost:8081'
+  'http://localhost:8080'
 ].filter(Boolean);
 
 const corsOptions = {
